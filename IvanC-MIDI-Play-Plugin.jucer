@@ -19,6 +19,7 @@
             file="Source/PluginEditor.cpp"/>
       <FILE id="OmjU9x" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
+    <FILE id="tVD7SO" name="README.md" compile="0" resource="1" file="README.md"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="1"
                JUCE_USE_MP3AUDIOFORMAT="1" JUCE_USE_LAME_AUDIO_FORMAT="1" JUCE_USE_WINRT_MIDI="1"

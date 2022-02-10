@@ -69,6 +69,12 @@ public:
     /** Returns the MIDI file track currently played. */
     int getCurrentTrack();
 
+    /** Callbacks for Play / Pause & Stop button*/
+    //JOELwindows7: here define play / pause & stop button press callbacks. what if
+    //we just hack the AudioPlayHead, yeah that host's play head!
+    void pressPlayPauseButton();
+    void pressStopButton();
+
 private:
     //==============================================================================
     /** Sends Note Off / Controller Off / Sound Off on all the MIDI channels */
@@ -81,6 +87,7 @@ private:
     juce::MidiFile theMIDIFile;                       // The current MIDI file content
     bool isPlayingSomething;                    // Tells if the last audio buffer included some MIDI content to play
     bool trackHasChanged = false;
+    juce::AudioPlayHead::CurrentPositionInfo thePositionInfo; //JOELwindows7: make position info global!
     
     std::atomic<int> currentTrack;              // Current MIDI file track that is played
     std::atomic<int> numTracks;                 // Current MIDI file number of tracks

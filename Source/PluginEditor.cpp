@@ -21,6 +21,12 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     addAndMakeVisible(buttonLoadMIDIFile = new juce::TextButton("Load a MIDI file"));
     buttonLoadMIDIFile->addListener(this);
 
+    // JOELwindows7: Click on this button to play / pause, and another to stop.
+    addAndMakeVisible(buttonPlayNow = new juce::TextButton("Play / Pause"));
+    addAndMakeVisible(buttonStopNow = new juce::TextButton("Stop"));
+    buttonPlayNow->addListener(this);
+    buttonStopNow->addListener(this);
+
     // Click on this combo box to select the track that needs to be played
     addAndMakeVisible(comboTrack = new juce::ComboBox());
     comboTrack->addListener(this);
@@ -49,15 +55,26 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
 
 void SimpleMidiplayerAudioProcessorEditor::buttonClicked(juce::Button * button)
 {
+    // JOELwindows7: unfortunately folks, Switch case only works on integral or enum type.
     if (button == buttonLoadMIDIFile)
     {
         juce::FileChooser theFileChooser("Find a MIDI file", juce::File(), "*.mid*");
         
-        if (theFileChooser.browseForFileToOpen())
+        // JOELwindows7: You must add `JUCE_MODAL_LOOPS_PERMITTED=1` into project setting,
+        // preprocessor definitions.
+        if (theFileChooser.browseForFileToOpen()) 
         {
             processor.loadMIDIFile(theFileChooser.getResult());
             updateTrackComboBox();
         }
+    }
+    else if (button == buttonPlayNow) {
+        //JOELwindows7: peck!! I have to do this nasty else ifs??!??!?
+        processor.pressPlayPauseButton();
+    }
+    else if (button == buttonStopNow) {
+        // JOELwindows7: ah damn!
+        processor.pressStopButton();
     }
 }
 

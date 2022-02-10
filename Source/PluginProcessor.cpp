@@ -154,7 +154,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
     if (myScopedLock.isLocked())
     {
-        juce::AudioPlayHead::CurrentPositionInfo thePositionInfo;
+        /*juce::AudioPlayHead::CurrentPositionInfo thePositionInfo;*/
         getPlayHead()->getCurrentPosition(thePositionInfo);
         
         if (numTracks.load() > 0)
@@ -271,6 +271,18 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     numTracks.store(theMIDIFile.getNumTracks());
     currentTrack.store(0);
     trackHasChanged = false;
+}
+
+//JOELwindows7: press play button
+void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
+    //const juce::ScopedLock myScopedLock(processLock);
+    
+}
+
+//JOELwindows7: press stop button
+void SimpleMidiplayerAudioProcessor::pressStopButton() {
+    //const juce::ScopedLock myScopedLock(processLock);
+
 }
 
 int SimpleMidiplayerAudioProcessor::getNumTracks()

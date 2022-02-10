@@ -36,10 +36,19 @@ public:
 private:
     //==============================================================================
     void updateTrackComboBox();
+
+    //JOELwindows7: here define play / pause & stop button press callbacks. what if
+    //we just hack the AudioPlayHead, yeah that host's play head!
+    void pressPlayPauseButton();
+    void pressStopButton();
     
     //==============================================================================
     juce::ScopedPointer<juce::TextButton> buttonLoadMIDIFile;
     juce::ScopedPointer<juce::ComboBox> comboTrack;
+
+    //JOELwindows7: okay, WHY THERE IS NO PLAY BUTTON??! WHY I HAVE TO RELY ON HOST'S PLAY BUTTON??!?
+    juce::ScopedPointer<juce::TextButton> buttonPlayNow; // Play / Pause
+    juce::ScopedPointer<juce::TextButton> buttonStopNow; // Stop
     
     //==============================================================================
     SimpleMidiplayerAudioProcessor& processor;

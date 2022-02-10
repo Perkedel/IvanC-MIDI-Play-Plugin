@@ -34,4 +34,8 @@
 # JUCE exports & stuffs
 .DS_Store
 Builds/VisualStudio2019/x64
+Builds/VisualStudio2019/x86
 Builds/VisualStudio2019/.vs
+Builds/VisualStudio2022/x64
+Builds/VisualStudio2022/x86
+Builds/VisualStudio2022/.vs

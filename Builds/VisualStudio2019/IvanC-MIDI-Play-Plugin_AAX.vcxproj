@@ -167,16 +167,16 @@ call &quot;C:\\SDKs\\AAX\\Utilities\\CreatePackage.bat&quot; &quot;$(OutDir)\Iva
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Wrapper.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Wrapper.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_AAX.cpp">
+    <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_AAX.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_plugin_client_AAX.cpp"/>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Modifier_Injector.h"/>
+    <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Modifier_Injector.h"/>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include=".\resources.rc"/>
