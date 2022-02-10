@@ -1,0 +1,57 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio Version 17
+
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IvanC-MIDI-Play-Plugin - Standalone Plugin", "IvanC-MIDI-Play-Plugin_StandalonePlugin.vcxproj", "{7D17B3EC-03AA-CCFA-D8CB-E1515F06B11F}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805} = {A32FE966-41B7-B5E5-0E29-FC723DC07805}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IvanC-MIDI-Play-Plugin - VST", "IvanC-MIDI-Play-Plugin_VST.vcxproj", "{ADF7A916-0842-A471-1C55-5D8546156D90}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805} = {A32FE966-41B7-B5E5-0E29-FC723DC07805}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IvanC-MIDI-Play-Plugin - VST3", "IvanC-MIDI-Play-Plugin_VST3.vcxproj", "{9C3AE449-0286-A40A-8D9A-50F101DCBAE3}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805} = {A32FE966-41B7-B5E5-0E29-FC723DC07805}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IvanC-MIDI-Play-Plugin - AAX", "IvanC-MIDI-Play-Plugin_AAX.vcxproj", "{73C81384-50F7-3690-3ED0-F02D94E41B02}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805} = {A32FE966-41B7-B5E5-0E29-FC723DC07805}
+	EndProjectSection
+EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "IvanC-MIDI-Play-Plugin - Shared Code", "IvanC-MIDI-Play-Plugin_SharedCode.vcxproj", "{A32FE966-41B7-B5E5-0E29-FC723DC07805}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ADF7A916-0842-A471-1C55-5D8546156D90}.Debug|x64.ActiveCfg = Debug|x64
+		{ADF7A916-0842-A471-1C55-5D8546156D90}.Debug|x64.Build.0 = Debug|x64
+		{ADF7A916-0842-A471-1C55-5D8546156D90}.Release|x64.ActiveCfg = Release|x64
+		{ADF7A916-0842-A471-1C55-5D8546156D90}.Release|x64.Build.0 = Release|x64
+		{9C3AE449-0286-A40A-8D9A-50F101DCBAE3}.Debug|x64.ActiveCfg = Debug|x64
+		{9C3AE449-0286-A40A-8D9A-50F101DCBAE3}.Debug|x64.Build.0 = Debug|x64
+		{9C3AE449-0286-A40A-8D9A-50F101DCBAE3}.Release|x64.ActiveCfg = Release|x64
+		{9C3AE449-0286-A40A-8D9A-50F101DCBAE3}.Release|x64.Build.0 = Release|x64
+		{73C81384-50F7-3690-3ED0-F02D94E41B02}.Debug|x64.ActiveCfg = Debug|x64
+		{73C81384-50F7-3690-3ED0-F02D94E41B02}.Debug|x64.Build.0 = Debug|x64
+		{73C81384-50F7-3690-3ED0-F02D94E41B02}.Release|x64.ActiveCfg = Release|x64
+		{73C81384-50F7-3690-3ED0-F02D94E41B02}.Release|x64.Build.0 = Release|x64
+		{7D17B3EC-03AA-CCFA-D8CB-E1515F06B11F}.Debug|x64.ActiveCfg = Debug|x64
+		{7D17B3EC-03AA-CCFA-D8CB-E1515F06B11F}.Debug|x64.Build.0 = Debug|x64
+		{7D17B3EC-03AA-CCFA-D8CB-E1515F06B11F}.Release|x64.ActiveCfg = Release|x64
+		{7D17B3EC-03AA-CCFA-D8CB-E1515F06B11F}.Release|x64.Build.0 = Release|x64
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805}.Debug|x64.ActiveCfg = Debug|x64
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805}.Debug|x64.Build.0 = Debug|x64
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805}.Release|x64.ActiveCfg = Release|x64
+		{A32FE966-41B7-B5E5-0E29-FC723DC07805}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
