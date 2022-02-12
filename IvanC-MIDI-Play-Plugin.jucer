@@ -6,9 +6,10 @@
               companyName="Perkedel" companyCopyright="Perkedel" companyWebsite="https://cointr.ee/joelwindows7"
               pluginManufacturer="Perkedel Technologies + IvanC" pluginAUMainType="'aumi'"
               pluginVST3Category="Generator,Instrument" pluginVSTCategory="kPlugCategSynth"
-              userNotes="Ported from following links&#10;- https://forum.juce.com/t/playing-a-midi-file-revisited/26646 playing midi file in JUCE framework revisited&#10;- https://forum.juce.com/t/playing-a-midi-file/160/11 old forum"
+              userNotes="Ported from following links&#10;- https://forum.juce.com/t/playing-a-midi-file-revisited/26646 playing midi file in JUCE framework revisited&#10;- https://forum.juce.com/t/playing-a-midi-file/160/11 old forum&#10;&#10;IvanC yeahay&#10;&#10;we need to make sure we can play MIDI fully from this plugin alone because nobody ever did this ever since JUCE days and even Open Source Musical days."
               pluginDesc="IvanC's MIDI player plugin" version="2022.02" cppLanguageStandard="17"
-              defines="JUCE_MODAL_LOOPS_PERMITTED=1" headerPath="C:\SDKs\boost_1_71_0&#10;C:\SDKs\ASIOSDK2.3\common">
+              defines="JUCE_MODAL_LOOPS_PERMITTED=1" headerPath="C:\SDKs\boost_1_71_0&#10;C:\SDKs\ASIOSDK2.3\common"
+              pluginCode="Icmd" pluginManufacturerCode="Pkdl">
   <MAINGROUP id="tJi96Q" name="IvanC-MIDI-Play-Plugin">
     <GROUP id="{E9923BCC-477C-3A94-754E-A553F23D6C85}" name="Source">
       <FILE id="ZxCGBm" name="PluginProcessor.cpp" compile="1" resource="0"

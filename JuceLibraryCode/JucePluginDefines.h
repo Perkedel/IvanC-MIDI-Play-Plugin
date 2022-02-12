@@ -53,10 +53,10 @@
  #define JucePlugin_ManufacturerEmail      ""
 #endif
 #ifndef  JucePlugin_ManufacturerCode
- #define JucePlugin_ManufacturerCode       0x4d616e75
+ #define JucePlugin_ManufacturerCode       0x506b646c
 #endif
 #ifndef  JucePlugin_PluginCode
- #define JucePlugin_PluginCode             0x57626766
+ #define JucePlugin_PluginCode             0x49636d64
 #endif
 #ifndef  JucePlugin_IsSynth
  #define JucePlugin_IsSynth                1

@@ -159,10 +159,40 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         
         if (numTracks.load() > 0)
         {
+            //JOELwindows7: receive tell signals
+            if (tellPlayNow)
+            {
+                //thePositionInfo.transportPlay(true);
+                getPlayHead()->transportPlay(true);
+                tellPlayNow = false;
+            }
+
+            if (tellStopNow)
+            {
+                getPlayHead()->transportPlay(false);
+                tellStopNow = false;
+            }
+
+            if (tellRecordNow)
+            {
+                tellRecordNow = false;
+            }
+
+            if (tellRewindNow) {
+                tellRewindNow = false;
+            }
+
             // The MIDI file is played only when the transport is active
+            // TODO: JOELwindows7: point of transport override. add ignore transport and use own transport
             if (thePositionInfo.isPlaying)
             {
                 const juce::MidiMessageSequence *theSequence = theMIDIFile.getTrack(currentTrack.load());
+                //const juce::MidiMessageSequence* entireSequence[16] = {}; //JOELwindows7: help me!
+
+                /*for (int i = 0; i < theMIDIFile.getNumTracks()-1; i++)
+                {
+                    entireSequences[i] = theMIDIFile.getTrack(i);
+                }*/
 
                 auto startTime = thePositionInfo.timeInSeconds;
                 auto endTime = startTime + buffer.getNumSamples() / getSampleRate();
@@ -174,31 +204,64 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
                 nextStartTime = endTime;
 
-                // If the MIDI file doesn't contain any event anymore
-                if (isPlayingSomething && startTime >= theSequence->getEndTime())
-                    sendAllNotesOff(midiMessages);
-
-                else
+                //JOELwindows7: now use 2 different modes
+                if (useEntireTracks)
                 {
-                    // Called when the user changes the track during playback
-                    if (trackHasChanged)
-                    {
-                        trackHasChanged = false;
+                    // If the MIDI file doesn't contain any event anymore
+                    if(isPlayingSomething && startTime >= traverseEndTime)
                         sendAllNotesOff(midiMessages);
-                    }
-                    
-                    // Iterating through the MIDI file contents and trying to find an event that
-                    // needs to be called in the current time frame
-                    for (auto i = 0; i < theSequence->getNumEvents(); i++)
+                    else
                     {
-                        juce::MidiMessageSequence::MidiEventHolder *event = theSequence->getEventPointer(i);
-
-                        if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                        // Called when the user changes the track during playback
+                        if (trackHasChanged)
                         {
-                            auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
-                            midiMessages.addEvent(event->message, samplePosition);
+                            trackHasChanged = false;
+                            // but this time don't send all note off!
+                        }
 
-                            isPlayingSomething = true;
+                        for (int i = 0; i < (numTracks.load()); i++) {
+                            // copy playback from bellow
+                            for (auto j = 0; j < entireSequences[i]->getNumEvents(); j++) {
+                                juce::MidiMessageSequence::MidiEventHolder* event = entireSequences[i]->getEventPointer(j);
+
+                                if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                                {
+                                    auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                                    midiMessages.addEvent(event->message, samplePosition);
+
+                                    isPlayingSomething = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    // If the MIDI file doesn't contain any event anymore
+                    if (isPlayingSomething && startTime >= theSequence->getEndTime())
+                        sendAllNotesOff(midiMessages);
+
+                    else
+                    {
+                        // Called when the user changes the track during playback
+                        if (trackHasChanged)
+                        {
+                            trackHasChanged = false;
+                            sendAllNotesOff(midiMessages);
+                        }
+
+                        // Iterating through the MIDI file contents and trying to find an event that
+                        // needs to be called in the current time frame
+                        for (auto i = 0; i < theSequence->getNumEvents(); i++)
+                        {
+                            juce::MidiMessageSequence::MidiEventHolder* event = theSequence->getEventPointer(i);
+
+                            if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                            {
+                                auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                                midiMessages.addEvent(event->message, samplePosition);
+
+                                isPlayingSomething = true;
+                            }
                         }
                     }
                 }
@@ -271,18 +334,47 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     numTracks.store(theMIDIFile.getNumTracks());
     currentTrack.store(0);
     trackHasChanged = false;
+
+    //JOELwindows7: now load them up to sequences!
+    //traverseEndTime = 0.00; // reset end time
+    traverseEndTime = theMIDIFile.getLastTimestamp() + 3.00; // AH PECKING FOUND IT!!! THE LENGTH OF MIDI FILE!!!
+    //entireSequences.clear();
+    //help how do I clear all array in const!!!???
+    //for (int i = 0; i < 15; i++)
+    //{
+    //    //entireSequences[i] = NULL;
+    //}
+
+    for (int i = 0; i < numTracks.load(); i++)
+    {
+        entireSequences[i] = theMIDIFile.getTrack(i);
+        //traverseEndTime = std::max(traverseEndTime, theMIDIFile.getTrack(i)->getEndTime());
+        //JOELwindows7: perhaps it doesn't work?
+        /*if (theMIDIFile.getTrack(i)->getEndTime() >= traverseEndTime) {
+            traverseEndTime = theMIDIFile.getTrack(i)->getEndTime();
+        }*/
+    }
 }
 
 //JOELwindows7: press play button
 void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
     //const juce::ScopedLock myScopedLock(processLock);
-    
+    tellPlayNow = true;
 }
 
 //JOELwindows7: press stop button
 void SimpleMidiplayerAudioProcessor::pressStopButton() {
     //const juce::ScopedLock myScopedLock(processLock);
+    tellStopNow = true;
+}
 
+void SimpleMidiplayerAudioProcessor::pressAllTracksCheckBox(bool stateNow) {
+    useEntireTracks = stateNow;
+    //sendAllNotesOff(midiMessages);
+}
+
+bool SimpleMidiplayerAudioProcessor::getUseEntireTracks() {
+    return useEntireTracks;
 }
 
 int SimpleMidiplayerAudioProcessor::getNumTracks()

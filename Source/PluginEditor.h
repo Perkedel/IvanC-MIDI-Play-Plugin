@@ -31,6 +31,7 @@ public:
 
     //==============================================================================
     void buttonClicked(juce:: Button* button) override;
+    //void checkBoxChanged(juce::ToggleButton* checkBox) override;
     void comboBoxChanged(juce::ComboBox* combo) override;
 
 private:
@@ -39,16 +40,19 @@ private:
 
     //JOELwindows7: here define play / pause & stop button press callbacks. what if
     //we just hack the AudioPlayHead, yeah that host's play head!
-    void pressPlayPauseButton();
-    void pressStopButton();
+    /*void pressPlayPauseButton();
+    void pressStopButton();*/
     
     //==============================================================================
+    //juce::OwnedArray<juce::TextButton> buttonsOfStuffs; //JOELwindows7: holding buttons
+
     juce::ScopedPointer<juce::TextButton> buttonLoadMIDIFile;
     juce::ScopedPointer<juce::ComboBox> comboTrack;
 
     //JOELwindows7: okay, WHY THERE IS NO PLAY BUTTON??! WHY I HAVE TO RELY ON HOST'S PLAY BUTTON??!?
     juce::ScopedPointer<juce::TextButton> buttonPlayNow; // Play / Pause
     juce::ScopedPointer<juce::TextButton> buttonStopNow; // Stop
+    juce::ToggleButton checkBoxAllTracks; // ON / OFF play all tracks at once
     
     //==============================================================================
     SimpleMidiplayerAudioProcessor& processor;
