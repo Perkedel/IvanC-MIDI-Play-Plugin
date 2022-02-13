@@ -53,6 +53,7 @@ private:
     juce::ScopedPointer<juce::TextButton> buttonPlayNow; // Play / Pause
     juce::ScopedPointer<juce::TextButton> buttonStopNow; // Stop
     juce::ToggleButton checkBoxAllTracks; // ON / OFF play all tracks at once
+    juce::ToggleButton checkBoxOwnTransport; // ON / OFF use own transport
     
     //==============================================================================
     SimpleMidiplayerAudioProcessor& processor;

@@ -16,7 +16,8 @@
 //==============================================================================
 /**
 */
-class SimpleMidiplayerAudioProcessor  : public juce::AudioProcessor
+class SimpleMidiplayerAudioProcessor  : public juce::AudioProcessor, 
+                                        private juce::Timer //JOELwindows7: da Timer as in Tutorial of Midi Message
 {
 public:
     //==============================================================================
@@ -75,8 +76,10 @@ public:
     void pressPlayPauseButton();
     void pressStopButton();
     void pressAllTracksCheckBox(bool stateNow);
+    void pressOwnTransportCheckBox(bool stateNow);
 
     bool getUseEntireTracks(); // JOELwindows7: get setter of use entire tracks
+    bool getUseOwnTransport(); // JOELwindows7: get setter of use entire tracks
 
 private:
     //==============================================================================
@@ -90,13 +93,20 @@ private:
     juce::MidiFile theMIDIFile;                       // The current MIDI file content
     bool isPlayingSomething;                    // Tells if the last audio buffer included some MIDI content to play
     bool trackHasChanged = false;
-    bool useEntireTracks = false; // tells if all tracks should be used instead
+    bool useEntireTracks = false;               // tells if all tracks should be used instead
+    bool useOwnTransportInstead = false;        // tells if we should use own transport instead of plugin host's Transport
+                                                // very useful if your plugin host doesn't have legitimate Play Stop control buttons
+                                                // such as Bespoke Synth (the Transport there plugin is not Play Stop), JUCE AudioPlugin demo, etc.
+    bool myOwnIsPlaying = false;                // Own Transport Press Play mode.
     juce::AudioPlayHead::CurrentPositionInfo thePositionInfo; //JOELwindows7: make position info global!
+    //juce::AudioPlayHead myPlayHead; //JOELwindows7: Host's playhead!
+    juce::AudioTransportSource ownTransportSource; //JOELwindows7: this very Transport own thingy
 
     const juce::MidiMessageSequence* entireSequences[16]; //JOELwindows7: globalize entire sequences
     
     std::atomic<int> currentTrack;              // Current MIDI file track that is played
     std::atomic<int> numTracks;                 // Current MIDI file number of tracks
+    double ownStartTime;                        // JOELwindows7: start time for own transport
     double traverseEndTime;        // JOELwindows7: Overall MIDI end time traversing sequence by sequence. who's the highest end time?
     
     double nextStartTime = -1.0;                // The start time in seconds of the next audio buffer
@@ -104,11 +114,12 @@ private:
                                                 // has been moved by the user or the looping system in the DAW, so
                                                 // we can call sendAllNotesOff there
 
-    //JOELwindows7: for signalizations
+    //JOELwindows7: flags for signalizations
     bool tellPlayNow = false;
     bool tellStopNow = false;
     bool tellRecordNow = false;
     bool tellRewindNow = false;
+    bool tellWorkaroundFirst = false;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMidiplayerAudioProcessor)

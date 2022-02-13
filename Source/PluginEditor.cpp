@@ -28,15 +28,24 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     //addAndMakeVisible(buttonsOfStuffs.add(buttonStopNow = new juce::TextButton("Stop")));
     addAndMakeVisible(buttonStopNow = new juce::TextButton("Stop"));
     addAndMakeVisible(checkBoxAllTracks);
+    addAndMakeVisible(checkBoxOwnTransport);
+
     buttonPlayNow->addListener(this);
     buttonStopNow->addListener(this);
     //checkBoxAllTracks->addListener(this);
     checkBoxAllTracks.setButtonText("Entire Tracks");
+    checkBoxAllTracks.setTooltip("Toggle whether should all tracks plays");
     //checkBoxAllTracks.setToggleState(true, juce::dontSendNotification);
-    checkBoxAllTracks.setToggleState(processor.getUseEntireTracks(), juce::dontSendNotification);
+    //checkBoxAllTracks.setToggleState(processor.getUseEntireTracks(), juce::dontSendNotification);
     checkBoxAllTracks.onClick = [this] {
         // JOELwindows7: hey .onClick callback!
         processor.pressAllTracksCheckBox(checkBoxAllTracks.getToggleState());
+    };
+    checkBoxOwnTransport.setButtonText("Override Host's Play/Stop head");
+    checkBoxOwnTransport.setTooltip("Toggle whether should to use own playhead instead of host's play head");
+    //checkBoxOwnTransport.setToggleState(processor.getUseOwnTransport(), juce::dontSendNotification);
+    checkBoxOwnTransport.onClick = [this] {
+        processor.pressOwnTransportCheckBox(checkBoxOwnTransport.getToggleState());
     };
 
     // Click on this combo box to select the track that needs to be played
@@ -48,6 +57,7 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     // JOELwindows7: add resizer
     // LINK HERE
     setResizable(true, true);
+    setResizeLimits(400, 300, 1280, 720);
     setSize (800, 600);
 
     // JOELwindows7: Copy from JUCE demo of `DialogsDemo.h
@@ -67,6 +77,13 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
 
 SimpleMidiplayerAudioProcessorEditor::~SimpleMidiplayerAudioProcessorEditor()
 {
+    //JOELwindows7: remove all callbacks & listener in this destructor (destroy)
+    buttonLoadMIDIFile->removeListener(this);
+    buttonPlayNow->removeListener(this);
+    buttonStopNow->removeListener(this);
+    checkBoxAllTracks.onClick = NULL;
+    checkBoxOwnTransport.onClick = NULL;
+    comboTrack->removeListener(this);
 }
 
 void SimpleMidiplayerAudioProcessorEditor::paint (juce::Graphics& g)
@@ -79,7 +96,12 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     //JOELwindows7: rehaul to use Dialog Demo's way of resize
     //auto area = getLocalBounds().reduced(5, 15);
     //juce::Rectangle<int> topRow;
-    juce::Rectangle<int> rect = getLocalBounds(); // legacy
+    juce::Rectangle<int> rect = getLocalBounds().reduced(4); // legacy
+
+    //JOELwindows7: copy from demo of Graphics Demo header.
+    int daHeight = 22;
+    auto columns = rect.removeFromTop(daHeight * 4);
+    auto col = columns.removeFromLeft(200);
     
     //JOELwindows7: here's new way!
     //for (auto thing : buttonsOfStuffs) {
@@ -94,18 +116,36 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
         thing->setBounds(topRow.removeFromLeft(area.getWidth() / 2).reduced(4, 2));*/
     //}
 
-    buttonLoadMIDIFile->setBounds(rect.removeFromTop((rect.getHeight() / 2)-10).withSizeKeepingCentre(200, 24));
+    //buttonLoadMIDIFile->setBounds(rect.removeFromTop((rect.getHeight() / 2)-10).withSizeKeepingCentre(200, 24));
+    buttonLoadMIDIFile->setBounds(col.removeFromTop(daHeight));
     //comboTrack->setBounds(rect.withSizeKeepingCentre(200, 24));
-    comboTrack->setBounds(rect.removeFromTop((rect.getHeight() / 2) - 18).withSizeKeepingCentre(200, 24));
+    //comboTrack->setBounds(rect.removeFromTop((rect.getHeight() / 2) - 18).withSizeKeepingCentre(200, 24));
+    //comboTrack->setBounds(col.removeFromTop(daHeight));
     //JOELwindows7: don't forget resize
     //buttonPlayNow->setBounds(rect.removeFromTop(rect.getHeight() / 2 - 30).withSizeKeepingCentre(200, 24));
     //buttonStopNow->setBounds(rect.removeFromTop(rect.getHeight() / 2 - 25).withSizeKeepingCentre(200, 24));
     //buttonPlayNow->setBounds(rect.withSizeKeepingCentre(200, 50));
     //buttonStopNow->setBounds(rect.withSizeKeepingCentre(200, 100));
-    buttonPlayNow->setBounds(rect.removeFromTop((rect.getHeight() / 2) - 30).withSizeKeepingCentre(200, 24));
-    buttonStopNow->setBounds(rect.removeFromTop((rect.getHeight() / 2) - 25).withSizeKeepingCentre(200, 24));
-    checkBoxAllTracks.setBounds(rect.withSizeKeepingCentre(200, 150));
+    //buttonPlayNow->setBounds(rect.removeFromTop((rect.getHeight() / 2) - 30).withSizeKeepingCentre(200, 24));
+    //buttonStopNow->setBounds(rect.removeFromTop((rect.getHeight() / 2) - 25).withSizeKeepingCentre(200, 24));
+    buttonPlayNow->setBounds(col.removeFromTop(daHeight));
+    buttonStopNow->setBounds(col.removeFromTop(daHeight));
+    
+    // JOELwindows7: begin separate Column like in graphics demo
+    columns.removeFromLeft(20);
+    col = columns.removeFromLeft(200);
+    
+    //checkBoxAllTracks.setBounds(rect.withSizeKeepingCentre(200, 150));
+    //checkBoxAllTracks.setBounds(rect.removeFromTop((rect.getHeight() / 2) - 20).withSizeKeepingCentre(200, 150));
+    checkBoxAllTracks.setBounds(col.removeFromTop(daHeight));
+    //checkBoxOwnTransport.setBounds(rect.withSizeKeepingCentre(200, 150));
+    //checkBoxOwnTransport.setBounds(rect.removeFromTop((rect.getHeight() / 2) - 15).withSizeKeepingCentre(200, 150));
+    checkBoxOwnTransport.setBounds(col.removeFromTop(daHeight));
     //checkBoxAllTracks.setBounds(rect.removeFromTop(rect.getHeight() / 2 - 20));
+
+    // JOELwindows7: graphic demo removes more rect grid spots
+    rect.removeFromBottom(6);
+    comboTrack->setBounds(rect.removeFromTop(daHeight));
 }
 
 void SimpleMidiplayerAudioProcessorEditor::buttonClicked(juce::Button * button)
