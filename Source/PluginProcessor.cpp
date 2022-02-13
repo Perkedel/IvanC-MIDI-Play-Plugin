@@ -31,6 +31,7 @@ SimpleMidiplayerAudioProcessor::SimpleMidiplayerAudioProcessor()
     juce::AudioTransportSource ownTransportSource(); // to construct non-pointer in C++, looks like this.
 
     numTracks.store(0);
+    //startTimer(1);
 }
 
 SimpleMidiplayerAudioProcessor::~SimpleMidiplayerAudioProcessor()
@@ -214,10 +215,13 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
             else {
                 //Yamaha S-YXG2006LE not drum on not XG proper MIDI
                 auto daDrumPatch = juce::MidiMessage::programChange(10, 127);
-                daDrumPatch.setTimeStamp(0);
-                //auto daSysEx = juce::MidiMessage::createSysExMessage(&0xf0f7);
-                midiMessages.addEvent(daDrumPatch,0);
-                //midiMessages.addEvent(juce::MidiMessage::createSysExMessage(0xf04310));
+                daDrumPatch.setTimeStamp(1);
+                // use GS because this Roland's reset is almost same as GM but bit extended.
+                // okay fine how about GM2 instead? Can't! not all compatible.
+                auto daSysEx = juce::MidiMessage::createSysExMessage(initialSysExGS, 16);
+                daSysEx.setTimeStamp(0);
+                //midiMessages.addEvent(daDrumPatch,1);
+                midiMessages.addEvent(daSysEx, 0);
 
                 //Flip signal
                 tellWorkaroundFirst = true;
@@ -226,10 +230,11 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
             // The MIDI file is played only when the transport is active
             // TODO: JOELwindows7: point of transport override. add ignore transport and use own transport
             if (useOwnTransportInstead) {
-                if (ownTransportSource.isPlaying()) {
+                if (Timer::isTimerRunning()) {
                     const juce::MidiMessageSequence* theSequence = theMIDIFile.getTrack(currentTrack.load());
 
-                    auto startTime = ownTransportSource.getCurrentPosition();
+                    //auto startTime = ownTransportSource.getCurrentPosition();
+                    auto startTime = ownStartTime * 1000;
                     auto endTime = startTime + buffer.getNumSamples() / getSampleRate();
                     auto sampleLength = 1.0 / getSampleRate();
 
@@ -491,11 +496,20 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
 void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
     //const juce::ScopedLock myScopedLock(processLock);
     if (useOwnTransportInstead) {
-        if (ownTransportSource.isPlaying()) {
+        /*if (ownTransportSource.isPlaying()) {
 
         }
         else {
             ownTransportSource.start();
+        }*/
+        if (Timer::isTimerRunning())
+        {
+
+        }
+        else {
+            printf("Play lah!");
+            DBG("Play lah!");
+            startTimer(1);
         }
     }
     tellPlayNow = true;
@@ -505,8 +519,9 @@ void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
 void SimpleMidiplayerAudioProcessor::pressStopButton() {
     //const juce::ScopedLock myScopedLock(processLock);
     if (useOwnTransportInstead) {
-        ownTransportSource.stop();
-        ownTransportSource.setPosition(0);
+        //ownTransportSource.stop();
+        //ownTransportSource.setPosition(0);
+        stopTimer();
     }
     tellStopNow = true;
 }
@@ -565,4 +580,9 @@ void SimpleMidiplayerAudioProcessor::sendAllNotesOff(juce::MidiBuffer& midiMessa
 
     isPlayingSomething = false;
     tellWorkaroundFirst = false;
+}
+
+//JOELwindows7: da callback from Midi Message Tutorial, PIP header number 2
+void SimpleMidiplayerAudioProcessor::timerCallback()
+{
 }

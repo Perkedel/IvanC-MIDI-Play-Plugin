@@ -77,6 +77,7 @@ public:
     void pressStopButton();
     void pressAllTracksCheckBox(bool stateNow);
     void pressOwnTransportCheckBox(bool stateNow);
+    void timerCallback() override;
 
     bool getUseEntireTracks(); // JOELwindows7: get setter of use entire tracks
     bool getUseOwnTransport(); // JOELwindows7: get setter of use entire tracks
@@ -113,6 +114,16 @@ private:
                                                 // That information is used to know when the transport bar position 
                                                 // has been moved by the user or the looping system in the DAW, so
                                                 // we can call sendAllNotesOff there
+
+    //JOELwindows7: f8888ing reset messages that is f8888ing hard to find online
+    // found in LINK
+    // and kuzu / OpenMIDI / Sekaiju guy Project's MIDI Tester app
+    unsigned char initialSysExGM [16] =     {0xf0,0x7e,0x7f,0x09,0x01,0xf7};
+    unsigned char initialSysExGMOff [16] =  {0xf0,0x7e,0x7f,0x09,0x02,0xf7};
+    unsigned char initialSysExG2 [16] =     {0xf0,0x7e,0x7f,0x09,0x03,0xf7};
+    unsigned char initialSysExXG [16] =     {0xf0,0x43,0x10,0x4c,0x00,0x00, 0x7e, 0x00, 0xf7 };
+    unsigned char initialSysExGS [16] =     {0xf0,0x41,0x10,0x42,0x12,0x40, 0x00, 0x7f, 0x00, 0x41, 0xf7 };
+    unsigned char initialSysEx88 [16] =     {0xf0,0x41,0x10,0x42,0x12,0x40, 0x00, 0x7f, 0x00, 0x01, 0xf7 };
 
     //JOELwindows7: flags for signalizations
     bool tellPlayNow = false;
