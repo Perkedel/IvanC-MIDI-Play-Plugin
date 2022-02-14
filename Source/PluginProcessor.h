@@ -17,7 +17,8 @@
 /**
 */
 class SimpleMidiplayerAudioProcessor  : public juce::AudioProcessor, 
-                                        private juce::Timer //JOELwindows7: da Timer as in Tutorial of Midi Message
+                                        private juce::Timer//, //JOELwindows7: da Timer as in Tutorial of Midi Message
+                                        //public juce::Thread //JOELwindows7: rosshoyt Threaden MIDI play
 {
 public:
     //==============================================================================
@@ -82,6 +83,12 @@ public:
     bool getUseEntireTracks(); // JOELwindows7: get setter of use entire tracks
     bool getUseOwnTransport(); // JOELwindows7: get setter of use entire tracks
 
+    //void handoverInfoLabel(juce::Label& thing);
+    juce::String getFillYourInfoHere(); //JOELwindows7: screw this! let editor harvest it itself!
+
+    void threadenOwnPlayMidi(); //JOELwindows7: rosshoyt threaded play MIDI file standalone
+    void stopThreadenOwnPlayMidi(); //JOELwindows7 the stop of it.
+
 private:
     //==============================================================================
     /** Sends Note Off / Controller Off / Sound Off on all the MIDI channels */
@@ -104,11 +111,15 @@ private:
     juce::AudioTransportSource ownTransportSource; //JOELwindows7: this very Transport own thingy
 
     const juce::MidiMessageSequence* entireSequences[16]; //JOELwindows7: globalize entire sequences
+    //juce::MidiBuffer& daMidiBuffer; //JOELwindows7: The globalized midi buffer to be filled by process block. REQUIRES INIT
+    //juce::AudioBuffer<float>& daAudioBuffer; //JOELwindows7: The globalized audio buffer to be filled by process block. REQUIRES INIT
     
     std::atomic<int> currentTrack;              // Current MIDI file track that is played
     std::atomic<int> numTracks;                 // Current MIDI file number of tracks
+    std::atomic<int> totalNumEvents;
     double ownStartTime;                        // JOELwindows7: start time for own transport
     double traverseEndTime;        // JOELwindows7: Overall MIDI end time traversing sequence by sequence. who's the highest end time?
+    double ownElapsedTime;                      // JOELwindows7: to be ++ every timer callbacks
     
     double nextStartTime = -1.0;                // The start time in seconds of the next audio buffer
                                                 // That information is used to know when the transport bar position 
@@ -118,12 +129,20 @@ private:
     //JOELwindows7: f8888ing reset messages that is f8888ing hard to find online
     // found in LINK
     // and kuzu / OpenMIDI / Sekaiju guy Project's MIDI Tester app
-    unsigned char initialSysExGM [16] =     {0xf0,0x7e,0x7f,0x09,0x01,0xf7};
-    unsigned char initialSysExGMOff [16] =  {0xf0,0x7e,0x7f,0x09,0x02,0xf7};
-    unsigned char initialSysExG2 [16] =     {0xf0,0x7e,0x7f,0x09,0x03,0xf7};
-    unsigned char initialSysExXG [16] =     {0xf0,0x43,0x10,0x4c,0x00,0x00, 0x7e, 0x00, 0xf7 };
-    unsigned char initialSysExGS [16] =     {0xf0,0x41,0x10,0x42,0x12,0x40, 0x00, 0x7f, 0x00, 0x41, 0xf7 };
-    unsigned char initialSysEx88 [16] =     {0xf0,0x41,0x10,0x42,0x12,0x40, 0x00, 0x7f, 0x00, 0x01, 0xf7 };
+    const unsigned char initialSysExGM [16] =     {0xf0,0x7e,0x7f,0x09,0x01,0xf7};
+    const unsigned char initialSysExGMOff [16] =  {0xf0,0x7e,0x7f,0x09,0x02,0xf7};
+    const unsigned char initialSysExG2 [16] =     {0xf0,0x7e,0x7f,0x09,0x03,0xf7};
+    const unsigned char initialSysExXG [16] =     {0xf0,0x43,0x10,0x4c,0x00,0x00, 0x7e, 0x00, 0xf7 };
+    const unsigned char initialSysExGS [16] =     {0xf0,0x41,0x10,0x42,0x12,0x40, 0x00, 0x7f, 0x00, 0x41, 0xf7 };
+    const unsigned char initialSysEx88 [16] =     {0xf0,0x41,0x10,0x42,0x12,0x40, 0x00, 0x7f, 0x00, 0x01, 0xf7 };
+
+    //JOELwindows7: make them as a MidiMessage for convenience
+    juce::MidiMessage initMessageGM = juce::MidiMessage::createSysExMessage(initialSysExGM, 16);
+    juce::MidiMessage initMessageGMOff = juce::MidiMessage::createSysExMessage(initialSysExGMOff, 16);
+    juce::MidiMessage initMessageG2 = juce::MidiMessage::createSysExMessage(initialSysExG2, 16);
+    juce::MidiMessage initMessageXG = juce::MidiMessage::createSysExMessage(initialSysExXG, 16);
+    juce::MidiMessage initMessageGS = juce::MidiMessage::createSysExMessage(initialSysExGS, 16);
+    juce::MidiMessage initMessage88 = juce::MidiMessage::createSysExMessage(initialSysEx88, 16);
 
     //JOELwindows7: flags for signalizations
     bool tellPlayNow = false;
@@ -131,6 +150,15 @@ private:
     bool tellRecordNow = false;
     bool tellRewindNow = false;
     bool tellWorkaroundFirst = false;
+
+    // JOELwindows7: handovers
+    //juce::Label& giveMeInfoLabel;
+    //SimpleMidiplayerAudioProcessorEditor& giveMeEditor;
+    juce::String fillYourInfoHere;
+
+    //JOELwindows7: itself instance
+    //SimpleMidiplayerAudioProcessorEditor *editor; //circular dependency
+    //SimpleMidiplayerAudioProcessorEditor &editorRef; // circular dependency
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMidiplayerAudioProcessor)

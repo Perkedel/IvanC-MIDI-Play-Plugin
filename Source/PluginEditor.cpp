@@ -29,6 +29,9 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     addAndMakeVisible(buttonStopNow = new juce::TextButton("Stop"));
     addAndMakeVisible(checkBoxAllTracks);
     addAndMakeVisible(checkBoxOwnTransport);
+    addAndMakeVisible(infoLabel);
+    infoLabel.setMultiLine(true, true);
+    infoLabel.setReadOnly(true);
 
     buttonPlayNow->addListener(this);
     buttonStopNow->addListener(this);
@@ -36,14 +39,14 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     checkBoxAllTracks.setButtonText("Entire Tracks");
     checkBoxAllTracks.setTooltip("Toggle whether should all tracks plays");
     //checkBoxAllTracks.setToggleState(true, juce::dontSendNotification);
-    //checkBoxAllTracks.setToggleState(processor.getUseEntireTracks(), juce::dontSendNotification);
+    checkBoxAllTracks.setToggleState(processor.getUseEntireTracks(), juce::dontSendNotification);
     checkBoxAllTracks.onClick = [this] {
         // JOELwindows7: hey .onClick callback!
         processor.pressAllTracksCheckBox(checkBoxAllTracks.getToggleState());
     };
     checkBoxOwnTransport.setButtonText("Override Host's Play/Stop head");
     checkBoxOwnTransport.setTooltip("Toggle whether should to use own playhead instead of host's play head");
-    //checkBoxOwnTransport.setToggleState(processor.getUseOwnTransport(), juce::dontSendNotification);
+    checkBoxOwnTransport.setToggleState(processor.getUseOwnTransport(), juce::dontSendNotification);
     checkBoxOwnTransport.onClick = [this] {
         processor.pressOwnTransportCheckBox(checkBoxOwnTransport.getToggleState());
     };
@@ -52,6 +55,8 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     addAndMakeVisible(comboTrack = new juce::ComboBox());
     comboTrack->addListener(this);
     updateTrackComboBox();
+    infoLabel.setText("Hello World\nLoad your MIDI here. Only MIDI Type 0 (Single Track) & 1 (Multi Track) works, 2 bug & crash.\nPlease help me make PluginProcessor.cpp edit this TextEditor here where\nThis thing was defined in PluginEditor.cpp\n also pls! I need playhead override, HOW to do that?!?\nSome host lacks playhead, so I need ways to play MIDI without relying on Host's playhead.\nThancc. cool and good\n (JOELwindows7) \nPerkedel Technologies & IvanC | GNU GPL v3");
+    
     
     // -------------------------------------------------------------------------
     // JOELwindows7: add resizer
@@ -97,6 +102,7 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     //auto area = getLocalBounds().reduced(5, 15);
     //juce::Rectangle<int> topRow;
     juce::Rectangle<int> rect = getLocalBounds().reduced(4); // legacy
+    
 
     //JOELwindows7: copy from demo of Graphics Demo header.
     int daHeight = 22;
@@ -146,6 +152,11 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     // JOELwindows7: graphic demo removes more rect grid spots
     rect.removeFromBottom(6);
     comboTrack->setBounds(rect.removeFromTop(daHeight));
+    // copy from demo of Box2D
+    auto widePutin = rect.removeFromBottom(6); //area to fill
+    widePutin.removeFromTop(daHeight);
+    //infoLabel.setBounds(widePutin);
+    infoLabel.setBounds(rect.removeFromTop(400));
 }
 
 void SimpleMidiplayerAudioProcessorEditor::buttonClicked(juce::Button * button)
@@ -198,3 +209,17 @@ void SimpleMidiplayerAudioProcessorEditor::updateTrackComboBox()
 
     comboTrack->setSelectedId(processor.getCurrentTrack() + 1, juce::dontSendNotification);
 }
+
+//JOELwindows7: da text label set & get
+void SimpleMidiplayerAudioProcessorEditor::setInfoLabelText(juce::String daNewText) {
+    infoLabel.setText(daNewText,juce::dontSendNotification);
+}
+
+juce::String SimpleMidiplayerAudioProcessorEditor::getInfoLabelText() {
+    return infoLabel.getText();
+}
+
+//JOELwindows7: get instance static
+//SimpleMidiplayerAudioProcessorEditor SimpleMidiplayerAudioProcessorEditor::getInstance() {
+//    return this;
+//}

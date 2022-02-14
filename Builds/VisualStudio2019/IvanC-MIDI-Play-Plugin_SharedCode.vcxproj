@@ -12,6 +12,10 @@
       <Configuration>Release</Configuration>
       <Platform>x64</Platform>
     </ProjectConfiguration>
+    <ProjectConfiguration Include="Release-x86|Win32">
+      <Configuration>Release-x86</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{A32FE966-41B7-B5E5-0E29-FC723DC07805}</ProjectGuid>
@@ -26,6 +30,14 @@
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'"
+                 Label="Configuration">
+    <ConfigurationType>StaticLibrary</ConfigurationType>
+    <UseOfMfc>false</UseOfMfc>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <PlatformToolset>v142</PlatformToolset>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release-x86|Win32'"
                  Label="Configuration">
     <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseOfMfc>false</UseOfMfc>
@@ -51,6 +63,10 @@
     <IntDir Condition="'$(Configuration)|$(Platform)'=='Release|x64'">$(Platform)\$(Configuration)\Shared Code\</IntDir>
     <TargetName Condition="'$(Configuration)|$(Platform)'=='Release|x64'">IvanC-MIDI-Play-Plugin</TargetName>
     <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</GenerateManifest>
+    <OutDir Condition="'$(Configuration)|$(Platform)'=='Release-x86|Win32'">$(SolutionDir)$(Platform)\$(Configuration)\Shared Code\</OutDir>
+    <IntDir Condition="'$(Configuration)|$(Platform)'=='Release-x86|Win32'">$(Platform)\$(Configuration)\Shared Code\</IntDir>
+    <TargetName Condition="'$(Configuration)|$(Platform)'=='Release-x86|Win32'">IvanC-MIDI-Play-Plugin</TargetName>
+    <GenerateManifest Condition="'$(Configuration)|$(Platform)'=='Release-x86|Win32'">true</GenerateManifest>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
@@ -74,7 +90,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>_DEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -114,7 +130,7 @@
       <WarningLevel>Level4</WarningLevel>
       <SuppressStartupBanner>true</SuppressStartupBanner>
       <MultiProcessorCompilation>true</MultiProcessorCompilation>
-      <LanguageStandard>stdcpp17</LanguageStandard>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
     </ClCompile>
     <ResourceCompile>
       <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
@@ -136,9 +152,57 @@
       <OutputFile>$(IntDir)\IvanC-MIDI-Play-Plugin.bsc</OutputFile>
     </Bscmake>
   </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release-x86|Win32'">
+    <Midl>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <MkTypLibCompatible>true</MkTypLibCompatible>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <TargetEnvironment>Win32</TargetEnvironment>
+      <HeaderFileName/>
+    </Midl>
+    <ClCompile>
+      <Optimization>Full</Optimization>
+      <AdditionalIncludeDirectories>C:\JUCE\modules\juce_audio_processors\format_types\VST3_SDK;C:\Users\joelr\Documents\kolmorotzzet (kolmorotshitt)\Artistic Setups\Steinberg\vstsdk3610_11_06_2018_build_37\VST_SDK\VST2_SDK;..\..\JuceLibraryCode;C:\SDKs\AAX;C:\SDKs\AAX\Interfaces;C:\SDKs\AAX\Interfaces\ACF;C:\JUCE\modules;C:\SDKs\boost_1_71_0;C:\SDKs\ASIOSDK2.3\common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <PreprocessorDefinitions>_CRT_SECURE_NO_WARNINGS;WIN32;_WINDOWS;NDEBUG;JUCE_DISPLAY_SPLASH_SCREEN=0;JUCE_USE_DARK_SPLASH_SCREEN=1;JUCE_PROJUCER_VERSION=0x60105;JUCE_MODULE_AVAILABLE_juce_audio_basics=1;JUCE_MODULE_AVAILABLE_juce_audio_devices=1;JUCE_MODULE_AVAILABLE_juce_audio_formats=1;JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1;JUCE_MODULE_AVAILABLE_juce_audio_processors=1;JUCE_MODULE_AVAILABLE_juce_audio_utils=1;JUCE_MODULE_AVAILABLE_juce_core=1;JUCE_MODULE_AVAILABLE_juce_data_structures=1;JUCE_MODULE_AVAILABLE_juce_dsp=1;JUCE_MODULE_AVAILABLE_juce_events=1;JUCE_MODULE_AVAILABLE_juce_graphics=1;JUCE_MODULE_AVAILABLE_juce_gui_basics=1;JUCE_MODULE_AVAILABLE_juce_gui_extra=1;JUCE_MODULE_AVAILABLE_juce_osc=1;JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1;JUCE_USE_WINRT_MIDI=1;JUCE_ASIO=1;JUCE_WASAPI=1;JUCE_DIRECTSOUND=1;JUCE_ALSA=1;JUCE_USE_MP3AUDIOFORMAT=1;JUCE_USE_LAME_AUDIO_FORMAT=1;JUCE_VST3_CAN_REPLACE_VST2=1;JUCE_PLUGINHOST_VST=1;JUCE_PLUGINHOST_VST3=1;JUCE_PLUGINHOST_AU=1;JUCE_PLUGINHOST_LADSPA=1;JUCE_ALLOW_STATIC_NULL_VARIABLES=1;JUCE_STRICT_REFCOUNTEDPOINTER=1;JucePlugin_Build_VST=1;JucePlugin_Build_VST3=1;JucePlugin_Build_AU=0;JucePlugin_Build_AUv3=0;JucePlugin_Build_RTAS=0;JucePlugin_Build_AAX=1;JucePlugin_Build_Standalone=1;JucePlugin_Build_Unity=0;JucePlugin_Enable_IAA=0;JucePlugin_Name=&quot;IvanC-MIDI-Play-Plugin&quot;;JucePlugin_Desc=&quot;IvanC\'s MIDI player plugin&quot;;JucePlugin_Manufacturer=&quot;Perkedel Technologies + IvanC&quot;;JucePlugin_ManufacturerWebsite=&quot;https://cointr.ee/joelwindows7&quot;;JucePlugin_ManufacturerEmail=&quot;&quot;;JucePlugin_ManufacturerCode=0x506b646c;JucePlugin_PluginCode=0x49636d64;JucePlugin_IsSynth=1;JucePlugin_WantsMidiInput=1;JucePlugin_ProducesMidiOutput=1;JucePlugin_IsMidiEffect=0;JucePlugin_EditorRequiresKeyboardFocus=0;JucePlugin_Version=2022.02;JucePlugin_VersionCode=0x7e60200;JucePlugin_VersionString=&quot;2022.02&quot;;JucePlugin_VSTUniqueID=JucePlugin_PluginCode;JucePlugin_VSTCategory=kPlugCategSynth;JucePlugin_Vst3Category=&quot;Instrument|Generator&quot;;JucePlugin_AUMainType='aumi';JucePlugin_AUSubType=JucePlugin_PluginCode;JucePlugin_AUExportPrefix=IvanCMIDIPlayPluginAU;JucePlugin_AUExportPrefixQuoted=&quot;IvanCMIDIPlayPluginAU&quot;;JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin;JucePlugin_RTASCategory=2048;JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_RTASProductId=JucePlugin_PluginCode;JucePlugin_RTASDisableBypass=0;JucePlugin_RTASDisableMultiMono=0;JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin;JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode;JucePlugin_AAXProductId=JucePlugin_PluginCode;JucePlugin_AAXCategory=2048;JucePlugin_AAXDisableBypass=0;JucePlugin_AAXDisableMultiMono=0;JucePlugin_IAAType=0x61757269;JucePlugin_IAASubType=JucePlugin_PluginCode;JucePlugin_IAAName=&quot;Perkedel Technologies + IvanC: IvanC-MIDI-Play-Plugin&quot;;JucePlugin_VSTNumMidiInputs=16;JucePlugin_VSTNumMidiOutputs=16;JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone;JUCE_MODAL_LOOPS_PERMITTED=1;JUCER_VS2019_78A5026=1;JUCE_APP_VERSION=2022.02;JUCE_APP_VERSION_HEX=0x7e60200;JUCE_SHARED_CODE=1;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
+      <RuntimeTypeInfo>true</RuntimeTypeInfo>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <AssemblerListingLocation>$(IntDir)\</AssemblerListingLocation>
+      <ObjectFileName>$(IntDir)\</ObjectFileName>
+      <ProgramDataBaseFileName>$(IntDir)\IvanC-MIDI-Play-Plugin.pdb</ProgramDataBaseFileName>
+      <WarningLevel>Level4</WarningLevel>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <MultiProcessorCompilation>true</MultiProcessorCompilation>
+      <LanguageStandard>stdcpplatest</LanguageStandard>
+    </ClCompile>
+    <ResourceCompile>
+      <PreprocessorDefinitions>NDEBUG;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+    </ResourceCompile>
+    <Link>
+      <OutputFile>$(OutDir)\IvanC-MIDI-Play-Plugin.lib</OutputFile>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
+      <GenerateDebugInformation>false</GenerateDebugInformation>
+      <ProgramDatabaseFile>$(IntDir)\IvanC-MIDI-Play-Plugin.pdb</ProgramDatabaseFile>
+      <SubSystem>Windows</SubSystem>
+      <TargetMachine>MachineX86</TargetMachine>
+      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <LargeAddressAware>true</LargeAddressAware>
+      <LinkTimeCodeGeneration>UseLinkTimeCodeGeneration</LinkTimeCodeGeneration>
+    </Link>
+    <Bscmake>
+      <SuppressStartupBanner>true</SuppressStartupBanner>
+      <OutputFile>$(IntDir)\IvanC-MIDI-Play-Plugin.bsc</OutputFile>
+    </Bscmake>
+    <Lib>
+      <TargetMachine>MachineX86</TargetMachine>
+    </Lib>
+  </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
+    <ClCompile Include="..\..\Source\ThisWindowThingyPls.cpp"/>
     <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
@@ -2242,6 +2306,7 @@
   <ItemGroup>
     <ClInclude Include="..\..\Source\PluginProcessor.h"/>
     <ClInclude Include="..\..\Source\PluginEditor.h"/>
+    <ClInclude Include="..\..\Source\ThisWindowThingyPls.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.h"/>
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioDataConverters.h"/>

@@ -34,6 +34,11 @@ public:
     //void checkBoxChanged(juce::ToggleButton* checkBox) override;
     void comboBoxChanged(juce::ComboBox* combo) override;
 
+    void setInfoLabelText(juce::String daNewText);
+    juce::String getInfoLabelText();
+
+    //static SimpleMidiplayerAudioProcessorEditor getInstance();
+
 private:
     //==============================================================================
     void updateTrackComboBox();
@@ -50,10 +55,14 @@ private:
     juce::ScopedPointer<juce::ComboBox> comboTrack;
 
     //JOELwindows7: okay, WHY THERE IS NO PLAY BUTTON??! WHY I HAVE TO RELY ON HOST'S PLAY BUTTON??!?
-    juce::ScopedPointer<juce::TextButton> buttonPlayNow; // Play / Pause
-    juce::ScopedPointer<juce::TextButton> buttonStopNow; // Stop
-    juce::ToggleButton checkBoxAllTracks; // ON / OFF play all tracks at once
-    juce::ToggleButton checkBoxOwnTransport; // ON / OFF use own transport
+    juce::ScopedPointer<juce::TextButton>   buttonPlayNow, // Play / Pause
+                                            buttonStopNow // Stop
+                                            ;
+    juce::ToggleButton                      checkBoxAllTracks, // ON / OFF play all tracks at once
+                                            checkBoxOwnTransport // ON / OFF use own transport
+                                            ;
+    juce::TextEditor                        infoLabel // Comprehensive infolabels
+                                            ;
     
     //==============================================================================
     SimpleMidiplayerAudioProcessor& processor;

@@ -7,7 +7,7 @@
               pluginManufacturer="Perkedel Technologies + IvanC" pluginAUMainType="'aumi'"
               pluginVST3Category="Generator,Instrument" pluginVSTCategory="kPlugCategSynth"
               userNotes="Ported from following links&#10;- https://forum.juce.com/t/playing-a-midi-file-revisited/26646 playing midi file in JUCE framework revisited&#10;- https://forum.juce.com/t/playing-a-midi-file/160/11 old forum&#10;&#10;IvanC yeahay&#10;&#10;we need to make sure we can play MIDI fully from this plugin alone because nobody ever did this ever since JUCE days and even Open Source Musical days."
-              pluginDesc="IvanC's MIDI player plugin" version="2022.02" cppLanguageStandard="17"
+              pluginDesc="IvanC's MIDI player plugin" version="2022.02" cppLanguageStandard="latest"
               defines="JUCE_MODAL_LOOPS_PERMITTED=1" headerPath="C:\SDKs\boost_1_71_0&#10;C:\SDKs\ASIOSDK2.3\common"
               pluginCode="Icmd" pluginManufacturerCode="Pkdl">
   <MAINGROUP id="tJi96Q" name="IvanC-MIDI-Play-Plugin">
@@ -21,6 +21,10 @@
       <FILE id="OmjU9x" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
     <FILE id="tVD7SO" name="README.md" compile="0" resource="1" file="README.md"/>
+    <FILE id="FAn9Ja" name="ThisWindowThingyPls.cpp" compile="1" resource="0"
+          file="Source/ThisWindowThingyPls.cpp"/>
+    <FILE id="KQxqT8" name="ThisWindowThingyPls.h" compile="0" resource="0"
+          file="Source/ThisWindowThingyPls.h"/>
   </MAINGROUP>
   <JUCEOPTIONS JUCE_STRICT_REFCOUNTEDPOINTER="1" JUCE_VST3_CAN_REPLACE_VST2="1"
                JUCE_USE_MP3AUDIOFORMAT="1" JUCE_USE_LAME_AUDIO_FORMAT="1" JUCE_USE_WINRT_MIDI="1"
@@ -76,6 +80,8 @@
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="IvanC-MIDI-Play-Plugin"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="IvanC-MIDI-Play-Plugin"/>
+        <CONFIGURATION isDebug="0" name="Release-x86" targetName="IvanC-MIDI-Play-Plugin"
+                       winArchitecture="Win32" userNotes="In case you don't want to sparsdat jbridge, and forcedly feel okay to use 32-bit host."/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../../../../../../../JUCE/modules"/>
@@ -98,6 +104,8 @@
       <CONFIGURATIONS>
         <CONFIGURATION isDebug="1" name="Debug" targetName="IvanC-MIDI-Play-Plugin"/>
         <CONFIGURATION isDebug="0" name="Release" targetName="IvanC-MIDI-Play-Plugin"/>
+        <CONFIGURATION isDebug="0" name="Release-x86" targetName="IvanC-MIDI-Play-Plugin"
+                       winArchitecture="Win32" userNotes="In case you don't want to sparsdat jbridge, and forcedly feel okay to use 32-bit host."/>
       </CONFIGURATIONS>
       <MODULEPATHS>
         <MODULEPATH id="juce_audio_basics" path="../../../../../../../../JUCE/modules"/>

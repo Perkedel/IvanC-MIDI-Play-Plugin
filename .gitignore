@@ -39,3 +39,10 @@ Builds/VisualStudio2019/.vs
 Builds/VisualStudio2022/x64
 Builds/VisualStudio2022/x86
 Builds/VisualStudio2022/.vs
+
+# Plugins
+*.dll 
+# confused! vst2 is dll! ; wtf, Steinberg?!
+
+.fake
+.ionide

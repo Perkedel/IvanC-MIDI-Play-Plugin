@@ -25,7 +25,10 @@ SimpleMidiplayerAudioProcessor::SimpleMidiplayerAudioProcessor()
                      #endif
                        ),
 #endif
-    ownStartTime(juce::Time::getMillisecondCounterHiRes() * 0.001)
+    ownStartTime(juce::Time::getMillisecondCounterHiRes() * 0.001)//, 
+    //daMidiBuffer(initMessageGS),daAudioBuffer(),
+    //editorRef(new SimpleMidiplayerAudioProcessorEditor(*this)) // Circular dependency
+    //Thread("rosshoyt MIDI Player Thread") // werror! thread abstract causes This class abstract not allowed instancing
 {
     //JOELwindows7: init da thingy
     juce::AudioTransportSource ownTransportSource(); // to construct non-pointer in C++, looks like this.
@@ -172,6 +175,79 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         //DSP Filtering code comes here
     }
 
+    // JOELwindows7: insert all info here
+    fillYourInfoHere = "Perkedel IvanC Midi Player\n";
+    fillYourInfoHere += "\nYeah\n";
+    fillYourInfoHere += "MIDI file: %s\n", "???";
+    fillYourInfoHere += "Using Own Transport = %s\n", useOwnTransportInstead ? "YES" : "NO";
+    fillYourInfoHere += "Using Entire Track = %s\n", useEntireTracks ? "YES" : "NO";
+    fillYourInfoHere += "Total Tracks = %d\n", numTracks.load();
+    fillYourInfoHere += "Chosen Track = %d\n", currentTrack.load();
+    fillYourInfoHere += "is Playing Something = %s\n", isPlayingSomething ? "YES" : "NO";
+    fillYourInfoHere += "Timer is running = %s\n", Timer::isTimerRunning() ? "YES" : "NO";
+    fillYourInfoHere += "Own Start Time = %F\n", ownStartTime;
+    fillYourInfoHere += "Next Start Time = %f\n", nextStartTime;
+    fillYourInfoHere += "Total End time = %F\n", traverseEndTime;
+    //if(editor != nullptr)
+        //editor->setInfoLabelText(fillYourInfoHere);
+    /*if (editorRef != NULL)
+        editorRef.setInfoLabelText(fillYourInfoHere);*/
+
+    //JOELwindows7: receive tell signals
+    if (tellPlayNow)
+    {
+        //thePositionInfo.transportPlay(true);
+        /*if (useOwnTransportInstead)
+            ownTransportSource.start();
+        else
+            getPlayHead()->transportPlay(true);*/
+        tellPlayNow = false;
+    }
+
+    if (tellStopNow)
+    {
+        /*if (useOwnTransportInstead)
+            ownTransportSource.stop();
+        else
+            getPlayHead()->transportPlay(false);*/
+        tellStopNow = false;
+    }
+
+    if (tellRecordNow)
+    {
+        tellRecordNow = false;
+    }
+
+    if (tellRewindNow) {
+        tellRewindNow = false;
+    }
+
+    if (tellWorkaroundFirst) {
+
+    }
+    else {
+        //Globalize MIDI buffer
+        //daMidiBuffer = midiMessages;
+        //daAudioBuffer = buffer;
+
+        //Enable GM first, very important!
+        initMessageGM.setTimeStamp(0);
+        midiMessages.addEvent(initMessageGM, 0);
+
+        //Yamaha S-YXG2006LE not drum on not XG proper MIDI
+        auto daDrumPatch = juce::MidiMessage::programChange(10, 127); //incorrecta, this is gunshot! GM, activate drum mode!!
+        daDrumPatch.setTimeStamp(2);
+        // use GS because this Roland's reset is almost same as GM but bit extended.
+        // okay fine how about GM2 instead? Can't! not all compatible.
+        auto daSysEx = juce::MidiMessage::createSysExMessage(initialSysExGS, 16);
+        daSysEx.setTimeStamp(1);
+        //midiMessages.addEvent(daDrumPatch,2);
+        midiMessages.addEvent(daSysEx, 1);
+
+        //Flip signal
+        tellWorkaroundFirst = true;
+    }
+
     if (myScopedLock.isLocked())
     {
         /*juce::AudioPlayHead::CurrentPositionInfo thePositionInfo;*/
@@ -180,56 +256,12 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         
         if (numTracks.load() > 0)
         {
-            //JOELwindows7: receive tell signals
-            if (tellPlayNow)
-            {
-                //thePositionInfo.transportPlay(true);
-                /*if (useOwnTransportInstead)
-                    ownTransportSource.start();
-                else
-                    getPlayHead()->transportPlay(true);*/
-                tellPlayNow = false;
-            }
-
-            if (tellStopNow)
-            {
-                /*if (useOwnTransportInstead)
-                    ownTransportSource.stop();
-                else
-                    getPlayHead()->transportPlay(false);*/
-                tellStopNow = false;
-            }
-
-            if (tellRecordNow)
-            {
-                tellRecordNow = false;
-            }
-
-            if (tellRewindNow) {
-                tellRewindNow = false;
-            }
-
-            if (tellWorkaroundFirst) {
-
-            }
-            else {
-                //Yamaha S-YXG2006LE not drum on not XG proper MIDI
-                auto daDrumPatch = juce::MidiMessage::programChange(10, 127);
-                daDrumPatch.setTimeStamp(1);
-                // use GS because this Roland's reset is almost same as GM but bit extended.
-                // okay fine how about GM2 instead? Can't! not all compatible.
-                auto daSysEx = juce::MidiMessage::createSysExMessage(initialSysExGS, 16);
-                daSysEx.setTimeStamp(0);
-                //midiMessages.addEvent(daDrumPatch,1);
-                midiMessages.addEvent(daSysEx, 0);
-
-                //Flip signal
-                tellWorkaroundFirst = true;
-            }
+            
 
             // The MIDI file is played only when the transport is active
             // TODO: JOELwindows7: point of transport override. add ignore transport and use own transport
             if (useOwnTransportInstead) {
+                /*
                 if (Timer::isTimerRunning()) {
                     const juce::MidiMessageSequence* theSequence = theMIDIFile.getTrack(currentTrack.load());
 
@@ -310,7 +342,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                     // If the transport isn't active anymore
                     if (isPlayingSomething)
                         sendAllNotesOff(midiMessages);
-                }
+                } */
             } else{
                 if (thePositionInfo.isPlaying)
                 {
@@ -403,6 +435,90 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
             }
         }
     }
+    else if (useOwnTransportInstead) {
+        //JOELwindows7: if using own transport instead.
+        if (Timer::isTimerRunning()) {
+            const juce::MidiMessageSequence* theSequence = theMIDIFile.getTrack(currentTrack.load());
+
+            //auto startTime = ownTransportSource.getCurrentPosition();
+            auto startTime = ownStartTime * 1000;
+            auto endTime = startTime + buffer.getNumSamples() / getSampleRate();
+            auto sampleLength = 1.0 / getSampleRate();
+
+            // If the transport bar position has been moved by the user or because of looping
+            if (std::abs(startTime - nextStartTime) > sampleLength && nextStartTime > 0.0)
+                sendAllNotesOff(midiMessages);
+
+            nextStartTime = endTime;
+
+            //JOELwindows7: now use 2 different modes
+            if (useEntireTracks)
+            {
+                // If the MIDI file doesn't contain any event anymore
+                if (isPlayingSomething && startTime >= traverseEndTime)
+                    sendAllNotesOff(midiMessages);
+                else
+                {
+                    // Called when the user changes the track during playback
+                    if (trackHasChanged)
+                    {
+                        trackHasChanged = false;
+                        // but this time don't send all note off!
+                    }
+
+                    for (int i = 0; i < (numTracks.load()); i++) {
+                        // copy playback from bellow
+                        for (auto j = 0; j < entireSequences[i]->getNumEvents(); j++) {
+                            juce::MidiMessageSequence::MidiEventHolder* event = entireSequences[i]->getEventPointer(j);
+
+                            if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                            {
+                                auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                                midiMessages.addEvent(event->message, samplePosition);
+
+                                isPlayingSomething = true;
+                            }
+                        }
+                    }
+                }
+            }
+            else {
+                // If the MIDI file doesn't contain any event anymore
+                if (isPlayingSomething && startTime >= theSequence->getEndTime())
+                    sendAllNotesOff(midiMessages);
+
+                else
+                {
+                    // Called when the user changes the track during playback
+                    if (trackHasChanged)
+                    {
+                        trackHasChanged = false;
+                        sendAllNotesOff(midiMessages);
+                    }
+
+                    // Iterating through the MIDI file contents and trying to find an event that
+                    // needs to be called in the current time frame
+                    for (auto i = 0; i < theSequence->getNumEvents(); i++)
+                    {
+                        juce::MidiMessageSequence::MidiEventHolder* event = theSequence->getEventPointer(i);
+
+                        if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                        {
+                            auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                            midiMessages.addEvent(event->message, samplePosition);
+
+                            isPlayingSomething = true;
+                        }
+                    }
+                }
+            }
+        }
+        else {
+            // If the transport isn't active anymore
+            if (isPlayingSomething)
+                sendAllNotesOff(midiMessages);
+        }
+    }
     else
     {
         // If we have just opened a MIDI file with no content
@@ -419,7 +535,10 @@ bool SimpleMidiplayerAudioProcessor::hasEditor() const
 
 juce::AudioProcessorEditor* SimpleMidiplayerAudioProcessor::createEditor()
 {
-    return new SimpleMidiplayerAudioProcessorEditor (*this);
+    //editor = new SimpleMidiplayerAudioProcessorEditor(*this); //globalize editor instance!!!
+    //return editor;
+    //return editorRef;
+    return new SimpleMidiplayerAudioProcessorEditor(*this);
 }
 
 //==============================================================================
@@ -466,6 +585,7 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     //JOELwindows7: now load them up to sequences!
     //traverseEndTime = 0.00; // reset end time
     traverseEndTime = theMIDIFile.getLastTimestamp() + 3.00; // AH PECKING FOUND IT!!! THE LENGTH OF MIDI FILE!!!
+    totalNumEvents = 0; // reset num events total
     //entireSequences.clear();
     //help how do I clear all array in const!!!???
     //for (int i = 0; i < 15; i++)
@@ -476,6 +596,7 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     for (int i = 0; i < numTracks.load(); i++)
     {
         entireSequences[i] = theMIDIFile.getTrack(i);
+        totalNumEvents += entireSequences[i]->getNumEvents();
         //traverseEndTime = std::max(traverseEndTime, theMIDIFile.getTrack(i)->getEndTime());
         //JOELwindows7: perhaps it doesn't work?
         /*if (theMIDIFile.getTrack(i)->getEndTime() >= traverseEndTime) {
@@ -585,4 +706,124 @@ void SimpleMidiplayerAudioProcessor::sendAllNotesOff(juce::MidiBuffer& midiMessa
 //JOELwindows7: da callback from Midi Message Tutorial, PIP header number 2
 void SimpleMidiplayerAudioProcessor::timerCallback()
 {
+    /*
+    if (useOwnTransportInstead) {
+        if (useEntireTracks)
+        {
+            if (!daMidiBuffer.isEmpty()) {
+                const juce::MidiMessageSequence* theSequence = theMIDIFile.getTrack(currentTrack.load());
+
+                //auto startTime = ownTransportSource.getCurrentPosition();
+                auto startTime = ownStartTime * 1000;
+                auto endTime = startTime + daAudioBuffer.getNumSamples() / getSampleRate();
+                auto sampleLength = 1.0 / getSampleRate();
+
+                // If the transport bar position has been moved by the user or because of looping
+                if (std::abs(startTime - nextStartTime) > sampleLength && nextStartTime > 0.0)
+                    sendAllNotesOff(daMidiBuffer);
+
+                nextStartTime = endTime;
+
+                //JOELwindows7: now use 2 different modes
+                if (useEntireTracks)
+                {
+                    // If the MIDI file doesn't contain any event anymore
+                    if (isPlayingSomething && startTime >= traverseEndTime)
+                        sendAllNotesOff(daMidiBuffer);
+                    else
+                    {
+                        // Called when the user changes the track during playback
+                        if (trackHasChanged)
+                        {
+                            trackHasChanged = false;
+                            // but this time don't send all note off!
+                        }
+
+                        for (int i = 0; i < (numTracks.load()); i++) {
+                            // copy playback from bellow
+                            for (auto j = 0; j < entireSequences[i]->getNumEvents(); j++) {
+                                juce::MidiMessageSequence::MidiEventHolder* event = entireSequences[i]->getEventPointer(j);
+
+                                if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                                {
+                                    auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                                    daMidiBuffer.addEvent(event->message, samplePosition);
+
+                                    isPlayingSomething = true;
+                                }
+                            }
+                        }
+                    }
+                }
+                else {
+                    // If the MIDI file doesn't contain any event anymore
+                    if (isPlayingSomething && startTime >= theSequence->getEndTime())
+                        sendAllNotesOff(daMidiBuffer);
+
+                    else
+                    {
+                        // Called when the user changes the track during playback
+                        if (trackHasChanged)
+                        {
+                            trackHasChanged = false;
+                            sendAllNotesOff(daMidiBuffer);
+                        }
+
+                        // Iterating through the MIDI file contents and trying to find an event that
+                        // needs to be called in the current time frame
+                        for (auto i = 0; i < theSequence->getNumEvents(); i++)
+                        {
+                            juce::MidiMessageSequence::MidiEventHolder* event = theSequence->getEventPointer(i);
+
+                            if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                            {
+                                auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                                daMidiBuffer.addEvent(event->message, samplePosition);
+
+                                isPlayingSomething = true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+    */
+
+    ownElapsedTime++;
 }
+
+//JOELwindows7: handover the label
+//void SimpleMidiplayerAudioProcessor::handoverInfoLabel(juce::Label& thing) {
+//    giveMeInfoLabel = thing;
+//}
+
+//JOELwindows7: screw this
+juce::String SimpleMidiplayerAudioProcessor::getFillYourInfoHere() {
+    return fillYourInfoHere;
+}
+
+//JOELwindows7: rosshoyt style countered MIDI play thread
+//void SimpleMidiplayerAudioProcessor::threadenOwnPlayMidi() {
+//    int numTrackEvents = totalNumEvents;
+//    int i = 0;
+//    juce::SortedSet<int> channelNoteMap;
+//    //std::vector<MidiMessage*> channelNoteMap;
+//    //std::unordered_multimap<int, int> channelMap;
+//    //ChannelNoteMap channelNoteMap;
+//    bool sustainOn = false;
+//    while (i < numTrackEvents && !threadShouldExit())
+//    {
+//        
+//        i++;
+//    }
+//    DBG("Closing Play() thread");
+//}
+//
+//void SimpleMidiplayerAudioProcessor::stopThreadenOwnPlayMidi() {
+//    DBG("Stopping MidiFilePlayer");
+//    stopThread(20);
+//    //keyboardState.allNotesOff(1);
+//}
+
+

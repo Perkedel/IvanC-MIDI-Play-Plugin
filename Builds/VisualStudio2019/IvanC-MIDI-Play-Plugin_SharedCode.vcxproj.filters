@@ -481,6 +481,9 @@
     <ClCompile Include="..\..\Source\PluginEditor.cpp">
       <Filter>IvanC-MIDI-Play-Plugin\Source</Filter>
     </ClCompile>
+    <ClCompile Include="..\..\Source\ThisWindowThingyPls.cpp">
+      <Filter>IvanC-MIDI-Play-Plugin</Filter>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.cpp">
       <Filter>JUCE Modules\juce_audio_basics\buffers</Filter>
     </ClCompile>
@@ -2744,6 +2747,9 @@
     </ClInclude>
     <ClInclude Include="..\..\Source\PluginEditor.h">
       <Filter>IvanC-MIDI-Play-Plugin\Source</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\Source\ThisWindowThingyPls.h">
+      <Filter>IvanC-MIDI-Play-Plugin</Filter>
     </ClInclude>
     <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\audio_play_head\juce_AudioPlayHead.h">
       <Filter>JUCE Modules\juce_audio_basics\audio_play_head</Filter>

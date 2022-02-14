@@ -51,6 +51,7 @@
 		9576FC39BA50E85B90892FF6 /* CoreAudio.framework */ = {isa = PBXBuildFile; fileRef = E388859239B3BABCA6933280; };
 		A061B7432DA3FAF0B0C31C00 /* QuartzCore.framework */ = {isa = PBXBuildFile; fileRef = 2F7E7001EB55F522D59D5E33; };
 		A778963E49E665D09D58F04C /* Standalone Plugin */ = {isa = PBXBuildFile; fileRef = EE78FDBF787E9175404600D3; };
+		B0097B1E9ECF3511148DAC59 /* ThisWindowThingyPls.cpp */ = {isa = PBXBuildFile; fileRef = D85E56E8CC1F1345618317D3; };
 		B1E0790BDDFDA42959FBD25C /* DiscRecording.framework */ = {isa = PBXBuildFile; fileRef = 7EAD56DA6CA3C116DC793F55; };
 		BE27F2176624F3A052D82157 /* include_juce_audio_plugin_client_utils.cpp */ = {isa = PBXBuildFile; fileRef = 03F48AED5835F0625228DAB7; };
 		C80EC8FCC958244828FA0E30 /* include_juce_audio_plugin_client_VST3.cpp */ = {isa = PBXBuildFile; fileRef = 18465A86D27FD9AC673FE31A; };
@@ -127,7 +128,9 @@
 		CDE7C2543A50AD8D2EC4E6D8 /* Accelerate.framework */ /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D33794B801C528C2EB3E3103 /* VST */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IvanC-MIDI-Play-Plugin.vst"; sourceTree = BUILT_PRODUCTS_DIR; };
 		D83912AC2821A550FD3EC811 /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = "~/JUCE/modules/juce_gui_extra"; sourceTree = "<absolute>"; };
+		D85E56E8CC1F1345618317D3 /* ThisWindowThingyPls.cpp */ /* ThisWindowThingyPls.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ThisWindowThingyPls.cpp; path = ../../Source/ThisWindowThingyPls.cpp; sourceTree = SOURCE_ROOT; };
 		DB0058F28643F5F4461D1AC7 /* include_juce_audio_processors.mm */ /* include_juce_audio_processors.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_processors.mm; path = ../../JuceLibraryCode/include_juce_audio_processors.mm; sourceTree = SOURCE_ROOT; };
+		DC3CE2D415216F02891A365B /* ThisWindowThingyPls.h */ /* ThisWindowThingyPls.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = ThisWindowThingyPls.h; path = ../../Source/ThisWindowThingyPls.h; sourceTree = SOURCE_ROOT; };
 		E388859239B3BABCA6933280 /* CoreAudio.framework */ /* CoreAudio.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudio.framework; path = System/Library/Frameworks/CoreAudio.framework; sourceTree = SDKROOT; };
 		E633ACB92AFBC4641FD045C6 /* include_juce_audio_plugin_client_VST_utils.mm */ /* include_juce_audio_plugin_client_VST_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_VST_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST_utils.mm; sourceTree = SOURCE_ROOT; };
 		E8DE8E503D42128117027292 /* include_juce_data_structures.mm */ /* include_juce_data_structures.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_data_structures.mm; path = ../../JuceLibraryCode/include_juce_data_structures.mm; sourceTree = SOURCE_ROOT; };
@@ -248,6 +251,8 @@
 			children = (
 				611F42EC37DE8AD5E4CC619A,
 				EAD4A1551565CF16D185CCF9,
+				D85E56E8CC1F1345618317D3,
+				DC3CE2D415216F02891A365B,
 			);
 			name = "IvanC-MIDI-Play-Plugin";
 			sourceTree = "<group>";
@@ -668,6 +673,7 @@
 			files = (
 				DDC3D4EF94F065A3775FE575,
 				FAA6FE5E1AA0732CA7A2B9F3,
+				B0097B1E9ECF3511148DAC59,
 				5751D6E56B3ED8C95EB1E9EA,
 				EBC3ED5E16CD96B4F3DDDC5E,
 				8296384410AE31EFCDB01F9C,
@@ -740,7 +746,7 @@
 		0077191DAB7F5E19A563A7F9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -878,7 +884,7 @@
 		01F3D091D212D9ED140ECA5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1013,7 +1019,7 @@
 		033B3FE02EF284505853D344 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1147,7 +1153,7 @@
 		0BBDCD41A860B0D4780E7291 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1286,7 +1292,7 @@
 		1089A3F3234D7518A98113E1 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1463,7 +1469,7 @@
 		556B3400F905EC0D4E866D17 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1607,7 +1613,7 @@
 		DCA6BBC7B82F3DDEB4F80CDA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1735,7 +1741,7 @@
 		DE1973A3DA454E2FD3D0EA40 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1864,7 +1870,7 @@
 		DF069829BFD30D76B02D3C19 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
@@ -1998,7 +2004,7 @@
 		EA38E8D64CCF2342424C3675 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_LINK_OBJC_RUNTIME = NO;
 				CODE_SIGN_IDENTITY = "";
