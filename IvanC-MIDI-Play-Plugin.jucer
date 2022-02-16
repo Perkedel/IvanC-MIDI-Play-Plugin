@@ -21,7 +21,7 @@
       <FILE id="OmjU9x" name="PluginEditor.h" compile="0" resource="0" file="Source/PluginEditor.h"/>
     </GROUP>
     <FILE id="tVD7SO" name="README.md" compile="0" resource="1" file="README.md"/>
-    <FILE id="FAn9Ja" name="ThisWindowThingyPls.cpp" compile="1" resource="0"
+    <FILE id="FAn9Ja" name="ThisWindowThingyPls.cpp" compile="0" resource="0"
           file="Source/ThisWindowThingyPls.cpp"/>
     <FILE id="KQxqT8" name="ThisWindowThingyPls.h" compile="0" resource="0"
           file="Source/ThisWindowThingyPls.h"/>

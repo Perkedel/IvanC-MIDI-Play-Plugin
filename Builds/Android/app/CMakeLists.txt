@@ -1778,6 +1778,7 @@ add_library( ${BINARY_NAME}
 set_source_files_properties("../../../Source/PluginProcessor.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties("../../../Source/PluginEditor.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties("../../../README.md" PROPERTIES HEADER_FILE_ONLY TRUE)
+set_source_files_properties("../../../Source/ThisWindowThingyPls.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties("../../../Source/ThisWindowThingyPls.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties("../../../../../../../../../JUCE/modules/juce_audio_basics/audio_play_head/juce_AudioPlayHead.h" PROPERTIES HEADER_FILE_ONLY TRUE)
 set_source_files_properties("../../../../../../../../../JUCE/modules/juce_audio_basics/buffers/juce_AudioChannelSet.cpp" PROPERTIES HEADER_FILE_ONLY TRUE)

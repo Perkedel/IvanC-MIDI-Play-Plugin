@@ -202,7 +202,9 @@
   <ItemGroup>
     <ClCompile Include="..\..\Source\PluginProcessor.cpp"/>
     <ClCompile Include="..\..\Source\PluginEditor.cpp"/>
-    <ClCompile Include="..\..\Source\ThisWindowThingyPls.cpp"/>
+    <ClCompile Include="..\..\Source\ThisWindowThingyPls.cpp">
+      <ExcludedFromBuild>true</ExcludedFromBuild>
+    </ClCompile>
     <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_basics\buffers\juce_AudioChannelSet.cpp">
       <ExcludedFromBuild>true</ExcludedFromBuild>
     </ClCompile>
