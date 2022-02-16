@@ -47,6 +47,11 @@ private:
     //we just hack the AudioPlayHead, yeah that host's play head!
     /*void pressPlayPauseButton();
     void pressStopButton();*/
+
+    //=============================================================================
+    //JOELwindows7: handovered component you must paste here in your face
+
+    //TODO: juce::Component &myMaskOn; //Or maybe2, try hacker class instead (empty bridge). nvm, not working this way I suppose.
     
     //==============================================================================
     //juce::OwnedArray<juce::TextButton> buttonsOfStuffs; //JOELwindows7: holding buttons
@@ -59,7 +64,8 @@ private:
                                             buttonStopNow // Stop
                                             ;
     juce::ToggleButton                      checkBoxAllTracks, // ON / OFF play all tracks at once
-                                            checkBoxOwnTransport // ON / OFF use own transport
+                                            checkBoxOwnTransport, // ON / OFF use own transport
+                                            checkBoxLoop // ON / OFF use loop
                                             ;
     juce::TextEditor                        infoLabel // Comprehensive infolabels
                                             ;

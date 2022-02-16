@@ -28,6 +28,29 @@ Not all Plugin Host has MIDI file loading support. Despite support MIDI, but doe
 Importing MIDI as DAW track lines **is different!** that's conversion, not Loading.
 
 # How to build
+## Minus First, Get the Git & GitHub Desktop
+**DO NOT DOWNLOAD ZIP**, you must legitly clone like professional.
+
+okay that's hard. but! there is [GitHub Desktop](https://desktop.github.com). Install it. after done, maybe restart browser.
+
+Now, in this GitHub repo page, scroll up from where you read this, `Code` green button, `Open in GitHub Desktop`, Select where folder you'd like to put this repo at,  
+and go back to this reading. NOW! GO GO GO!
+
+Okay you're back.
+
+## Zeroth, You must install JUCE
+https://JUCE.com yess.
+
+Alright, this is so confusing. Click `Discover` top left. down a bit, click `Projucer`. `Download the Projucer`. in `Personal` tier, click `Download`.  
+choose your OS. now, with this ZIP file, take that `JUCE` folder to `C:/`. so now, you have `C:/JUCE` with all JUCE stuffs in it.
+
+idk for Linux yet. please rereach me Linux again. Oh, perhaps there are available on package managers of your distro idk.
+
+inside this new `JUCE` folder there is that `Projucer` executable. that, will be your project manager for JUCE things. You can create and edit projects.  
+the project file is `.jucer` that put next to bunch of folders and stuffs in each project folder.
+
+therefore, this, you `Open Existing Project`, go to where `IvanC-MIDI-Play-Plugin.jucer` is, which is at that cloned git repo folder of `IvanC-MIDI-Play-Plugin`.
+
 ## First, grab yourself stuffs
 ### VST2, older version of VST SDK (Because you make plugin .dll, do not distribute unless you are first lucky few who got the license before deprecation)
 put in anywhere you like (because it's legacy you shall not confuse with latest VST SDK, so put it in different folder than usual). 
@@ -70,6 +93,44 @@ Build this thing! each IDE has differently set build destination. your files is 
 
 I don't think you can export to any others, and if somehow does then idk how do we supposed to make it work.
 
+## With this IDE and the solution file you've opened, 
+**REMEMBER!!! Choose `Release` configuration!** The `Debug` is not efficient, so don't build with this configuration unless you're contributing.
+
+`Compile` / `Build Solution` now! usually it's `F5` or it's on Top menu of `Build`, `Compile`, etc.
+
+Note, it is `Build` / `Compile`, not `Run` / `Start Debugging`. This is pluggin, a `.vst3` file. `.dll` something.
+
+the `Standalone` version I've tested last time didn't work. so don't `Run`, just `Build` instead.
+
+## Now load this built binary .vst3 up into your host!
+the build folder is in respective IDE where you complied at. it's named so.
+
+last time I see, in my case of `VisualStudio2019` and so on, it's in `x64` because I am compiling for 64-bit. So,
+
+`${this_source_code}/Builds/VisualStudio2019/x64` . okay yours of course can be different depending on different IDE and environment chosen.  
+`${this_source_code}/Builds/${you_IDE_which_compiled_at}/x64` I think...
+
+Next, there is 2 folder. One because **you forgot to set the configuration correctly** (or because you want to contribute) & other that only appears if you chose correct configuration.  
+there are `Debug` & `Release`. each folder appears & updates its content as you compile to which config between `Debug` & `Release`.
+
+use the `Release` one!
+
+### How to load plugins in JUCE base host typically
+Find the VST manager setting.
+
+In kushview Element, `View` top menu, `Plugin Manager`. top left beside `Scan`, there `Option`, click it! `Scan for VST3 Plugin`.
+
+Bespoke, top right `vst plugins`, `manage vsts`.
+
+in JUCE Audio Plugin Host extras, uh... `Options` top menu, `Edit list of available plugins` (`Ctrl` + `P`).
+
+Now, this familiar VST manager window opens. `+` to add new folder. simply add this source code folder,  
+it'l scan recursively. nvm, straight to where the `.vst3` file is at ( you might have `Debug` which is not to be used).  
+
+click `Save` / `Scan` . in Bespoke & JUCE Audio Plugin Host, it'll immediately scan, while kushview Element you need to press top left `Scan`.
+
+alright you can now add it.
+
 # How to use
 You will need MIDI file. make sure your MIDI file has proper reset in it. Some VSTi synth such as Yamaha S-YXG2006LE in default state did not set the drum correctly. But maybe I've fixed that by putting SysEx event in 0th event. does it fixed?
 
@@ -89,7 +150,9 @@ https://bespokesynth.com/ $0 & OPEN SOURCE
 This is a standalone JUCE synth, where you can build crazy music & in jams. It's like you have this DAW, get broken down to pieces, and then you got to rebuild it again. It has so many nodes you can put and connect together, and of course, it also hosts external plugins too yeah VST host!!!
 
 Unfortunately,:
-- It does not have timeline. the transport over there at the moment is only to metronome internal nodes, and isn't a recognizable Playhead (`AudioTransportSource`) standardly. Without the playhead support, IvanC MIDI play does not work well and it'll just sitt there poker face unless we finally managed to have our own playhead.
+- ~~It does not have timeline.~~ the transport over there at the moment is only to metronome internal nodes, and isn't a recognizable Playhead (`AudioTransportSource`) standardly. Without the playhead support, IvanC MIDI play does not work well and it'll just sitt there poker face unless we finally managed to have our own playhead.
+- NEW correction! there is recognizable `AudioTransportSource`, but even if you press reset, it won't reset `AudioTransportPosition` position back to 0.
+- Like Carla, the MIDI also screws up fatally! it fail to recognize `Program Change` and possibly others. Even tested with this finally works with loop, nope! **it forgor Program Change!!!**
 
 ## VST Host
 https://www.hermannseib.com/english/vsthost.htm $0 & PROPRIETARY
@@ -143,3 +206,16 @@ C'mon, I need help. I've been trying to build on playhead here, because of of al
 JUST, **That**, one Play head inside this our VSTi, so we together can use Bespoke to build craziest ever MIDI Player. Not just Surreal randomness, but ordered & Timelined MIDI playback as well!
 
 I tried every single way I could find with search, and none of those all works.
+
+# TODO
+## Install JUCE source code itself modules but it's LV2 fork
+https://github.com/lv2-porting-project/JUCE/tree/lv2  
+https://jatinchowdhury18.medium.com/building-lv2-plugins-with-juce-and-cmake-d1f8937dbac3  
+
+I am surprised JUCE does not yet support rendering / compilation to LADSPA v2! what the peck?!
+
+simply have a `modules` folder, `git submodules add https://github.com/lv2-porting-project/JUCE/ `  
+and then checkout / change branch of that submodule into `lv2` branch instead of master with go to that `JUCE` special module folder,  
+and then `git checkout lv2`.
+
+maybe later.

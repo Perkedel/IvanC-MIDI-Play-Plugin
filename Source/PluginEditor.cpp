@@ -29,6 +29,7 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     addAndMakeVisible(buttonStopNow = new juce::TextButton("Stop"));
     addAndMakeVisible(checkBoxAllTracks);
     addAndMakeVisible(checkBoxOwnTransport);
+    addAndMakeVisible(checkBoxLoop);
     addAndMakeVisible(infoLabel);
     infoLabel.setMultiLine(true, true);
     infoLabel.setReadOnly(true);
@@ -49,6 +50,12 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     checkBoxOwnTransport.setToggleState(processor.getUseOwnTransport(), juce::dontSendNotification);
     checkBoxOwnTransport.onClick = [this] {
         processor.pressOwnTransportCheckBox(checkBoxOwnTransport.getToggleState());
+    };
+    checkBoxLoop.setButtonText("Loop");
+    checkBoxLoop.setTooltip("Toggle whether should the play loops");
+    checkBoxLoop.setToggleState(processor.getDoLoop(), juce::dontSendNotification);
+    checkBoxLoop.onClick = [this] {
+        processor.pressLoopCheckBox(checkBoxLoop.getToggleState());
     };
 
     // Click on this combo box to select the track that needs to be played
@@ -88,6 +95,7 @@ SimpleMidiplayerAudioProcessorEditor::~SimpleMidiplayerAudioProcessorEditor()
     buttonStopNow->removeListener(this);
     checkBoxAllTracks.onClick = NULL;
     checkBoxOwnTransport.onClick = NULL;
+    checkBoxLoop.onClick = NULL;
     comboTrack->removeListener(this);
 }
 
@@ -148,13 +156,14 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     //checkBoxOwnTransport.setBounds(rect.removeFromTop((rect.getHeight() / 2) - 15).withSizeKeepingCentre(200, 150));
     checkBoxOwnTransport.setBounds(col.removeFromTop(daHeight));
     //checkBoxAllTracks.setBounds(rect.removeFromTop(rect.getHeight() / 2 - 20));
+    checkBoxLoop.setBounds(col.removeFromTop(daHeight));
 
     // JOELwindows7: graphic demo removes more rect grid spots
     rect.removeFromBottom(6);
     comboTrack->setBounds(rect.removeFromTop(daHeight));
     // copy from demo of Box2D
-    auto widePutin = rect.removeFromBottom(6); //area to fill
-    widePutin.removeFromTop(daHeight);
+    //auto widePutin = rect.removeFromBottom(6); //area to fill
+    //widePutin.removeFromTop(daHeight);
     //infoLabel.setBounds(widePutin);
     infoLabel.setBounds(rect.removeFromTop(400));
 }

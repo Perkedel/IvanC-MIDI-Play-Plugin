@@ -78,10 +78,12 @@ public:
     void pressStopButton();
     void pressAllTracksCheckBox(bool stateNow);
     void pressOwnTransportCheckBox(bool stateNow);
+    void pressLoopCheckBox(bool stateNow);
     void timerCallback() override;
 
-    bool getUseEntireTracks(); // JOELwindows7: get setter of use entire tracks
-    bool getUseOwnTransport(); // JOELwindows7: get setter of use entire tracks
+    bool getUseEntireTracks(); // JOELwindows7: getter of use entire tracks
+    bool getUseOwnTransport(); // JOELwindows7: getter of use entire tracks
+    bool getDoLoop(); // JOELwindows7: getter of use loop
 
     //void handoverInfoLabel(juce::Label& thing);
     juce::String getFillYourInfoHere(); //JOELwindows7: screw this! let editor harvest it itself!
@@ -98,6 +100,10 @@ private:
     juce::CriticalSection processLock;
 
     //==============================================================================
+    // JOELwindows7: da window pls
+    juce::Component thisWindowThingy;           // Component you should be able to customize.
+
+    //==============================================================================
     juce::MidiFile theMIDIFile;                       // The current MIDI file content
     bool isPlayingSomething;                    // Tells if the last audio buffer included some MIDI content to play
     bool trackHasChanged = false;
@@ -106,6 +112,7 @@ private:
                                                 // very useful if your plugin host doesn't have legitimate Play Stop control buttons
                                                 // such as Bespoke Synth (the Transport there plugin is not Play Stop), JUCE AudioPlugin demo, etc.
     bool myOwnIsPlaying = false;                // Own Transport Press Play mode.
+    bool doLoop = false;                        // Should we loop automatically?
     juce::AudioPlayHead::CurrentPositionInfo thePositionInfo; //JOELwindows7: make position info global!
     //juce::AudioPlayHead myPlayHead; //JOELwindows7: Host's playhead!
     juce::AudioTransportSource ownTransportSource; //JOELwindows7: this very Transport own thingy
@@ -120,11 +127,13 @@ private:
     double ownStartTime;                        // JOELwindows7: start time for own transport
     double traverseEndTime;        // JOELwindows7: Overall MIDI end time traversing sequence by sequence. who's the highest end time?
     double ownElapsedTime;                      // JOELwindows7: to be ++ every timer callbacks
-    
+    double lastSampleStartTime;                 // JOELwindows7: for position pulling here purpose & loop. see https://forum.juce.com/t/how-to-loop-midi-file/33837/10?u=joelwindows
+    double loop;                                // JOELwindows7: loop final calculations
     double nextStartTime = -1.0;                // The start time in seconds of the next audio buffer
                                                 // That information is used to know when the transport bar position 
                                                 // has been moved by the user or the looping system in the DAW, so
                                                 // we can call sendAllNotesOff there
+    int transpose = 0;                          // JOELwindows7: adissu had transposer. it starts from 0 & typically adjustable from -12 to 12.
 
     //JOELwindows7: f8888ing reset messages that is f8888ing hard to find online
     // found in LINK
@@ -150,6 +159,7 @@ private:
     bool tellRecordNow = false;
     bool tellRewindNow = false;
     bool tellWorkaroundFirst = false;
+    bool tellLoopPull = false;
 
     // JOELwindows7: handovers
     //juce::Label& giveMeInfoLabel;

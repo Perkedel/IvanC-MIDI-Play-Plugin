@@ -57,7 +57,7 @@ public:
     void lookAndFeelChanged() override;
     bool hitTest (int x, int y) override;
     void broughtToFront() override;
-    void filesDropped (const juce::StringArray& filenames, int mouseX, int mouseY) override;
+    //void filesDropped (const juce::StringArray& filenames, int mouseX, int mouseY) override;
     void handleCommandMessage (int commandId) override;
     void childrenChanged() override;
     void enablementChanged() override;

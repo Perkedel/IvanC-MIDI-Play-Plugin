@@ -10,13 +10,21 @@ namespace BinaryData
 //================== README.md ==================
 static const unsigned char temp_binary_data_0[] =
 "# IvanC-MIDI-Play-Plugin\n"
-" Ported the glorious JUCE MIDI loader & \"player\" plugin from https://forum.juce.com/t/playing-a-midi-file-revisited/26646 . I have to thancc IvanC for reproviding the source for this this majestic treasure. But it's incomplete & only plays single t"
-"rack. UGH! here, lemme complete this. Ah there it is. FULL MIDI Player in its glory! yeah! not efficient & elegant, but it works. Sorry, I haven't taught myself Object Oriented pure C++ fully yet, but have learned its derivatives from my college and "
-"self taughts.\n"
+" Ported the glorious JUCE MIDI loader & \"player\" plugin from https://forum.juce.com/t/playing-a-midi-file-revisited/26646 .  \n"
+"I have to thancc IvanC for reproviding the source for this this majestic treasure.  \n"
+"But it was incomplete & only plays single track.  \n"
+"UGH! here, lemme complete this. Ah there it is.  \n"
+"FULL MIDI Player in its glory! yeah! not efficient & elegant, but it works.  \n"
+"Sorry, I haven't taught myself Object Oriented pure C++ fully yet, but have learned its derivatives from my college and self taughts.\n"
 "\n"
-" And.. I need help. read on!\n"
+" And.. I need help (Now Help Wanted: Override playhead transport). read on!\n"
 "\n"
 " Ahei JUCEr & Dasandimians, welcome! Please have a look & Enjoy.\n"
+"\n"
+"# Why some VST fail to initate correctly? like my MIDI Synth?\n"
+"Because those VST are compiled in other architecture. If you have 64 bit Host, then it can't load those 32 bit VSTs at all, & vice versa.\n"
+"\n"
+"We have provided compile configuration for 32 bit to match with those VSTs. BUT caveat, **you also have to use 32 bit version of the host** unfortunately. \n"
 "\n"
 "# What's this?\n"
 "This is a VSTi plugin that lets you load your favourite MIDI file then broadcast it via Event Output / MIDI OUT.\n"
@@ -160,6 +168,9 @@ static const unsigned char temp_binary_data_0[] =
 "- https://sites.google.com/site/zarkoasenov/zerovjane https://www.kvraudio.com/forum/viewtopic.php?t=438406&start=15 Unfortunately, the MIDI player seems no longer working with our VST host we have here.\n"
 "- https://code.google.com/archive/p/pizmidi/downloads https://www.kvraudio.com/product/midilooper-by-insert-piz-here While it's fully functional even that `DEMO VERSION`, it's still not work as I expected when I try to load the MIDI to there. This is"
 " just a basic press key Sequencer, not a valid MIDI Player that got more than this.\n"
+"- https://jstuff.wordpress.com jbridge is bridge generator for each VST dll. put your other architecture VST here, and you'll have bridged to your archicture VST. This is very expensive & I am appalled that nobody want to build $0 & Open Source compe"
+"ting alternative to this. This is why I have to still support 32-bit, for it this.. ugh!!! stop canceling! We got age old trouble been unsolved for centuries!!! don't sit right there complaining me complaining that there is age old pecking paywall th"
+"at remains unbroken forever!!!. Not to mention, everytime the bridged version loads, it complains lack of Admin privilege on the Host execution. wtf!? shut up!!!\n"
 "\n"
 "# Damn, where home should I go?\n"
 "Nowhere I can peacefully rely on Host!? We only have kuzu / OpenMIDIProject MIDI Tester & Sekaiju but uh now, kuzu became trouble-heads. No, not NFT, it was the paid DLC. Sekaiju Script is not $0. other than that, Sekaiju is fully functional. also MI"
@@ -187,7 +198,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
 
     switch (hash)
     {
-        case 0x64791dc8:  numBytes = 14664; return README_md;
+        case 0x64791dc8:  numBytes = 15743; return README_md;
         default: break;
     }
 

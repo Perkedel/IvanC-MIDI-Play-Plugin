@@ -236,13 +236,13 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
         //Yamaha S-YXG2006LE not drum on not XG proper MIDI
         auto daDrumPatch = juce::MidiMessage::programChange(10, 127); //incorrecta, this is gunshot! GM, activate drum mode!!
-        daDrumPatch.setTimeStamp(2);
+        daDrumPatch.setTimeStamp(0);
         // use GS because this Roland's reset is almost same as GM but bit extended.
         // okay fine how about GM2 instead? Can't! not all compatible.
         auto daSysEx = juce::MidiMessage::createSysExMessage(initialSysExGS, 16);
-        daSysEx.setTimeStamp(1);
+        daSysEx.setTimeStamp(0);
         //midiMessages.addEvent(daDrumPatch,2);
-        midiMessages.addEvent(daSysEx, 1);
+        midiMessages.addEvent(daSysEx, 0);
 
         //Flip signal
         tellWorkaroundFirst = true;
@@ -355,76 +355,84 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                     }*/
 
                     auto startTime = thePositionInfo.timeInSeconds;
-                    auto endTime = startTime + buffer.getNumSamples() / getSampleRate();
+                    //auto endTime = startTime + buffer.getNumSamples() / getSampleRate();
+                    //auto sampleLength = 1.0 / getSampleRate();
+
+                    //adissu's loop land offset.
+                    // https://forum.juce.com/t/how-to-loop-midi-file/33837/10?u=joelwindows7
+                    double loopOffset = fmod(startTime, useEntireTracks ? traverseEndTime : theSequence->getEndTime());
+                    loop = startTime - loopOffset;
+                    auto sampleStartTime = startTime - loop;
+
+                    // JOELwindows7: abisu reseton
+                    if (doLoop? lastSampleStartTime > sampleStartTime : tellLoopPull)
+                    {
+                        sampleStartTime = 0.0; // set to 0 if new loop starts
+                        tellLoopPull = false;
+                    }
+
+                    lastSampleStartTime = sampleStartTime;
+                    auto sampleEndTime = sampleStartTime + buffer.getNumSamples() / getSampleRate();
                     auto sampleLength = 1.0 / getSampleRate();
 
                     // If the transport bar position has been moved by the user or because of looping
-                    if (std::abs(startTime - nextStartTime) > sampleLength && nextStartTime > 0.0)
+                    //if (std::abs(startTime - nextStartTime) > sampleLength && nextStartTime > 0.0)
+                    if (std::abs(sampleStartTime - nextStartTime) > sampleLength && nextStartTime > 0.0)
                         sendAllNotesOff(midiMessages);
 
-                    nextStartTime = endTime;
+                    //nextStartTime = endTime;
+                    nextStartTime = sampleEndTime;
 
-                    //JOELwindows7: now use 2 different modes
-                    if (useEntireTracks)
+                    //JOELwindows7: now use 2 different modes. PAIN IS TEMPORARY, GLORY IS FOREVER
+                    // If the MIDI file doesn't contain any event anymore
+                    if (isPlayingSomething && sampleStartTime >= (useEntireTracks? traverseEndTime: theSequence->getEndTime()))
+                        sendAllNotesOff(midiMessages);
+                    else
                     {
-                        // If the MIDI file doesn't contain any event anymore
-                        if (isPlayingSomething && startTime >= traverseEndTime)
-                            sendAllNotesOff(midiMessages);
-                        else
+                        // Called when the user changes the track during playback
+                        if (trackHasChanged)
                         {
-                            // Called when the user changes the track during playback
-                            if (trackHasChanged)
-                            {
-                                trackHasChanged = false;
-                                // but this time don't send all note off!
-                            }
-
-                            for (int i = 0; i < (numTracks.load()); i++) {
-                                // copy playback from bellow
-                                for (auto j = 0; j < entireSequences[i]->getNumEvents(); j++) {
-                                    juce::MidiMessageSequence::MidiEventHolder* event = entireSequences[i]->getEventPointer(j);
-
-                                    if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
-                                    {
-                                        auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
-                                        midiMessages.addEvent(event->message, samplePosition);
-
-                                        isPlayingSomething = true;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    else {
-                        // If the MIDI file doesn't contain any event anymore
-                        if (isPlayingSomething && startTime >= theSequence->getEndTime())
-                            sendAllNotesOff(midiMessages);
-
-                        else
-                        {
-                            // Called when the user changes the track during playback
-                            if (trackHasChanged)
-                            {
-                                trackHasChanged = false;
+                            trackHasChanged = false;
+                            // but this time don't send all note off!
+                            //nvm here you go
+                            if (!useEntireTracks)
                                 sendAllNotesOff(midiMessages);
-                            }
+                        }
+                        int curTranspose = transpose, lastTranspose = transpose; //JOELwindows7: adissu had this.
 
-                            // Iterating through the MIDI file contents and trying to find an event that
-                            // needs to be called in the current time frame
-                            for (auto i = 0; i < theSequence->getNumEvents(); i++)
-                            {
-                                juce::MidiMessageSequence::MidiEventHolder* event = theSequence->getEventPointer(i);
+                        for (int i = 0; i < (useEntireTracks? numTracks.load() : 1); i++) {
+                            // copy playback from bellow
+                            for (auto j = 0; j < (useEntireTracks? entireSequences[i]->getNumEvents() : theSequence->getNumEvents()); j++) {
+                                juce::MidiMessageSequence::MidiEventHolder* event = useEntireTracks? entireSequences[i]->getEventPointer(j) : theSequence->getEventPointer(j);
 
-                                if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                                //if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
+                                if (event->message.getTimeStamp() >= sampleStartTime && event->message.getTimeStamp() < sampleEndTime)
                                 {
-                                    auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                                    //auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
+                                    auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - sampleStartTime) * getSampleRate());
                                     midiMessages.addEvent(event->message, samplePosition);
+
+                                    //JOELwindows7: adissu workaround loop miss
+                                    /* to avoid that the first element of the next loop will be missed because it has to be sent in the same time frame, send it in the same time frame.
+                                    Needs to be improved:
+                                    - only send the first event, if it really is part of the same time frame
+                                    - could also be more the one event.
+                                    */
+                                    if (fmod(startTime, useEntireTracks? entireSequences[i]->getEndTime() : theSequence->getEndTime()) >
+                                        fmod(sampleEndTime, useEntireTracks? entireSequences[i]->getEndTime() : theSequence->getEndTime())
+                                        )
+                                    {
+                                        juce::MidiMessageSequence::MidiEventHolder event2 = useEntireTracks? *entireSequences[i]->getEventPointer(0) : *theSequence->getEventPointer(0);
+                                        auto samplePosition = juce::roundToInt((event2.message.getTimeStamp()) * getSampleRate());
+                                        midiMessages.addEvent(event2.message, samplePosition);
+                                    }
 
                                     isPlayingSomething = true;
                                 }
                             }
                         }
                     }
+                    
                 }
                 else
                 {
@@ -435,6 +443,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
             }
         }
     }
+    /*
     else if (useOwnTransportInstead) {
         //JOELwindows7: if using own transport instead.
         if (Timer::isTimerRunning()) {
@@ -519,6 +528,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                 sendAllNotesOff(midiMessages);
         }
     }
+    */
     else
     {
         // If we have just opened a MIDI file with no content
@@ -634,6 +644,9 @@ void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
         }
     }
     tellPlayNow = true;
+    if (!doLoop) {
+        tellLoopPull = true;
+    }
 }
 
 //JOELwindows7: press stop button
@@ -657,12 +670,21 @@ void SimpleMidiplayerAudioProcessor::pressOwnTransportCheckBox(bool stateNow) {
     //sendAllNotesOff(midiMessages);
 }
 
+void SimpleMidiplayerAudioProcessor::pressLoopCheckBox(bool stateNow) {
+    doLoop = stateNow;
+    //sendAllNotesOff(midiMessages);
+}
+
 bool SimpleMidiplayerAudioProcessor::getUseEntireTracks() {
     return useEntireTracks;
 }
 
 bool SimpleMidiplayerAudioProcessor::getUseOwnTransport() {
     return useOwnTransportInstead;
+}
+
+bool SimpleMidiplayerAudioProcessor::getDoLoop() {
+    return doLoop;
 }
 
 int SimpleMidiplayerAudioProcessor::getNumTracks()

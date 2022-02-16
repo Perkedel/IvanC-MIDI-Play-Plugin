@@ -241,11 +241,11 @@ void ThisWindowThingyPls::broughtToFront()
     //[/UserCode_broughtToFront]
 }
 
-void ThisWindowThingyPls::filesDropped (const juce::StringArray& filenames, int mouseX, int mouseY)
-{
-    //[UserCode_filesDropped] -- Add your code here...
-    //[/UserCode_filesDropped]
-}
+//void ThisWindowThingyPls::filesDropped (const juce::StringArray& filenames, int mouseX, int mouseY)
+//{
+//    //[UserCode_filesDropped] -- Add your code here...
+//    //[/UserCode_filesDropped]
+//}
 
 void ThisWindowThingyPls::handleCommandMessage (int commandId)
 {
