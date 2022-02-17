@@ -49,6 +49,7 @@ void SimpleMidiplayerAudioProcessorEditor::buildDaUI() {
     addAndMakeVisible(buttonPlayNow = new juce::TextButton("Play / Pause"));
     //addAndMakeVisible(buttonsOfStuffs.add(buttonStopNow = new juce::TextButton("Stop")));
     addAndMakeVisible(buttonStopNow = new juce::TextButton("Stop"));
+    addAndMakeVisible(buttonPanicNow = new juce::TextButton("PANIK!!! CPR"));
     addAndMakeVisible(checkBoxAllTracks);
     addAndMakeVisible(checkBoxOwnTransport);
     addAndMakeVisible(checkBoxLoop);
@@ -60,6 +61,12 @@ void SimpleMidiplayerAudioProcessorEditor::buildDaUI() {
 
     buttonPlayNow->addListener(this);
     buttonStopNow->addListener(this);
+    buttonPanicNow->addListener(this);
+    
+    buttonPlayNow->setTooltip("Play the song (for Override Playhead) & Signal Pull the loop start");
+    buttonStopNow->setTooltip("Stop the song (for Override Playhead) & Cancel signaling pull the loop start");
+    buttonPanicNow->setTooltip("Send all notes OFF on all channels.\nif you have hung notes & events, press this button to shock the \"heart\" & stop fibrilation.\n Or Valsava Manuver when playing");
+
     //checkBoxAllTracks->addListener(this);
     checkBoxAllTracks.setButtonText("Entire Tracks");
     checkBoxAllTracks.setTooltip("Toggle whether should all tracks plays");
@@ -124,6 +131,7 @@ SimpleMidiplayerAudioProcessorEditor::~SimpleMidiplayerAudioProcessorEditor()
     buttonLoadMIDIFile->removeListener(this);
     buttonPlayNow->removeListener(this);
     buttonStopNow->removeListener(this);
+    buttonPanicNow->removeListener(this);
     checkBoxAllTracks.onClick = NULL;
     checkBoxOwnTransport.onClick = NULL;
     checkBoxLoop.onClick = NULL;
@@ -176,6 +184,7 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     //buttonStopNow->setBounds(rect.removeFromTop((rect.getHeight() / 2) - 25).withSizeKeepingCentre(200, 24));
     buttonPlayNow->setBounds(col.removeFromTop(daHeight));
     buttonStopNow->setBounds(col.removeFromTop(daHeight));
+    buttonPanicNow->setBounds(col.removeFromTop(daHeight));
     
     // JOELwindows7: begin separate Column like in graphics demo
     columns.removeFromLeft(20);
@@ -223,6 +232,9 @@ void SimpleMidiplayerAudioProcessorEditor::buttonClicked(juce::Button * button)
     else if (button == buttonStopNow) {
         // JOELwindows7: ah damn!
         processor.pressStopButton();
+    }
+    else if (button == buttonPanicNow) {
+        processor.pressPanicButton();
     }
     //else if (button == checkBoxAllTracks) {
     //    // JOELwindows7: hey .onClick callback!

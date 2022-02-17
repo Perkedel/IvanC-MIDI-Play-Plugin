@@ -64,7 +64,8 @@ private:
 
     //JOELwindows7: okay, WHY THERE IS NO PLAY BUTTON??! WHY I HAVE TO RELY ON HOST'S PLAY BUTTON??!?
     juce::ScopedPointer<juce::TextButton>   buttonPlayNow, // Play / Pause
-                                            buttonStopNow // Stop
+                                            buttonStopNow, // Stop
+                                            buttonPanicNow // Panic PANIK!!!
                                             ;
     juce::ToggleButton                      checkBoxAllTracks, // ON / OFF play all tracks at once
                                             checkBoxOwnTransport, // ON / OFF use own transport

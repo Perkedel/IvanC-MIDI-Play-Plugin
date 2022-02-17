@@ -226,6 +226,13 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         tellRewindNow = false;
     }
 
+    if (tellPanic) {
+        // PANIK ATTACK!!!
+
+        sendAllNotesOff(midiMessages);
+        tellPanic = false;
+    }
+
     if (tellWorkaroundFirst) {
 
     }
@@ -243,7 +250,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         daDrumPatch.setTimeStamp(0);
         // use GS because this Roland's reset is almost same as GM but bit extended.
         // okay fine how about GM2 instead? Can't! not all compatible.
-        auto daSysEx = juce::MidiMessage::createSysExMessage(initialSysExGS, 16);
+        auto daSysEx = juce::MidiMessage::createSysExMessage(initialSysExG2, 16);
         daSysEx.setTimeStamp(0);
         //midiMessages.addEvent(daDrumPatch,2);
         midiMessages.addEvent(daSysEx, 0);
@@ -360,16 +367,15 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
                     auto startTime = thePositionInfo.timeInSeconds;
                     //auto endTime = startTime + buffer.getNumSamples() / getSampleRate();
-                    //auto sampleLength = 1.0 / getSampleRate();
 
                     //JOELwindows7: adissu's loop land offset.
                     // https://forum.juce.com/t/how-to-loop-midi-file/33837/10?u=joelwindows7
-                    double loopOffset = fmod(startTime, useEntireTracks ? traverseEndTime : (theSequence->getEndTime() + doSpacer? 3.00 : 0)); // do repull here instead?
+                    double loopOffset = fmod(startTime, traverseEndTime); // do repull here instead?
                     loop = startTime - loopOffset;
-                    auto sampleStartTime = startTime - loop;
+                    auto sampleStartTime = startTime - (doLoop? loop: 0.0);
 
                     // JOELwindows7: abisu reseton
-                    if (doLoop? lastSampleStartTime > sampleStartTime : tellLoopPull)
+                    if (lastSampleStartTime > sampleStartTime)
                     {
                         sampleStartTime = 0.0; // set to 0 if new loop starts
                         tellLoopPull = false;
@@ -377,7 +383,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
                     lastSampleStartTime = sampleStartTime;
                     auto sampleEndTime = sampleStartTime + buffer.getNumSamples() / getSampleRate();
-                    auto sampleLength = 1.0 / getSampleRate();
+                    auto sampleLength = 1.0 / getSampleRate(); // sample length is here!
 
                     // If the transport bar position has been moved by the user or because of looping
                     //if (std::abs(startTime - nextStartTime) > sampleLength && nextStartTime > 0.0)
@@ -389,7 +395,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
                     //JOELwindows7: now use 2 different modes. PAIN IS TEMPORARY, GLORY IS FOREVER
                     // If the MIDI file doesn't contain any event anymore
-                    if (isPlayingSomething && sampleStartTime >= (useEntireTracks? traverseEndTime: (theSequence->getEndTime() + doSpacer ? 3.00 : 0)))
+                    if (isPlayingSomething && sampleStartTime >= traverseEndTime)
                         sendAllNotesOff(midiMessages);
                     else
                     {
@@ -406,7 +412,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
                         for (int i = 0; i < (useEntireTracks? numTracks.load() : 1); i++) {
                             // copy playback from bellow
-                            for (auto j = 0; j < (useEntireTracks? entireSequences[i]->getNumEvents() : (theSequence->getEndTime() + doSpacer ? 3.00 : 0.0)); j++) {
+                            for (auto j = 0; j < (useEntireTracks? entireSequences[i]->getNumEvents() : theSequence->getNumEvents()); j++) {
                                 juce::MidiMessageSequence::MidiEventHolder* event = useEntireTracks? entireSequences[i]->getEventPointer(j) : theSequence->getEventPointer(j);
 
                                 //if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
@@ -422,9 +428,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                                     - only send the first event, if it really is part of the same time frame
                                     - could also be more the one event.
                                     */
-                                    if (fmod(startTime, useEntireTracks? traverseEndTime : (theSequence->getEndTime() + doSpacer ? 3.00 : 0.0)) >
-                                        fmod(sampleEndTime, useEntireTracks? traverseEndTime : (theSequence->getEndTime() + doSpacer ? 3.00 : 0))
-                                        )
+                                    if (fmod(startTime, traverseEndTime) > fmod(sampleEndTime, traverseEndTime))
                                     {
                                         juce::MidiMessageSequence::MidiEventHolder event2 = useEntireTracks? *entireSequences[i]->getEventPointer(0) : *theSequence->getEventPointer(0);
                                         auto samplePosition = juce::roundToInt((event2.message.getTimeStamp()) * getSampleRate());
@@ -654,8 +658,7 @@ void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
     tellPlayNow = true;
 
     //Just pull it up!
-    tellLoopPull = !tellLoopPull;
-
+    tellLoopPull = true;
 }
 
 //JOELwindows7: press stop button
@@ -667,6 +670,12 @@ void SimpleMidiplayerAudioProcessor::pressStopButton() {
         stopTimer();
     }
     tellStopNow = true;
+    tellLoopPull = false;
+}
+
+//JOELwindows7: panic button
+void SimpleMidiplayerAudioProcessor::pressPanicButton() {
+    tellPanic = true;
 }
 
 void SimpleMidiplayerAudioProcessor::pressAllTracksCheckBox(bool stateNow) {
@@ -681,6 +690,7 @@ void SimpleMidiplayerAudioProcessor::pressOwnTransportCheckBox(bool stateNow) {
 
 void SimpleMidiplayerAudioProcessor::pressLoopCheckBox(bool stateNow) {
     doLoop = stateNow;
+    tellLoopPull = doLoop;
     //sendAllNotesOff(midiMessages);
 }
 
@@ -747,6 +757,7 @@ void SimpleMidiplayerAudioProcessor::sendAllNotesOff(juce::MidiBuffer& midiMessa
 
     isPlayingSomething = false;
     tellWorkaroundFirst = false;
+    tellLoopPull = false;
 }
 
 //JOELwindows7: da callback from Midi Message Tutorial, PIP header number 2

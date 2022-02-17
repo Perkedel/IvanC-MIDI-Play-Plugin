@@ -76,6 +76,7 @@ public:
     //we just hack the AudioPlayHead, yeah that host's play head!
     void pressPlayPauseButton();
     void pressStopButton();
+    void pressPanicButton();
     void pressAllTracksCheckBox(bool stateNow);
     void pressOwnTransportCheckBox(bool stateNow);
     void pressLoopCheckBox(bool stateNow);
@@ -158,6 +159,8 @@ private:
     juce::MidiMessage initMessageGS = juce::MidiMessage::createSysExMessage(initialSysExGS, 16);
     juce::MidiMessage initMessage88 = juce::MidiMessage::createSysExMessage(initialSysEx88, 16);
 
+    //IDEA: JOELwindows7: store first program changes & maybe last? yeah collect metadata, have signal I got it for each of them, in array
+
     //JOELwindows7: flags for signalizations
     bool tellPlayNow = false;
     bool tellStopNow = false;
@@ -165,6 +168,7 @@ private:
     bool tellRewindNow = false;
     bool tellWorkaroundFirst = false;
     bool tellLoopPull = false;
+    bool tellPanic = false; // heart fibrilation
 
     // JOELwindows7: handovers
     //juce::Label& giveMeInfoLabel;

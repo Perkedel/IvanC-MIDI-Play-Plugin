@@ -27,7 +27,21 @@ Not all Plugin Host has MIDI file loading support. Despite support MIDI, but doe
 
 Importing MIDI as DAW track lines **is different!** that's conversion, not Loading.
 
+# DOWNLOAD PLS!!! I'M TIRED TO BUILD MYSELF!!! NO TIME!!!
+## Right side, release section
+comming soon
+
+## Nightly Immediately
+
+The nightly & cutting edge rolling is finally here!
+### rendered in Visual Studio 2019
+https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2019/x64 (64-bit)
+
+- VST3
+- LV2 (LADSPA v2) (Coming soon)
+
 # How to build
+Here's how to compile this VSTi. As well as preparing everything to be able to compile more VST & JUCE projects in the future. You're welcome.
 ## Minus First, Get the Git & GitHub Desktop
 **DO NOT DOWNLOAD ZIP**, you must legitly clone like professional.
 
@@ -160,7 +174,7 @@ This is a standalone JUCE synth, where you can build crazy music & in jams. It's
 
 Unfortunately,:
 - ~~It does not have timeline.~~ the transport over there at the moment is only to metronome internal nodes, and isn't a recognizable Playhead (`AudioTransportSource`) standardly. Without the playhead support, IvanC MIDI play does not work well and it'll just sitt there poker face unless we finally managed to have our own playhead.
-- NEW correction! there is recognizable `AudioTransportSource`, but even if you press reset, it won't reset `AudioTransportPosition` position back to 0.
+- NEW correction! there is recognizable `AudioTransportSource`, but even if you press reset, it won't reset `AudioTransportPosition` position back to 0. enable `Loop` in this VSTi!!!
 - Like Carla, the MIDI also screws up fatally! it fail to recognize `Program Change` and possibly others. Even tested with this finally works with loop, nope! **it forgor Program Change!!!**
 
 ## VST Host
@@ -189,7 +203,10 @@ Unfortunately,
 - EXPENSIVE!!! >$0 !!! Despite being Open Source under GNU GPL v3 (& hence the source code there on GitHub & $0), the prebuilt binaries are Expensive. worse, buying once only grants you that version. worse again, per purchase opens the download for only 14 days! quick download before expired. worse and worst, ***RAAAAAAAAAAAAAW***, I mean, If you want to always be up to date, then you have to subscribe to their Patreon or whatever is that to have access to download link everyday for every new version. Remember, don't pay for tools! and since this is considered **Adobe level of soul hostage**, it is morally correct to sparsdat this product. No offense, sorry. Oh wow, I've been canceled lmao! Well, you see that GNU GPL only wants you let people have freedom in Source code, **but not have to be as in beer**. Bruh why not both. very flawed License I would say.
 - Lacks MIDI player at the moment. though it has Audio Player (has respond to MIDI Start, Stop, & Continue button) & duplicate its under the name of Media Player (that just plays Audio and does not respond to MIDI start stop continue button). C'mon, I want MIDI player!!! This is where IvanC MIDI Play plugin.. actually honestly shines. Element has that Playhead needed.
 
-My question is I can fork (it's GNU GPL v3). but.. can I render and spread my own, (warning earape fx) **for $0**?
+My question is I can fork (it's GNU GPL v3). but.. can I render and spread my own, (warning earape fx) **for $0**?  
+Yes, [you can](https://www.youtube.com/watch?v=B66VtJBN2N0 ). Despite not disallowing paywall of GNU GPL, it seems that it doesn't mean anybody that rebuild & redistribute that build without official consent **~~illegal~~, no it's not**. it's **LEGAL**. (among us game start sfx) HEHEHEHEHEE, yeaha boi!
+
+okay, give me disk space pls. little help.. no! **big help pls!!!**
 
 ## kx.Studio Carla
 https://kx.studio/Applications:Carla $0 & Open Source
