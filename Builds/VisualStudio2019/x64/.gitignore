@@ -1,0 +1,17 @@
+# Do not distribute unlicensed files, because they are karen.
+Release/AAX
+Release/AU
+Release/VST
+
+# Redundant ignores do not distribute unlicensed us. in case you accidentally unignore debug
+Debug/AAX
+Debug/AU
+Debug/VST
+
+# VST3 is ironically safe, GNU GPL v3 some sort. still, Steinberg, you d888head! why not also older VST too?!??!
+
+# Do not distribute debug because it is not efficient & confuses people.
+Debug
+Release/Shared Code
+Release/SharedCode
+

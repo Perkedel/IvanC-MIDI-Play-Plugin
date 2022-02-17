@@ -10,6 +10,7 @@
 
 #include "PluginProcessor.h"
 #include "PluginEditor.h"
+#include "ThisWindowThingyPls.h"
 
 //JOELwindows7: pls count to 3, people
 
@@ -30,6 +31,9 @@ SimpleMidiplayerAudioProcessor::SimpleMidiplayerAudioProcessor()
     //editorRef(new SimpleMidiplayerAudioProcessorEditor(*this)) // Circular dependency
     //Thread("rosshoyt MIDI Player Thread") // werror! thread abstract causes This class abstract not allowed instancing
 {
+    // JOELwindows7: component pls
+    thisWindowThingy = new ThisWindowThingyPls();
+
     //JOELwindows7: init da thingy
     juce::AudioTransportSource ownTransportSource(); // to construct non-pointer in C++, looks like this.
 
@@ -358,9 +362,9 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                     //auto endTime = startTime + buffer.getNumSamples() / getSampleRate();
                     //auto sampleLength = 1.0 / getSampleRate();
 
-                    //adissu's loop land offset.
+                    //JOELwindows7: adissu's loop land offset.
                     // https://forum.juce.com/t/how-to-loop-midi-file/33837/10?u=joelwindows7
-                    double loopOffset = fmod(startTime, useEntireTracks ? traverseEndTime : theSequence->getEndTime());
+                    double loopOffset = fmod(startTime, useEntireTracks ? traverseEndTime : (theSequence->getEndTime() + doSpacer? 3.00 : 0)); // do repull here instead?
                     loop = startTime - loopOffset;
                     auto sampleStartTime = startTime - loop;
 
@@ -385,7 +389,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
                     //JOELwindows7: now use 2 different modes. PAIN IS TEMPORARY, GLORY IS FOREVER
                     // If the MIDI file doesn't contain any event anymore
-                    if (isPlayingSomething && sampleStartTime >= (useEntireTracks? traverseEndTime: theSequence->getEndTime()))
+                    if (isPlayingSomething && sampleStartTime >= (useEntireTracks? traverseEndTime: (theSequence->getEndTime() + doSpacer ? 3.00 : 0)))
                         sendAllNotesOff(midiMessages);
                     else
                     {
@@ -402,7 +406,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
 
                         for (int i = 0; i < (useEntireTracks? numTracks.load() : 1); i++) {
                             // copy playback from bellow
-                            for (auto j = 0; j < (useEntireTracks? entireSequences[i]->getNumEvents() : theSequence->getNumEvents()); j++) {
+                            for (auto j = 0; j < (useEntireTracks? entireSequences[i]->getNumEvents() : (theSequence->getEndTime() + doSpacer ? 3.00 : 0.0)); j++) {
                                 juce::MidiMessageSequence::MidiEventHolder* event = useEntireTracks? entireSequences[i]->getEventPointer(j) : theSequence->getEventPointer(j);
 
                                 //if (event->message.getTimeStamp() >= startTime && event->message.getTimeStamp() < endTime)
@@ -412,14 +416,14 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                                     auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - sampleStartTime) * getSampleRate());
                                     midiMessages.addEvent(event->message, samplePosition);
 
-                                    //JOELwindows7: adissu workaround loop miss
+                                    //JOELwindows7: adissu workaround loop 1st element avoid
                                     /* to avoid that the first element of the next loop will be missed because it has to be sent in the same time frame, send it in the same time frame.
                                     Needs to be improved:
                                     - only send the first event, if it really is part of the same time frame
                                     - could also be more the one event.
                                     */
-                                    if (fmod(startTime, useEntireTracks? entireSequences[i]->getEndTime() : theSequence->getEndTime()) >
-                                        fmod(sampleEndTime, useEntireTracks? entireSequences[i]->getEndTime() : theSequence->getEndTime())
+                                    if (fmod(startTime, useEntireTracks? traverseEndTime : (theSequence->getEndTime() + doSpacer ? 3.00 : 0.0)) >
+                                        fmod(sampleEndTime, useEntireTracks? traverseEndTime : (theSequence->getEndTime() + doSpacer ? 3.00 : 0))
                                         )
                                     {
                                         juce::MidiMessageSequence::MidiEventHolder event2 = useEntireTracks? *entireSequences[i]->getEventPointer(0) : *theSequence->getEventPointer(0);
@@ -548,7 +552,8 @@ juce::AudioProcessorEditor* SimpleMidiplayerAudioProcessor::createEditor()
     //editor = new SimpleMidiplayerAudioProcessorEditor(*this); //globalize editor instance!!!
     //return editor;
     //return editorRef;
-    return new SimpleMidiplayerAudioProcessorEditor(*this);
+    //return new SimpleMidiplayerAudioProcessorEditor(*this);
+    return new SimpleMidiplayerAudioProcessorEditor(*this, thisWindowThingy);
 }
 
 //==============================================================================
@@ -594,7 +599,8 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
 
     //JOELwindows7: now load them up to sequences!
     //traverseEndTime = 0.00; // reset end time
-    traverseEndTime = theMIDIFile.getLastTimestamp() + 3.00; // AH PECKING FOUND IT!!! THE LENGTH OF MIDI FILE!!!
+    traverseEndTime = theMIDIFile.getLastTimestamp() + (doSpacer? 3.00 : 0.00); // AH PECKING FOUND IT!!! THE LENGTH OF MIDI FILE!!!
+    haveBeenSpaced = doSpacer;
     totalNumEvents = 0; // reset num events total
     //entireSequences.clear();
     //help how do I clear all array in const!!!???
@@ -603,6 +609,7 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     //    //entireSequences[i] = NULL;
     //}
 
+    // JOELwindows7: Now fill all of the tracks!
     for (int i = 0; i < numTracks.load(); i++)
     {
         entireSequences[i] = theMIDIFile.getTrack(i);
@@ -619,6 +626,7 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     // must manually set it. Dude, not all MIDI does that, it's initiative for XG ASMR MIDIs typically.
     // on on any other bland potatoes MIDIs.
     juce::MidiMessage::programChange(10, 127); // GM drum
+    //wait, that's a value. put that in addEvent on that midiMessages!!!
 
     tellWorkaroundFirst = false;
 }
@@ -644,9 +652,10 @@ void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
         }
     }
     tellPlayNow = true;
-    if (!doLoop) {
-        tellLoopPull = true;
-    }
+
+    //Just pull it up!
+    tellLoopPull = !tellLoopPull;
+
 }
 
 //JOELwindows7: press stop button
@@ -675,6 +684,17 @@ void SimpleMidiplayerAudioProcessor::pressLoopCheckBox(bool stateNow) {
     //sendAllNotesOff(midiMessages);
 }
 
+void SimpleMidiplayerAudioProcessor::pressSpacerCheckBox(bool stateNow) {
+    doSpacer = stateNow;
+    //traverseEndTime = doSpacer ? traverseEndTime + 3.00 : traverseEndTime;
+    if (haveBeenSpaced)
+        traverseEndTime = doSpacer ? traverseEndTime - 3 : traverseEndTime; // if has been spaced, remove spacer if haven't already
+    else
+        traverseEndTime = doSpacer ? traverseEndTime + 3 : traverseEndTime; // if not been spaced, add spacer if haven't already
+    haveBeenSpaced = doSpacer; // re update last have been spaced.
+    //sendAllNotesOff(midiMessages);
+}
+
 bool SimpleMidiplayerAudioProcessor::getUseEntireTracks() {
     return useEntireTracks;
 }
@@ -685,6 +705,10 @@ bool SimpleMidiplayerAudioProcessor::getUseOwnTransport() {
 
 bool SimpleMidiplayerAudioProcessor::getDoLoop() {
     return doLoop;
+}
+
+bool SimpleMidiplayerAudioProcessor::getDoSpacer() {
+    return doSpacer;
 }
 
 int SimpleMidiplayerAudioProcessor::getNumTracks()

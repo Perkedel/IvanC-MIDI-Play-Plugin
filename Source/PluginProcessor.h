@@ -79,17 +79,19 @@ public:
     void pressAllTracksCheckBox(bool stateNow);
     void pressOwnTransportCheckBox(bool stateNow);
     void pressLoopCheckBox(bool stateNow);
+    void pressSpacerCheckBox(bool stateNow);
     void timerCallback() override;
 
     bool getUseEntireTracks(); // JOELwindows7: getter of use entire tracks
     bool getUseOwnTransport(); // JOELwindows7: getter of use entire tracks
     bool getDoLoop(); // JOELwindows7: getter of use loop
+    bool getDoSpacer(); // JOELwindows7: getter of doSpacer
 
     //void handoverInfoLabel(juce::Label& thing);
     juce::String getFillYourInfoHere(); //JOELwindows7: screw this! let editor harvest it itself!
 
-    void threadenOwnPlayMidi(); //JOELwindows7: rosshoyt threaded play MIDI file standalone
-    void stopThreadenOwnPlayMidi(); //JOELwindows7 the stop of it.
+    //void threadenOwnPlayMidi(); //JOELwindows7: rosshoyt threaded play MIDI file standalone
+    //void stopThreadenOwnPlayMidi(); //JOELwindows7 the stop of it.
 
 private:
     //==============================================================================
@@ -101,18 +103,20 @@ private:
 
     //==============================================================================
     // JOELwindows7: da window pls
-    juce::Component thisWindowThingy;           // Component you should be able to customize.
+    juce::ScopedPointer<juce::Component> thisWindowThingy;           // Component you should be able to customize.
+    //ThisWindowThingyPls thisWindowThingy;           // Component you should be able to customize.
 
     //==============================================================================
     juce::MidiFile theMIDIFile;                       // The current MIDI file content
     bool isPlayingSomething;                    // Tells if the last audio buffer included some MIDI content to play
     bool trackHasChanged = false;
-    bool useEntireTracks = false;               // tells if all tracks should be used instead
+    bool useEntireTracks = true;               // tells if all tracks should be used instead
     bool useOwnTransportInstead = false;        // tells if we should use own transport instead of plugin host's Transport
                                                 // very useful if your plugin host doesn't have legitimate Play Stop control buttons
                                                 // such as Bespoke Synth (the Transport there plugin is not Play Stop), JUCE AudioPlugin demo, etc.
     bool myOwnIsPlaying = false;                // Own Transport Press Play mode.
     bool doLoop = false;                        // Should we loop automatically?
+    bool doSpacer = true;                       // Should we space 3 second at the total end?
     juce::AudioPlayHead::CurrentPositionInfo thePositionInfo; //JOELwindows7: make position info global!
     //juce::AudioPlayHead myPlayHead; //JOELwindows7: Host's playhead!
     juce::AudioTransportSource ownTransportSource; //JOELwindows7: this very Transport own thingy
@@ -134,6 +138,7 @@ private:
                                                 // has been moved by the user or the looping system in the DAW, so
                                                 // we can call sendAllNotesOff there
     int transpose = 0;                          // JOELwindows7: adissu had transposer. it starts from 0 & typically adjustable from -12 to 12.
+    bool haveBeenSpaced = false;                // JOELwindows7: tell if the traverse end time have been spaced.
 
     //JOELwindows7: f8888ing reset messages that is f8888ing hard to find online
     // found in LINK

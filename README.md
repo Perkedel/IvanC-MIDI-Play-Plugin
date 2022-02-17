@@ -51,7 +51,16 @@ the project file is `.jucer` that put next to bunch of folders and stuffs in eac
 
 therefore, this, you `Open Existing Project`, go to where `IvanC-MIDI-Play-Plugin.jucer` is, which is at that cloned git repo folder of `IvanC-MIDI-Play-Plugin`.
 
+OKAY almost forgot, **this is very important**!!! Click person icon top right. `Enable GNU GPL mode`! this allows you to disable splash screen even not logged in,  
+declaring, I love Open Source. Remember folks, **Always share your edit forks source code if you intent to release binary file!!!** keep the same license, GNU GPL v3 yeah!
+
+alright, next
+
 ## First, grab yourself stuffs
+You need following libraries first. I know, very unecessary I've defined the need for this. idk what to have & what would be in the future.
+
+These are not included in JUCE for legal reason. So, you need to download these all yourselves.
+
 ### VST2, older version of VST SDK (Because you make plugin .dll, do not distribute unless you are first lucky few who got the license before deprecation)
 put in anywhere you like (because it's legacy you shall not confuse with latest VST SDK, so put it in different folder than usual). 
 
@@ -162,13 +171,13 @@ Old yet reliable VST Host. Very famous. no need introduction. Okay this hosts VS
 Unfortunately,
 - Proprietary. There is that open source variant under GNU GPL v2, but that's outdated. according to that website Herman said, people stole his work. I mean, people fork but **dare to remove the credit altogether**. what a degenerate wh88e. I wish those thiefs jailed to this day. Hence, now we got the proprietary version that is new.
 
-## FalcoSoft BassMIDI Player
-LINK $0 & PROPRIETARY (that BassMIDI src is just for that BassMIDI library)
+## FalcoSoft BassMIDI Soundfont Player
+http://falcosoft.hu/softwares.html#midiplayer $0 & PROPRIETARY (that BassMIDI src is just for that BassMIDI library)
 
 It plays MIDI yeah! You can load soundfont, because of course, it's BassMIDI. and even you can have VSTi, not just VST effect. load the VSTi with synths like Yamaha S-YXG2006LE or Roland SoundCanvas VA yeah! also if you want, you can have MIDI IN and MIDI OUT to physical MIDI Synth / Virtual MIDI synth driver.
 
 Unfortunately,
-- Proprietary. Don't be bamboozled, that src is only the BassMIDI library, not this player src. Yep, Freeware.
+- Proprietary. Don't be bamboozled, that `src` is only the BassMIDI library, not this player src. Yep, Freeware.
 - Some screw ups special case of MIDI. If you played MIDI collected by [Astolfo Alter](https://youtu.be/UZoipDBaphk ) or [stuff edited & made by me](https://github.com/Perkedel/After-Church) (go to `RAW FILES/MIDI/JOELwindows7`, wait go back! to the `RAW FILES/XG Works` yess, okay I've had some XG works experiments & edited some from [here](https://psrtutorial.com/song/yamaha.html ), click the dark blue category text to download the pack of it. try that `Electric Piano` demo I *rehacked* its channel 10 to program change to uhh forgot! it's new location for `Dance Kit`) first the MIDI should play fine. But if you try the same on e.g. Herman Seibb's VST Host, & Yamaha MidRadio, the Dance kit appears! it disprogram change on this FalcoSoft somehow! maybe because of Smart Drum Patch I've mentioned earlier? bug!
 
 ## KushView Element

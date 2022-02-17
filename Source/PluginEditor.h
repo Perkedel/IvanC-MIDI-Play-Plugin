@@ -23,7 +23,10 @@ class SimpleMidiplayerAudioProcessorEditor : public juce::AudioProcessorEditor,
 public:
     //==============================================================================
     SimpleMidiplayerAudioProcessorEditor (SimpleMidiplayerAudioProcessor&);
+    SimpleMidiplayerAudioProcessorEditor (SimpleMidiplayerAudioProcessor&,juce::ScopedPointer<juce::Component>);
     ~SimpleMidiplayerAudioProcessorEditor();
+    void buildDaUI();
+    void putFaceMaskInstead();
 
     //==============================================================================
     void paint (juce::Graphics&) override;
@@ -65,13 +68,15 @@ private:
                                             ;
     juce::ToggleButton                      checkBoxAllTracks, // ON / OFF play all tracks at once
                                             checkBoxOwnTransport, // ON / OFF use own transport
-                                            checkBoxLoop // ON / OFF use loop
+                                            checkBoxLoop, // ON / OFF use loop
+                                            checkBoxSpacer // ON / OFF space 3 second after the end.
                                             ;
     juce::TextEditor                        infoLabel // Comprehensive infolabels
                                             ;
     
     //==============================================================================
     SimpleMidiplayerAudioProcessor& processor;
+    juce::ScopedPointer<juce::Component> handedOverFacemask;
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMidiplayerAudioProcessorEditor)

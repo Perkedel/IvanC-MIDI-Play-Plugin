@@ -13,9 +13,31 @@
 
 
 //==============================================================================
-SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (SimpleMidiplayerAudioProcessor& p)
-    : juce::AudioProcessorEditor (&p), processor (p)
+//JOELwindows7: contruct now
+SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor(SimpleMidiplayerAudioProcessor& p) 
+    : juce::AudioProcessorEditor(&p),
+    processor(p)
 {
+    buildDaUI();
+}
+
+SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (SimpleMidiplayerAudioProcessor& p, juce::ScopedPointer<juce::Component> componento)
+    : juce::AudioProcessorEditor (&p), 
+    processor (p)
+{
+    handedOverFacemask = componento;
+    buildDaUI();
+}
+
+void SimpleMidiplayerAudioProcessorEditor::putFaceMaskInstead() {
+    // TODO: use handedOverFacemask GUI instead
+}
+
+void SimpleMidiplayerAudioProcessorEditor::buildDaUI() {
+    //JOELwindows7: I believe this thing is called everytime you open this VSTi window.
+
+    //TODO / IDEA: if (handedOverFaceMask != nullptr(){ /* place this instead & return? */}
+
     // -------------------------------------------------------------------------
     // Click on this button to select a MIDI file to play in the processor
     //addAndMakeVisible(buttonsOfStuffs.add (buttonLoadMIDIFile = new juce::TextButton("Load a MIDI file")));
@@ -30,7 +52,9 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     addAndMakeVisible(checkBoxAllTracks);
     addAndMakeVisible(checkBoxOwnTransport);
     addAndMakeVisible(checkBoxLoop);
+    addAndMakeVisible(checkBoxSpacer);
     addAndMakeVisible(infoLabel);
+
     infoLabel.setMultiLine(true, true);
     infoLabel.setReadOnly(true);
 
@@ -57,20 +81,26 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
     checkBoxLoop.onClick = [this] {
         processor.pressLoopCheckBox(checkBoxLoop.getToggleState());
     };
+    checkBoxSpacer.setButtonText("3 second space at end");
+    checkBoxSpacer.setTooltip("Toggle whether should to add 3 second space at the end\nWithout this ON, some MIDI files will end with immediate silence (perfectly cut meme)");
+    checkBoxSpacer.setToggleState(processor.getDoSpacer(), juce::dontSendNotification);
+    checkBoxSpacer.onClick = [this] {
+        processor.pressSpacerCheckBox(checkBoxSpacer.getToggleState());
+    };
 
     // Click on this combo box to select the track that needs to be played
     addAndMakeVisible(comboTrack = new juce::ComboBox());
     comboTrack->addListener(this);
     updateTrackComboBox();
     infoLabel.setText("Hello World\nLoad your MIDI here. Only MIDI Type 0 (Single Track) & 1 (Multi Track) works, 2 bug & crash.\nPlease help me make PluginProcessor.cpp edit this TextEditor here where\nThis thing was defined in PluginEditor.cpp\n also pls! I need playhead override, HOW to do that?!?\nSome host lacks playhead, so I need ways to play MIDI without relying on Host's playhead.\nThancc. cool and good\n (JOELwindows7) \nPerkedel Technologies & IvanC | GNU GPL v3");
-    
-    
+
+
     // -------------------------------------------------------------------------
     // JOELwindows7: add resizer
     // LINK HERE
     setResizable(true, true);
     setResizeLimits(400, 300, 1280, 720);
-    setSize (800, 600);
+    setSize(800, 600);
 
     // JOELwindows7: Copy from JUCE demo of `DialogsDemo.h
     juce::RuntimePermissions::request(juce::RuntimePermissions::readExternalStorage,
@@ -90,12 +120,14 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (Simp
 SimpleMidiplayerAudioProcessorEditor::~SimpleMidiplayerAudioProcessorEditor()
 {
     //JOELwindows7: remove all callbacks & listener in this destructor (destroy)
+    // this destructor calls everytime you close this window, I think.
     buttonLoadMIDIFile->removeListener(this);
     buttonPlayNow->removeListener(this);
     buttonStopNow->removeListener(this);
     checkBoxAllTracks.onClick = NULL;
     checkBoxOwnTransport.onClick = NULL;
     checkBoxLoop.onClick = NULL;
+    checkBoxSpacer.onClick = NULL;
     comboTrack->removeListener(this);
 }
 
@@ -113,9 +145,9 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     
 
     //JOELwindows7: copy from demo of Graphics Demo header.
-    int daHeight = 22;
-    auto columns = rect.removeFromTop(daHeight * 4);
-    auto col = columns.removeFromLeft(200);
+    int daHeight = 22; // da button height
+    auto columns = rect.removeFromTop(daHeight * 5);
+    auto col = columns.removeFromLeft(200); // IDEA: (rect.getWidth() / 2) + 200
     
     //JOELwindows7: here's new way!
     //for (auto thing : buttonsOfStuffs) {
@@ -157,9 +189,10 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     checkBoxOwnTransport.setBounds(col.removeFromTop(daHeight));
     //checkBoxAllTracks.setBounds(rect.removeFromTop(rect.getHeight() / 2 - 20));
     checkBoxLoop.setBounds(col.removeFromTop(daHeight));
+    checkBoxSpacer.setBounds(col.removeFromTop(daHeight));
 
     // JOELwindows7: graphic demo removes more rect grid spots
-    rect.removeFromBottom(6);
+    rect.removeFromBottom(7);
     comboTrack->setBounds(rect.removeFromTop(daHeight));
     // copy from demo of Box2D
     //auto widePutin = rect.removeFromBottom(6); //area to fill

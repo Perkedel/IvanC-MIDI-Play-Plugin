@@ -84,7 +84,7 @@ ThisWindowThingyPls::ThisWindowThingyPls ()
     juce__comboBox->setTextWhenNoChoicesAvailable (TRANS("(no choices)"));
     juce__comboBox->addListener (this);
 
-    juce__comboBox->setBounds (16, 128, 304, 24);
+    juce__comboBox->setBounds (16, 160, 304, 24);
 
     juce__textEditor.reset (new juce::TextEditor ("StatusTextEdit"));
     addAndMakeVisible (juce__textEditor.get());
@@ -96,7 +96,16 @@ ThisWindowThingyPls::ThisWindowThingyPls ()
     juce__textEditor->setPopupMenuEnabled (true);
     juce__textEditor->setText (TRANS("Hello World\n"));
 
-    juce__textEditor->setBounds (16, 168, 304, 328);
+    juce__textEditor->setBounds (16, 200, 304, 328);
+
+    juce__toggleButton3.reset (new juce::ToggleButton ("SpacerCheck"));
+    addAndMakeVisible (juce__toggleButton3.get());
+    juce__toggleButton3->setButtonText (TRANS("3 second space at end"));
+    juce__toggleButton3->setConnectedEdges (juce::Button::ConnectedOnLeft | juce::Button::ConnectedOnBottom);
+    juce__toggleButton3->addListener (this);
+    juce__toggleButton3->setToggleState (true, juce::dontSendNotification);
+
+    juce__toggleButton3->setBounds (16, 128, 150, 24);
 
 
     //[UserPreSize]
@@ -121,6 +130,7 @@ ThisWindowThingyPls::~ThisWindowThingyPls()
     juce__toggleButton2 = nullptr;
     juce__comboBox = nullptr;
     juce__textEditor = nullptr;
+    juce__toggleButton3 = nullptr;
 
 
     //[Destructor]. You can add your own custom destruction code here..
@@ -177,6 +187,11 @@ void ThisWindowThingyPls::buttonClicked (juce::Button* buttonThatWasClicked)
     {
         //[UserButtonCode_juce__toggleButton2] -- add your button handler code here..
         //[/UserButtonCode_juce__toggleButton2]
+    }
+    else if (buttonThatWasClicked == juce__toggleButton3.get())
+    {
+        //[UserButtonCode_juce__toggleButton3] -- add your button handler code here..
+        //[/UserButtonCode_juce__toggleButton3]
     }
 
     //[UserbuttonClicked_Post]
@@ -240,12 +255,6 @@ void ThisWindowThingyPls::broughtToFront()
     //[UserCode_broughtToFront] -- Add your code here...
     //[/UserCode_broughtToFront]
 }
-
-//void ThisWindowThingyPls::filesDropped (const juce::StringArray& filenames, int mouseX, int mouseY)
-//{
-//    //[UserCode_filesDropped] -- Add your code here...
-//    //[/UserCode_filesDropped]
-//}
 
 void ThisWindowThingyPls::handleCommandMessage (int commandId)
 {
@@ -384,7 +393,6 @@ BEGIN_JUCER_METADATA
     <METHOD name="lookAndFeelChanged()"/>
     <METHOD name="hitTest (int x, int y)"/>
     <METHOD name="broughtToFront()"/>
-    <METHOD name="filesDropped (const juce::StringArray&amp; filenames, int mouseX, int mouseY)"/>
     <METHOD name="handleCommandMessage (int commandId)"/>
     <METHOD name="childrenChanged()"/>
     <METHOD name="enablementChanged()"/>
@@ -422,13 +430,16 @@ BEGIN_JUCER_METADATA
                 virtualName="" explicitFocusOrder="0" pos="176 96 150 24" buttonText="Override Host's PlayHead"
                 connectedEdges="9" needsCallback="1" radioGroupId="0" state="0"/>
   <COMBOBOX name="TracksCombo" id="3d32cea78c2e0d4c" memberName="juce__comboBox"
-            virtualName="" explicitFocusOrder="0" pos="16 128 304 24" tooltip="Select Track to play"
+            virtualName="" explicitFocusOrder="0" pos="16 160 304 24" tooltip="Select Track to play"
             editable="0" layout="33" items="" textWhenNonSelected="Tracks"
             textWhenNoItems="(no choices)"/>
   <TEXTEDITOR name="StatusTextEdit" id="302b1f7a6e4b35f" memberName="juce__textEditor"
-              virtualName="" explicitFocusOrder="0" pos="16 168 304 328" initialText="Hello World&#10;"
+              virtualName="" explicitFocusOrder="0" pos="16 200 304 328" initialText="Hello World&#10;"
               multiline="1" retKeyStartsLine="1" readonly="1" scrollbars="1"
               caret="0" popupmenu="1"/>
+  <TOGGLEBUTTON name="SpacerCheck" id="7ef291dc2c1d373d" memberName="juce__toggleButton3"
+                virtualName="" explicitFocusOrder="0" pos="16 128 150 24" buttonText="3 second space at end"
+                connectedEdges="9" needsCallback="1" radioGroupId="0" state="1"/>
 </JUCER_COMPONENT>
 
 END_JUCER_METADATA

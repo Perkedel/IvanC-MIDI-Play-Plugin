@@ -33,16 +33,62 @@
 
 # JUCE exports & stuffs
 .DS_Store
-Builds/VisualStudio2019/x64
-Builds/VisualStudio2019/x86
+# Builds/VisualStudio2019/x64
+# Builds/VisualStudio2019/x86
 Builds/VisualStudio2019/.vs
-Builds/VisualStudio2022/x64
-Builds/VisualStudio2022/x86
+# Builds/VisualStudio2022/x64
+# Builds/VisualStudio2022/x86
 Builds/VisualStudio2022/.vs
 
-# Plugins
+# Plugins (because some of the distribution may requires sell soul (subscription) / purchase for license, what a karen!)
 *.dll 
-# confused! vst2 is dll! ; wtf, Steinberg?!
+*.aaxplugin
+*.rtax
+*.rtas
+# confused! vst2 is dll! ; wtf, Steinberg?! okay, get it again.
 
 .fake
 .ionide
+
+# why do we need to have object & other build residues??
+*.obj
+*.pch
+*.pdb
+*.ilk
+*.exp
+*.lib
+*.ncb
+*.opt
+*.plg
+*.rsp
+*.suo
+*.tlb
+*.tlh
+*.rsp
+*.dsw
+*.dsp
+*.dsp.template
+*.dsw.template
+*.dsp.header
+*.dsw.header
+*.dsp.config
+*.dsw.config
+*.dsp.user
+*.dsw.user
+*.dsp.user.header
+*.dsp.user.header
+*.dsp.user.config
+*.dsp.user.config
+*.dsp.user.template
+*.dsw.user.template
+*.dsp.user.header.template
+*.dsw.user.header.template
+*.dsp.user.config.template
+*.dsw.user.config.template
+*.dsp.user.template.header
+*.recipe
+*.tlog
+*.iobj
+*.log
+*.FileListAbsolute.txt
+*.res
