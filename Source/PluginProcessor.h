@@ -88,11 +88,17 @@ public:
     bool getDoLoop(); // JOELwindows7: getter of use loop
     bool getDoSpacer(); // JOELwindows7: getter of doSpacer
 
+    juce::ScopedPointer<juce::Component> getThisWindowThingy(); //We can get setter component pointer!
+
     //void handoverInfoLabel(juce::Label& thing);
     juce::String getFillYourInfoHere(); //JOELwindows7: screw this! let editor harvest it itself!
 
     //void threadenOwnPlayMidi(); //JOELwindows7: rosshoyt threaded play MIDI file standalone
     //void stopThreadenOwnPlayMidi(); //JOELwindows7 the stop of it.
+
+    juce::ScopedPointer<juce::TextEditor> daInfoTextBox; //JOELwindows7: to be picked up by Editor & placed here instead
+    //TODO: Channel ON/OFF checkboxes
+    //IDEA: radio button to change which info displayed between: Info status, Lyric, scroll MIDI message
 
 private:
     //==============================================================================
@@ -109,6 +115,7 @@ private:
 
     //==============================================================================
     juce::MidiFile theMIDIFile;                       // The current MIDI file content
+    juce::String lastFilePath;                  //JOELwindows7: current file path
     bool isPlayingSomething;                    // Tells if the last audio buffer included some MIDI content to play
     bool trackHasChanged = false;
     bool useEntireTracks = true;               // tells if all tracks should be used instead
@@ -173,7 +180,7 @@ private:
     // JOELwindows7: handovers
     //juce::Label& giveMeInfoLabel;
     //SimpleMidiplayerAudioProcessorEditor& giveMeEditor;
-    juce::String fillYourInfoHere;
+    juce::String fillYourInfoHere = "Perkedel IvanC MIDI Player";
 
     //JOELwindows7: itself instance
     //SimpleMidiplayerAudioProcessorEditor *editor; //circular dependency

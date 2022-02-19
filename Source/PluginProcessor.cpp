@@ -17,25 +17,30 @@
 //==============================================================================
 SimpleMidiplayerAudioProcessor::SimpleMidiplayerAudioProcessor()
 #ifndef JucePlugin_PreferredChannelConfigurations
-     : AudioProcessor (BusesProperties()
-                     #if ! JucePlugin_IsMidiEffect
-                      #if ! JucePlugin_IsSynth
-                       .withInput  ("Input",  juce::AudioChannelSet::stereo(), true)
-                      #endif
-                       .withOutput ("Output", juce::AudioChannelSet::stereo(), true)
-                     #endif
-                       ),
+    : AudioProcessor(BusesProperties()
+#if ! JucePlugin_IsMidiEffect
+#if ! JucePlugin_IsSynth
+        .withInput("Input", juce::AudioChannelSet::stereo(), true)
 #endif
-    ownStartTime(juce::Time::getMillisecondCounterHiRes() * 0.001)//, 
+        .withOutput("Output", juce::AudioChannelSet::stereo(), true)
+#endif
+    ),
+#endif
+    ownStartTime(juce::Time::getMillisecondCounterHiRes() * 0.001),
     //daMidiBuffer(initMessageGS),daAudioBuffer(),
     //editorRef(new SimpleMidiplayerAudioProcessorEditor(*this)) // Circular dependency
     //Thread("rosshoyt MIDI Player Thread") // werror! thread abstract causes This class abstract not allowed instancing
+    thisWindowThingy(new ThisWindowThingyPls()),
+    daInfoTextBox(new juce::TextEditor)
 {
     // JOELwindows7: component pls
-    thisWindowThingy = new ThisWindowThingyPls();
+    //thisWindowThingy = new ThisWindowThingyPls();
 
     //JOELwindows7: init da thingy
     juce::AudioTransportSource ownTransportSource(); // to construct non-pointer in C++, looks like this.
+
+    //JOELwindows7: reference pls
+    daInfoTextBox->setText(fillYourInfoHere, juce::dontSendNotification);
 
     numTracks.store(0);
     //startTimer(1);
@@ -178,24 +183,6 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
     {
         //DSP Filtering code comes here
     }
-
-    // JOELwindows7: insert all info here
-    fillYourInfoHere = "Perkedel IvanC Midi Player\n";
-    fillYourInfoHere += "\nYeah\n";
-    fillYourInfoHere += "MIDI file: %s\n", "???";
-    fillYourInfoHere += "Using Own Transport = %s\n", useOwnTransportInstead ? "YES" : "NO";
-    fillYourInfoHere += "Using Entire Track = %s\n", useEntireTracks ? "YES" : "NO";
-    fillYourInfoHere += "Total Tracks = %d\n", numTracks.load();
-    fillYourInfoHere += "Chosen Track = %d\n", currentTrack.load();
-    fillYourInfoHere += "is Playing Something = %s\n", isPlayingSomething ? "YES" : "NO";
-    fillYourInfoHere += "Timer is running = %s\n", Timer::isTimerRunning() ? "YES" : "NO";
-    fillYourInfoHere += "Own Start Time = %F\n", ownStartTime;
-    fillYourInfoHere += "Next Start Time = %f\n", nextStartTime;
-    fillYourInfoHere += "Total End time = %F\n", traverseEndTime;
-    //if(editor != nullptr)
-        //editor->setInfoLabelText(fillYourInfoHere);
-    /*if (editorRef != NULL)
-        editorRef.setInfoLabelText(fillYourInfoHere);*/
 
     //JOELwindows7: receive tell signals
     if (tellPlayNow)
@@ -543,6 +530,28 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         if (isPlayingSomething)
             sendAllNotesOff(midiMessages);        
     }
+
+    // JOELwindows7: insert all info here
+    fillYourInfoHere = "Perkedel IvanC MIDI Player\n";
+    fillYourInfoHere += ("\nYeah\n");
+    fillYourInfoHere += ("Play status = " + juce::String(isPlayingSomething ? "PLAYING" : "STOPPED") + "\n");
+    fillYourInfoHere += ("Positions = "+ juce::String(thePositionInfo.timeInSeconds)+"\n");
+    fillYourInfoHere += "MIDI file = "+ lastFilePath +"\n";
+    fillYourInfoHere += "Using Own Transport = "+ juce::String(useOwnTransportInstead ? "YES" : "NO") + "\n";
+    fillYourInfoHere += "Using Entire Track = "+ juce::String(useEntireTracks ? "YES" : "NO") + "\n";
+    fillYourInfoHere += "Total Tracks = " + juce::String(numTracks.load()) + "\n";
+    fillYourInfoHere += "Chosen Track = "+ juce::String(currentTrack.load()) + "\n";
+    //fillYourInfoHere += "Timer is running = "+ juce::String(Timer::isTimerRunning() ? "YES" : "NO") + "\n";
+    fillYourInfoHere += "Own Start Time = "+ juce::String(ownStartTime) + "\n";
+    fillYourInfoHere += "Last Sample Start Time = "+ juce::String(lastSampleStartTime) + "\n";
+    fillYourInfoHere += "Next Start Time = "+ juce::String(nextStartTime) + "\n";
+    fillYourInfoHere += "Total End time = "+ juce::String(traverseEndTime) + "\n";
+    //if(editor != nullptr)
+        //editor->setInfoLabelText(fillYourInfoHere);
+    /*if (editorRef != NULL)
+        editorRef.setInfoLabelText(fillYourInfoHere);*/
+    daInfoTextBox->setText(fillYourInfoHere, juce::dontSendNotification); // Finally, I hope this works!
+    // This is inefficient & heavy
 }
 
 //==============================================================================
@@ -588,6 +597,10 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     
     juce::FileInputStream theStream(fileMIDI);
     theMIDIFile.readFrom(theStream);
+    // JOELwindows7: fill last filename!
+    //lastFilePath = theStream.getFile().getFullPathName(); // No, there are Hololive YouTubers. what if their user account name
+    // got leaked online??!
+    lastFilePath = theStream.getFile().getFileName(); //Yeah, this is better, but big cavea.. idk. nvm.
 
     /** This function call means that the MIDI file is going to be played with the
         original tempo and signature.
@@ -858,6 +871,12 @@ void SimpleMidiplayerAudioProcessor::timerCallback()
 //JOELwindows7: screw this
 juce::String SimpleMidiplayerAudioProcessor::getFillYourInfoHere() {
     return fillYourInfoHere;
+}
+
+//JOELwindows7: attempt to have more return type of this. WIndow thingy
+juce::ScopedPointer<juce::Component> SimpleMidiplayerAudioProcessor::getThisWindowThingy()
+{
+    return thisWindowThingy;
 }
 
 //JOELwindows7: rosshoyt style countered MIDI play thread

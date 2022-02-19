@@ -67,12 +67,12 @@ private:
                                             buttonStopNow, // Stop
                                             buttonPanicNow // Panic PANIK!!!
                                             ;
-    juce::ToggleButton                      checkBoxAllTracks, // ON / OFF play all tracks at once
+    juce::ScopedPointer<juce::ToggleButton> checkBoxAllTracks, // ON / OFF play all tracks at once
                                             checkBoxOwnTransport, // ON / OFF use own transport
                                             checkBoxLoop, // ON / OFF use loop
                                             checkBoxSpacer // ON / OFF space 3 second after the end.
                                             ;
-    juce::TextEditor                        infoLabel // Comprehensive infolabels
+    juce::TextEditor&                       infoLabel // Comprehensive infolabels
                                             ;
     
     //==============================================================================

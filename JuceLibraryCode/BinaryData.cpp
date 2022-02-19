@@ -38,7 +38,21 @@ static const unsigned char temp_binary_data_0[] =
 "\n"
 "Importing MIDI as DAW track lines **is different!** that's conversion, not Loading.\n"
 "\n"
+"# DOWNLOAD PLS!!! I'M TIRED TO BUILD MYSELF!!! NO TIME!!!\n"
+"## Right side, release section\n"
+"comming soon\n"
+"\n"
+"## Nightly Immediately\n"
+"\n"
+"The nightly & cutting edge rolling is finally here!\n"
+"### rendered in Visual Studio 2019\n"
+"https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2019/x64 (64-bit)\n"
+"\n"
+"- VST3\n"
+"- LV2 (LADSPA v2) (Coming soon)\n"
+"\n"
 "# How to build\n"
+"Here's how to compile this VSTi. As well as preparing everything to be able to compile more VST & JUCE projects in the future. You're welcome.\n"
 "## Minus First, Get the Git & GitHub Desktop\n"
 "**DO NOT DOWNLOAD ZIP**, you must legitly clone like professional.\n"
 "\n"
@@ -179,7 +193,7 @@ static const unsigned char temp_binary_data_0[] =
 "Unfortunately,:\n"
 "- ~~It does not have timeline.~~ the transport over there at the moment is only to metronome internal nodes, and isn't a recognizable Playhead (`AudioTransportSource`) standardly. Without the playhead support, IvanC MIDI play does not work well and i"
 "t'll just sitt there poker face unless we finally managed to have our own playhead.\n"
-"- NEW correction! there is recognizable `AudioTransportSource`, but even if you press reset, it won't reset `AudioTransportPosition` position back to 0.\n"
+"- NEW correction! there is recognizable `AudioTransportSource`, but even if you press reset, it won't reset `AudioTransportPosition` position back to 0. enable `Loop` in this VSTi!!!\n"
 "- Like Carla, the MIDI also screws up fatally! it fail to recognize `Program Change` and possibly others. Even tested with this finally works with loop, nope! **it forgor Program Change!!!**\n"
 "\n"
 "## VST Host\n"
@@ -217,7 +231,11 @@ static const unsigned char temp_binary_data_0[] =
 "- Lacks MIDI player at the moment. though it has Audio Player (has respond to MIDI Start, Stop, & Continue button) & duplicate its under the name of Media Player (that just plays Audio and does not respond to MIDI start stop continue button). C'mon, "
 "I want MIDI player!!! This is where IvanC MIDI Play plugin.. actually honestly shines. Element has that Playhead needed.\n"
 "\n"
-"My question is I can fork (it's GNU GPL v3). but.. can I render and spread my own, (warning earape fx) **for $0**?\n"
+"My question is I can fork (it's GNU GPL v3). but.. can I render and spread my own, (warning earape fx) **for $0**?  \n"
+"Yes, [you can](https://www.youtube.com/watch?v=B66VtJBN2N0 ). Despite not disallowing paywall of GNU GPL, it seems that it doesn't mean anybody that rebuild & redistribute that build without official consent **~~illegal~~, no it's not**. it's **LEGAL"
+"**. (among us game start sfx) HEHEHEHEHEE, yeaha boi!\n"
+"\n"
+"okay, give me disk space pls. little help.. no! **big help pls!!!**\n"
 "\n"
 "## kx.Studio Carla\n"
 "https://kx.studio/Applications:Carla $0 & Open Source\n"
@@ -283,7 +301,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
 
     switch (hash)
     {
-        case 0x64791dc8:  numBytes = 20782; return README_md;
+        case 0x64791dc8:  numBytes = 21683; return README_md;
         default: break;
     }
 

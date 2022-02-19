@@ -16,14 +16,17 @@
 //JOELwindows7: contruct now
 SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor(SimpleMidiplayerAudioProcessor& p) 
     : juce::AudioProcessorEditor(&p),
-    processor(p)
+    processor(p),
+    handedOverFacemask(processor.getThisWindowThingy()),
+    infoLabel(*p.daInfoTextBox)
 {
     buildDaUI();
 }
 
 SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (SimpleMidiplayerAudioProcessor& p, juce::ScopedPointer<juce::Component> componento)
     : juce::AudioProcessorEditor (&p), 
-    processor (p)
+    processor (p),
+    infoLabel(*p.daInfoTextBox)
 {
     handedOverFacemask = componento;
     buildDaUI();
@@ -50,10 +53,10 @@ void SimpleMidiplayerAudioProcessorEditor::buildDaUI() {
     //addAndMakeVisible(buttonsOfStuffs.add(buttonStopNow = new juce::TextButton("Stop")));
     addAndMakeVisible(buttonStopNow = new juce::TextButton("Stop"));
     addAndMakeVisible(buttonPanicNow = new juce::TextButton("PANIK!!! CPR"));
-    addAndMakeVisible(checkBoxAllTracks);
-    addAndMakeVisible(checkBoxOwnTransport);
-    addAndMakeVisible(checkBoxLoop);
-    addAndMakeVisible(checkBoxSpacer);
+    addAndMakeVisible(checkBoxAllTracks = new juce::ToggleButton("Entire Tracks"));
+    addAndMakeVisible(checkBoxOwnTransport = new juce::ToggleButton("Override Host's Play / pause"));
+    addAndMakeVisible(checkBoxLoop = new juce::ToggleButton("Loop"));
+    addAndMakeVisible(checkBoxSpacer = new juce::ToggleButton("3 second space at end"));
     addAndMakeVisible(infoLabel);
 
     infoLabel.setMultiLine(true, true);
@@ -68,38 +71,38 @@ void SimpleMidiplayerAudioProcessorEditor::buildDaUI() {
     buttonPanicNow->setTooltip("Send all notes OFF on all channels.\nif you have hung notes & events, press this button to shock the \"heart\" & stop fibrilation.\n Or Valsava Manuver when playing");
 
     //checkBoxAllTracks->addListener(this);
-    checkBoxAllTracks.setButtonText("Entire Tracks");
-    checkBoxAllTracks.setTooltip("Toggle whether should all tracks plays");
-    //checkBoxAllTracks.setToggleState(true, juce::dontSendNotification);
-    checkBoxAllTracks.setToggleState(processor.getUseEntireTracks(), juce::dontSendNotification);
-    checkBoxAllTracks.onClick = [this] {
+    checkBoxAllTracks->setButtonText("Entire Tracks");
+    checkBoxAllTracks->setTooltip("Toggle whether should all tracks plays");
+    //checkBoxAllTracks->setToggleState(true, juce::dontSendNotification);
+    checkBoxAllTracks->setToggleState(processor.getUseEntireTracks(), juce::dontSendNotification);
+    checkBoxAllTracks->onClick = [this] {
         // JOELwindows7: hey .onClick callback!
-        processor.pressAllTracksCheckBox(checkBoxAllTracks.getToggleState());
+        processor.pressAllTracksCheckBox(checkBoxAllTracks->getToggleState());
     };
-    checkBoxOwnTransport.setButtonText("Override Host's Play/Stop head");
-    checkBoxOwnTransport.setTooltip("Toggle whether should to use own playhead instead of host's play head");
-    checkBoxOwnTransport.setToggleState(processor.getUseOwnTransport(), juce::dontSendNotification);
-    checkBoxOwnTransport.onClick = [this] {
-        processor.pressOwnTransportCheckBox(checkBoxOwnTransport.getToggleState());
+    checkBoxOwnTransport->setButtonText("Override Host's Play/Stop head");
+    checkBoxOwnTransport->setTooltip("Toggle whether should to use own playhead instead of host's play head");
+    checkBoxOwnTransport->setToggleState(processor.getUseOwnTransport(), juce::dontSendNotification);
+    checkBoxOwnTransport->onClick = [this] {
+        processor.pressOwnTransportCheckBox(checkBoxOwnTransport->getToggleState());
     };
-    checkBoxLoop.setButtonText("Loop");
-    checkBoxLoop.setTooltip("Toggle whether should the play loops");
-    checkBoxLoop.setToggleState(processor.getDoLoop(), juce::dontSendNotification);
-    checkBoxLoop.onClick = [this] {
-        processor.pressLoopCheckBox(checkBoxLoop.getToggleState());
+    checkBoxLoop->setButtonText("Loop");
+    checkBoxLoop->setTooltip("Toggle whether should the play loops");
+    checkBoxLoop->setToggleState(processor.getDoLoop(), juce::dontSendNotification);
+    checkBoxLoop->onClick = [this] {
+        processor.pressLoopCheckBox(checkBoxLoop->getToggleState());
     };
-    checkBoxSpacer.setButtonText("3 second space at end");
-    checkBoxSpacer.setTooltip("Toggle whether should to add 3 second space at the end\nWithout this ON, some MIDI files will end with immediate silence (perfectly cut meme)");
-    checkBoxSpacer.setToggleState(processor.getDoSpacer(), juce::dontSendNotification);
-    checkBoxSpacer.onClick = [this] {
-        processor.pressSpacerCheckBox(checkBoxSpacer.getToggleState());
+    checkBoxSpacer->setButtonText("3 second space at end");
+    checkBoxSpacer->setTooltip("Toggle whether should to add 3 second space at the end\nWithout this ON, some MIDI files will end with immediate silence (perfectly cut meme)");
+    checkBoxSpacer->setToggleState(processor.getDoSpacer(), juce::dontSendNotification);
+    checkBoxSpacer->onClick = [this] {
+        processor.pressSpacerCheckBox(checkBoxSpacer->getToggleState());
     };
 
     // Click on this combo box to select the track that needs to be played
     addAndMakeVisible(comboTrack = new juce::ComboBox());
     comboTrack->addListener(this);
     updateTrackComboBox();
-    infoLabel.setText("Hello World\nLoad your MIDI here. Only MIDI Type 0 (Single Track) & 1 (Multi Track) works, 2 bug & crash.\nPlease help me make PluginProcessor.cpp edit this TextEditor here where\nThis thing was defined in PluginEditor.cpp\n also pls! I need playhead override, HOW to do that?!?\nSome host lacks playhead, so I need ways to play MIDI without relying on Host's playhead.\nThancc. cool and good\n (JOELwindows7) \nPerkedel Technologies & IvanC | GNU GPL v3");
+    //infoLabel.setText("Hello World\nLoad your MIDI here. Only MIDI Type 0 (Single Track) & 1 (Multi Track) works, 2 bug & crash.\nPlease help me make PluginProcessor.cpp edit this TextEditor here where\nThis thing was defined in PluginEditor.cpp\n also pls! I need playhead override, HOW to do that?!?\nSome host lacks playhead, so I need ways to play MIDI without relying on Host's playhead.\nThancc. cool and good\n (JOELwindows7) \nPerkedel Technologies & IvanC | GNU GPL v3");
 
 
     // -------------------------------------------------------------------------
@@ -132,10 +135,10 @@ SimpleMidiplayerAudioProcessorEditor::~SimpleMidiplayerAudioProcessorEditor()
     buttonPlayNow->removeListener(this);
     buttonStopNow->removeListener(this);
     buttonPanicNow->removeListener(this);
-    checkBoxAllTracks.onClick = NULL;
-    checkBoxOwnTransport.onClick = NULL;
-    checkBoxLoop.onClick = NULL;
-    checkBoxSpacer.onClick = NULL;
+    checkBoxAllTracks->onClick = NULL;
+    checkBoxOwnTransport->onClick = NULL;
+    checkBoxLoop->onClick = NULL;
+    checkBoxSpacer->onClick = NULL;
     comboTrack->removeListener(this);
 }
 
@@ -192,13 +195,13 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     
     //checkBoxAllTracks.setBounds(rect.withSizeKeepingCentre(200, 150));
     //checkBoxAllTracks.setBounds(rect.removeFromTop((rect.getHeight() / 2) - 20).withSizeKeepingCentre(200, 150));
-    checkBoxAllTracks.setBounds(col.removeFromTop(daHeight));
+    checkBoxAllTracks->setBounds(col.removeFromTop(daHeight));
     //checkBoxOwnTransport.setBounds(rect.withSizeKeepingCentre(200, 150));
     //checkBoxOwnTransport.setBounds(rect.removeFromTop((rect.getHeight() / 2) - 15).withSizeKeepingCentre(200, 150));
-    checkBoxOwnTransport.setBounds(col.removeFromTop(daHeight));
+    checkBoxOwnTransport->setBounds(col.removeFromTop(daHeight));
     //checkBoxAllTracks.setBounds(rect.removeFromTop(rect.getHeight() / 2 - 20));
-    checkBoxLoop.setBounds(col.removeFromTop(daHeight));
-    checkBoxSpacer.setBounds(col.removeFromTop(daHeight));
+    checkBoxLoop->setBounds(col.removeFromTop(daHeight));
+    checkBoxSpacer->setBounds(col.removeFromTop(daHeight));
 
     // JOELwindows7: graphic demo removes more rect grid spots
     rect.removeFromBottom(7);
