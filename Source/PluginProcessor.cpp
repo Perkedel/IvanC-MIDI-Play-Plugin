@@ -24,14 +24,19 @@ SimpleMidiplayerAudioProcessor::SimpleMidiplayerAudioProcessor()
 #endif
         .withOutput("Output", juce::AudioChannelSet::stereo(), true)
 #endif
+        //IDEA: JOELwindows7: moar audio outs for
+        // - Soundfonteh all MIDI channels
+        // - Soundfonteh each MIDI channel has a pair.
     ),
 #endif
     ownStartTime(juce::Time::getMillisecondCounterHiRes() * 0.001),
     //daMidiBuffer(initMessageGS),daAudioBuffer(),
     //editorRef(new SimpleMidiplayerAudioProcessorEditor(*this)) // Circular dependency
     //Thread("rosshoyt MIDI Player Thread") // werror! thread abstract causes This class abstract not allowed instancing
+    //Thread("anThreaden"), // werror! thread abstract causes This class abstract not allowed instancing
     thisWindowThingy(new ThisWindowThingyPls()),
-    daInfoTextBox(new juce::TextEditor)
+    daInfoTextBox(new juce::TextEditor),
+    daTimerLabel(new juce::Label("Timer","0:00 / 0:00"))
 {
     // JOELwindows7: component pls
     //thisWindowThingy = new ThisWindowThingyPls();
@@ -40,7 +45,42 @@ SimpleMidiplayerAudioProcessor::SimpleMidiplayerAudioProcessor()
     juce::AudioTransportSource ownTransportSource(); // to construct non-pointer in C++, looks like this.
 
     //JOELwindows7: reference pls
+    // don't forget follow MIDI demo received message sets for that info text box!
+    daInfoTextBox->setReturnKeyStartsNewLine(false);
+    daInfoTextBox->setMultiLine(true);
+    daInfoTextBox->setReadOnly(true);
+    daInfoTextBox->setScrollbarsShown(true);
+    daInfoTextBox->setCaretVisible(true);
+    daInfoTextBox->setPopupMenuEnabled(false);
     daInfoTextBox->setText(fillYourInfoHere, juce::dontSendNotification);
+    daTimerLabel->setText(fillYourTimerHere, juce::dontSendNotification);
+    daTimerLabel->setSize(100, 50);
+    
+    //JOELwindows7: radio buttoning to be refered by editor. push them to arrays.
+    // use demo of look and feel
+    for (int i = 0; i < radioButtoningsSay.size(); i++)
+    {
+        auto* b = radioButtonings.add(new juce::TextButton(radioButtoningsSay[i], radioButtoningsTooltips[i]));
+
+        //int whereModeSet = i;
+        //tempFillOutSetMode = i;
+
+        b->setRadioGroupId(77);
+        b->setClickingTogglesState(true);
+        b->setTooltip(radioButtoningsTooltips[i]); // I said, THE PECKING TOOLTIPS!!!
+        //b->setComponentID(juce::String(i));
+        b->onClick = std::bind([this](int a) {
+            tellInfoModes = a;
+            pressRadioButtonings(a);
+            }, i);
+
+        //Okay that look & feel demo's edging is not procedural! pick from Widgets demo!!! Buttons page.
+        b->setConnectedEdges(
+            ((i != 0) ? juce::Button::ConnectedOnLeft : 0) 
+            | 
+            ((i != radioButtoningsSay.size()-1) ? juce::Button::ConnectedOnRight : 0))
+            ;
+    }
 
     numTracks.store(0);
     //startTimer(1);
@@ -408,6 +448,10 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                                     //auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - startTime) * getSampleRate());
                                     auto samplePosition = juce::roundToInt((event->message.getTimeStamp() - sampleStartTime) * getSampleRate());
                                     midiMessages.addEvent(event->message, samplePosition);
+                                    insertMessageLog(juce::String(samplePosition) + "\t\t -> " + juce::String(event->message.getDescription()));
+                                    if (event->message.isTextMetaEvent())
+                                        insertLyricLog(event->message.getTextFromTextMetaEvent());
+                                    // help, this is laggy! I need to off buffer it somehow.
 
                                     //JOELwindows7: adissu workaround loop 1st element avoid
                                     /* to avoid that the first element of the next loop will be missed because it has to be sent in the same time frame, send it in the same time frame.
@@ -415,6 +459,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                                     - only send the first event, if it really is part of the same time frame
                                     - could also be more the one event.
                                     */
+                                    //if ((fmod(startTime, traverseEndTime) > fmod(sampleEndTime, traverseEndTime)) && thePositionInfo.timeInSeconds != 0)
                                     if (fmod(startTime, traverseEndTime) > fmod(sampleEndTime, traverseEndTime))
                                     {
                                         juce::MidiMessageSequence::MidiEventHolder event2 = useEntireTracks? *entireSequences[i]->getEventPointer(0) : *theSequence->getEventPointer(0);
@@ -535,22 +580,46 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
     fillYourInfoHere = "Perkedel IvanC MIDI Player\n";
     fillYourInfoHere += ("\nYeah\n");
     fillYourInfoHere += ("Play status = " + juce::String(isPlayingSomething ? "PLAYING" : "STOPPED") + "\n");
-    fillYourInfoHere += ("Positions = "+ juce::String(thePositionInfo.timeInSeconds)+"\n");
+    //fillYourInfoHere += ("Positions = "+ juce::String(thePositionInfo.timeInSeconds)+"\n");
     fillYourInfoHere += "MIDI file = "+ lastFilePath +"\n";
     fillYourInfoHere += "Using Own Transport = "+ juce::String(useOwnTransportInstead ? "YES" : "NO") + "\n";
     fillYourInfoHere += "Using Entire Track = "+ juce::String(useEntireTracks ? "YES" : "NO") + "\n";
     fillYourInfoHere += "Total Tracks = " + juce::String(numTracks.load()) + "\n";
     fillYourInfoHere += "Chosen Track = "+ juce::String(currentTrack.load()) + "\n";
     //fillYourInfoHere += "Timer is running = "+ juce::String(Timer::isTimerRunning() ? "YES" : "NO") + "\n";
-    fillYourInfoHere += "Own Start Time = "+ juce::String(ownStartTime) + "\n";
-    fillYourInfoHere += "Last Sample Start Time = "+ juce::String(lastSampleStartTime) + "\n";
-    fillYourInfoHere += "Next Start Time = "+ juce::String(nextStartTime) + "\n";
+    //fillYourInfoHere += "Own Start Time = "+ juce::String(ownStartTime) + "\n";
+    //fillYourInfoHere += "Last Sample Start Time = "+ juce::String(lastSampleStartTime) + "\n";
+    //fillYourInfoHere += "Next Start Time = "+ juce::String(nextStartTime) + "\n";
     fillYourInfoHere += "Total End time = "+ juce::String(traverseEndTime) + "\n";
+    fillYourInfoHere += "Radio button selected = " + juce::String(tellInfoModes) + "\n";
+
+    fillYourTimerHere = "Playhead Time \t\t= " + juce::String(thePositionInfo.timeInSeconds) + "\nSample Start Time \t\t= " + juce::String(lastSampleStartTime) + " / " + juce::String(traverseEndTime);
+
     //if(editor != nullptr)
         //editor->setInfoLabelText(fillYourInfoHere);
     /*if (editorRef != NULL)
         editorRef.setInfoLabelText(fillYourInfoHere);*/
-    daInfoTextBox->setText(fillYourInfoHere, juce::dontSendNotification); // Finally, I hope this works!
+
+    //JOELwindows7: damn it!! how do I juce::String thiser = switch(){default:break;}; bla bla bla?!??!?!
+    juce::String yoWhatToShow = "";
+    switch (tellInfoModes) {
+    case 0:
+        yoWhatToShow = fillYourInfoHere;
+        break;
+    case 1:
+        yoWhatToShow = fillYourMessageHere;
+        break;
+    case 2:
+        yoWhatToShow = fillYourLyricHere;
+        break;
+    default:
+        yoWhatToShow = fillYourInfoHere;
+        break;
+    }
+
+    if(tellInfoModes == 0)
+        daInfoTextBox->setText(yoWhatToShow, juce::dontSendNotification); // Finally, I hope this works!
+    daTimerLabel->setText(fillYourTimerHere, juce::dontSendNotification); // also don't hog up! use smaller text label!
     // This is inefficient & heavy
 }
 
@@ -619,6 +688,9 @@ void SimpleMidiplayerAudioProcessor::loadMIDIFile(juce::File fileMIDI)
     traverseEndTime = theMIDIFile.getLastTimestamp() + (doSpacer? 3.00 : 0.00); // AH PECKING FOUND IT!!! THE LENGTH OF MIDI FILE!!!
     haveBeenSpaced = doSpacer;
     totalNumEvents = 0; // reset num events total
+    fillYourMessageHere = "MIDI file = " + lastFilePath;
+    fillYourLyricHere = "\n===========================\n" + lastFilePath + "\n===========================\n\n";
+    pressRadioButtonings(tellInfoModes); // I think this is how to refresh the text box??
     //entireSequences.clear();
     //help how do I clear all array in const!!!???
     //for (int i = 0; i < 15; i++)
@@ -691,6 +763,15 @@ void SimpleMidiplayerAudioProcessor::pressPanicButton() {
     tellPanic = true;
 }
 
+//JOELwindows7: clear log button
+void SimpleMidiplayerAudioProcessor::pressClearLogButton() {
+    fillYourInfoHere.clear();
+    fillYourLyricHere.clear();
+    fillYourMessageHere.clear();
+
+    daInfoTextBox->clear();
+}
+
 void SimpleMidiplayerAudioProcessor::pressAllTracksCheckBox(bool stateNow) {
     useEntireTracks = stateNow;
     //sendAllNotesOff(midiMessages);
@@ -718,6 +799,26 @@ void SimpleMidiplayerAudioProcessor::pressSpacerCheckBox(bool stateNow) {
     //sendAllNotesOff(midiMessages);
 }
 
+void SimpleMidiplayerAudioProcessor::pressRadioButtonings(int WhichPressed)
+{
+    DBG("Pressed" + WhichPressed);
+    switch (WhichPressed) {
+    case 0:
+        daInfoTextBox->setText(fillYourInfoHere, juce::dontSendNotification);
+        break;
+    case 1:
+        daInfoTextBox->setText(fillYourMessageHere, juce::dontSendNotification);
+        break;
+    case 2:
+        daInfoTextBox->setText(fillYourLyricHere, juce::dontSendNotification);
+        break;
+    default:
+        daInfoTextBox->setText(fillYourInfoHere, juce::dontSendNotification);
+        break;
+    }
+    daInfoTextBox->setCaretPosition(daInfoTextBox->getText().length());
+}
+
 bool SimpleMidiplayerAudioProcessor::getUseEntireTracks() {
     return useEntireTracks;
 }
@@ -738,6 +839,11 @@ int SimpleMidiplayerAudioProcessor::getNumTracks()
 {
     return numTracks.load();
 }
+
+//juce::OwnedArray<juce::TextButton> SimpleMidiplayerAudioProcessor::getRadioButtonings()
+//{
+//    return radioButtonings;
+//}
 
 void SimpleMidiplayerAudioProcessor::setCurrentTrack(int value)
 {
@@ -902,4 +1008,26 @@ juce::ScopedPointer<juce::Component> SimpleMidiplayerAudioProcessor::getThisWind
 //    //keyboardState.allNotesOff(1);
 //}
 
+//JOELwindows7: da insert message logs
+juce::String SimpleMidiplayerAudioProcessor::insertMessageLog(juce::String whatToAppend)
+{
+    fillYourMessageHere << juce::String(whatToAppend) << "\n"; // hehe C++ way of shift insertion.
+    //fillYourMessageHere += juce::String(whatToAppend) + "\n"; // NO! it doesn't work properly! wait no, it was the caret positioner
 
+    //insert at caret position like JUCE MIDI IN / OUT demo. handle async update
+    if (tellInfoModes == 1)
+        daInfoTextBox->insertTextAtCaret("\n" + juce::String(whatToAppend));
+
+    return whatToAppend;
+}
+
+juce::String SimpleMidiplayerAudioProcessor::insertLyricLog(juce::String syllable)
+{
+    fillYourLyricHere << syllable;
+    //fillYourLyricHere += syllable;
+
+    if (tellInfoModes == 2)
+        daInfoTextBox->insertTextAtCaret(syllable);
+
+    return syllable;
+}

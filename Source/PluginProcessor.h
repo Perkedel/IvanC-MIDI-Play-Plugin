@@ -77,16 +77,22 @@ public:
     void pressPlayPauseButton();
     void pressStopButton();
     void pressPanicButton();
+    void pressClearLogButton();
     void pressAllTracksCheckBox(bool stateNow);
     void pressOwnTransportCheckBox(bool stateNow);
     void pressLoopCheckBox(bool stateNow);
     void pressSpacerCheckBox(bool stateNow);
+    void pressRadioButtonings(int WhichPressed);
     void timerCallback() override;
 
     bool getUseEntireTracks(); // JOELwindows7: getter of use entire tracks
     bool getUseOwnTransport(); // JOELwindows7: getter of use entire tracks
     bool getDoLoop(); // JOELwindows7: getter of use loop
     bool getDoSpacer(); // JOELwindows7: getter of doSpacer
+    //juce::OwnedArray<juce::TextButton> getRadioButtonings(); // JOELwindows7: getter of radioButtonings.
+
+    juce::String insertMessageLog(juce::String whatToAppend); // JOELwindows7: insert new message to the text box
+    juce::String insertLyricLog(juce::String syllable); //JOELwindows7: lyric or text syllables.
 
     juce::ScopedPointer<juce::Component> getThisWindowThingy(); //We can get setter component pointer!
 
@@ -97,6 +103,9 @@ public:
     //void stopThreadenOwnPlayMidi(); //JOELwindows7 the stop of it.
 
     juce::ScopedPointer<juce::TextEditor> daInfoTextBox; //JOELwindows7: to be picked up by Editor & placed here instead
+    juce::ScopedPointer<juce::Label> daTimerLabel; //JOELwindows7: to be picked up by Editor & placed here instead
+    juce::OwnedArray<juce::TextButton> radioButtonings; // JOELwindows7: What?? inaccessible in its own??
+    
     //TODO: Channel ON/OFF checkboxes
     //IDEA: radio button to change which info displayed between: Info status, Lyric, scroll MIDI message
 
@@ -176,15 +185,26 @@ private:
     bool tellWorkaroundFirst = false;
     bool tellLoopPull = false;
     bool tellPanic = false; // heart fibrilation
+    int tellInfoModes = 0; //which modes? Info, Message log, or Lyric?
+    int tempFillOutSetMode = 0;
 
     // JOELwindows7: handovers
     //juce::Label& giveMeInfoLabel;
     //SimpleMidiplayerAudioProcessorEditor& giveMeEditor;
     juce::String fillYourInfoHere = "Perkedel IvanC MIDI Player";
+    juce::String fillYourMessageHere = "MESSAGE LOGS\n";
+    juce::String fillYourLyricHere = "La la la la la\n";
+    juce::String fillYourTimerHere = "0:00 / 0:00";
+    juce::Array<juce::String> radioButtoningsSay = {"Info","Messages","Lyrics"};
+    juce::Array<juce::String> radioButtoningsTooltips = { "Show Status", "Show MIDI messages log", "Show MIDI lyrics or text,\nbut unfortunately JUCE & many other MIDI Karaoke readers does not recognize Yamaha XF lyrics as Text, warm and bad!" };
+    
 
     //JOELwindows7: itself instance
     //SimpleMidiplayerAudioProcessorEditor *editor; //circular dependency
     //SimpleMidiplayerAudioProcessorEditor &editorRef; // circular dependency
+
+    //JOELwindows7: na components
+    /*juce::OwnedArray<juce::TextButton> radioButtonings;*/
 
     //==============================================================================
     JUCE_DECLARE_NON_COPYABLE_WITH_LEAK_DETECTOR (SimpleMidiplayerAudioProcessor)

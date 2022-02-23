@@ -18,7 +18,9 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor(Simpl
     : juce::AudioProcessorEditor(&p),
     processor(p),
     handedOverFacemask(processor.getThisWindowThingy()),
-    infoLabel(*p.daInfoTextBox)
+    infoLabel(*p.daInfoTextBox),
+    timerLabel(*p.daTimerLabel),
+    radioButtonsPls(p.radioButtonings)
 {
     buildDaUI();
 }
@@ -26,7 +28,9 @@ SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor(Simpl
 SimpleMidiplayerAudioProcessorEditor::SimpleMidiplayerAudioProcessorEditor (SimpleMidiplayerAudioProcessor& p, juce::ScopedPointer<juce::Component> componento)
     : juce::AudioProcessorEditor (&p), 
     processor (p),
-    infoLabel(*p.daInfoTextBox)
+    infoLabel(*p.daInfoTextBox),
+    timerLabel(*p.daTimerLabel),
+    radioButtonsPls(p.radioButtonings)
 {
     handedOverFacemask = componento;
     buildDaUI();
@@ -53,22 +57,37 @@ void SimpleMidiplayerAudioProcessorEditor::buildDaUI() {
     //addAndMakeVisible(buttonsOfStuffs.add(buttonStopNow = new juce::TextButton("Stop")));
     addAndMakeVisible(buttonStopNow = new juce::TextButton("Stop"));
     addAndMakeVisible(buttonPanicNow = new juce::TextButton("PANIK!!! CPR"));
+    addAndMakeVisible(buttonClearLogNow = new juce::TextButton("Clear Logs"));
     addAndMakeVisible(checkBoxAllTracks = new juce::ToggleButton("Entire Tracks"));
     addAndMakeVisible(checkBoxOwnTransport = new juce::ToggleButton("Override Host's Play / pause"));
     addAndMakeVisible(checkBoxLoop = new juce::ToggleButton("Loop"));
     addAndMakeVisible(checkBoxSpacer = new juce::ToggleButton("3 second space at end"));
     addAndMakeVisible(infoLabel);
+    addAndMakeVisible(timerLabel);
+    //addAndMakeVisible(radioButtonsPls);
 
-    infoLabel.setMultiLine(true, true);
-    infoLabel.setReadOnly(true);
+    /*for (int i = 0; i < radioButtonsPls.size(); ++i)
+    {
+        addAndMakeVisible(radioButtonsPls[i]);
+    }*/
+
+    for (auto* b : radioButtonsPls)
+    {
+        addAndMakeVisible(b);
+    }
+
+    //infoLabel.setMultiLine(true, true);
+    //infoLabel.setReadOnly(true);
 
     buttonPlayNow->addListener(this);
     buttonStopNow->addListener(this);
     buttonPanicNow->addListener(this);
+    buttonClearLogNow->addListener(this);
     
     buttonPlayNow->setTooltip("Play the song (for Override Playhead) & Signal Pull the loop start");
     buttonStopNow->setTooltip("Stop the song (for Override Playhead) & Cancel signaling pull the loop start");
     buttonPanicNow->setTooltip("Send all notes OFF on all channels.\nif you have hung notes & events, press this button to shock the \"heart\" & stop fibrilation.\n Or Valsava Manuver when playing");
+    buttonClearLogNow->setTooltip("Clear all logs & whatever in the info text box");
 
     //checkBoxAllTracks->addListener(this);
     checkBoxAllTracks->setButtonText("Entire Tracks");
@@ -135,6 +154,7 @@ SimpleMidiplayerAudioProcessorEditor::~SimpleMidiplayerAudioProcessorEditor()
     buttonPlayNow->removeListener(this);
     buttonStopNow->removeListener(this);
     buttonPanicNow->removeListener(this);
+    buttonClearLogNow->removeListener(this);
     checkBoxAllTracks->onClick = NULL;
     checkBoxOwnTransport->onClick = NULL;
     checkBoxLoop->onClick = NULL;
@@ -157,7 +177,7 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
 
     //JOELwindows7: copy from demo of Graphics Demo header.
     int daHeight = 22; // da button height
-    auto columns = rect.removeFromTop(daHeight * 5);
+    auto columns = rect.removeFromTop(daHeight * 6);
     auto col = columns.removeFromLeft(200); // IDEA: (rect.getWidth() / 2) + 200
     
     //JOELwindows7: here's new way!
@@ -188,6 +208,7 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     buttonPlayNow->setBounds(col.removeFromTop(daHeight));
     buttonStopNow->setBounds(col.removeFromTop(daHeight));
     buttonPanicNow->setBounds(col.removeFromTop(daHeight));
+    buttonClearLogNow->setBounds(col.removeFromTop(daHeight));
     
     // JOELwindows7: begin separate Column like in graphics demo
     columns.removeFromLeft(20);
@@ -210,6 +231,13 @@ void SimpleMidiplayerAudioProcessorEditor::resized()
     //auto widePutin = rect.removeFromBottom(6); //area to fill
     //widePutin.removeFromTop(daHeight);
     //infoLabel.setBounds(widePutin);
+    timerLabel.setBounds(rect.removeFromTop(50));
+    columns = rect.removeFromTop(daHeight); 
+    col = columns.removeFromLeft(500);
+    // JOELwindows7: use look and feel demo resize or radio buttons.
+    for (auto* b : radioButtonsPls) {
+        b->setBounds(col.removeFromLeft(100));
+    }
     infoLabel.setBounds(rect.removeFromTop(400));
 }
 
@@ -238,6 +266,9 @@ void SimpleMidiplayerAudioProcessorEditor::buttonClicked(juce::Button * button)
     }
     else if (button == buttonPanicNow) {
         processor.pressPanicButton();
+    }
+    else if (button == buttonClearLogNow) {
+        processor.pressClearLogButton();
     }
     //else if (button == checkBoxAllTracks) {
     //    // JOELwindows7: hey .onClick callback!

@@ -65,7 +65,8 @@ private:
     //JOELwindows7: okay, WHY THERE IS NO PLAY BUTTON??! WHY I HAVE TO RELY ON HOST'S PLAY BUTTON??!?
     juce::ScopedPointer<juce::TextButton>   buttonPlayNow, // Play / Pause
                                             buttonStopNow, // Stop
-                                            buttonPanicNow // Panic PANIK!!!
+                                            buttonPanicNow, // Panic PANIK!!!
+                                            buttonClearLogNow // Clear textbox and all logs
                                             ;
     juce::ScopedPointer<juce::ToggleButton> checkBoxAllTracks, // ON / OFF play all tracks at once
                                             checkBoxOwnTransport, // ON / OFF use own transport
@@ -73,6 +74,10 @@ private:
                                             checkBoxSpacer // ON / OFF space 3 second after the end.
                                             ;
     juce::TextEditor&                       infoLabel // Comprehensive infolabels
+                                            ;
+    juce::Label&                            timerLabel // Comprehensive timer label
+                                            ;
+    juce::OwnedArray<juce::TextButton>&     radioButtonsPls // Comprehensive radio button to change which info the text editor box to show.
                                             ;
     
     //==============================================================================
