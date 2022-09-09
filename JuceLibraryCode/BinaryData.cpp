@@ -4,6 +4,8 @@
 
 */
 
+#include <cstring>
+
 namespace BinaryData
 {
 
@@ -46,10 +48,11 @@ static const unsigned char temp_binary_data_0[] =
 "\n"
 "The nightly & cutting edge rolling is finally here!\n"
 "### rendered in Visual Studio 2019\n"
-"https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2019/x64 (64-bit)\n"
+"<!-- https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2019/x64 (64-bit) -->\n"
+"https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2022/x64 (64-bit)\n"
 "\n"
 "- VST3\n"
-"- LV2 (LADSPA v2) (Coming soon)\n"
+"- LV2 (LADSPA v2) **(NEW)**\n"
 "\n"
 "# How to build\n"
 "Here's how to compile this VSTi. As well as preparing everything to be able to compile more VST & JUCE projects in the future. You're welcome.\n"
@@ -60,6 +63,17 @@ static const unsigned char temp_binary_data_0[] =
 "\n"
 "Now, in this GitHub repo page, scroll up from where you read this, `Code` green button, `Open in GitHub Desktop`, Select where folder you'd like to put this repo at,  \n"
 "and go back to this reading. NOW! GO GO GO!\n"
+"\n"
+"### Note however, if you are on a platform that failed to appear `Open in GitHub Desktop`,\n"
+"- Copy the `HTTPS` URL (the download tab must be selected `HTTPS`, not `SSH`) by pressing that clipboard icon button.\n"
+"- Focus / Open your GitHub Desktop.\n"
+"- `File` top menu.\n"
+"- `Clone Repository...`.\n"
+"- `URL` tab\n"
+"- Paste this repo URL you've just got, in.\n"
+"- Browse where you'd like to put it at.\n"
+"- `Open Folder` & see that your folder selection has the repo directory name appened.\n"
+"- Clone. DOne!\n"
 "\n"
 "Okay you're back.\n"
 "\n"
@@ -76,8 +90,8 @@ static const unsigned char temp_binary_data_0[] =
 "\n"
 "therefore, this, you `Open Existing Project`, go to where `IvanC-MIDI-Play-Plugin.jucer` is, which is at that cloned git repo folder of `IvanC-MIDI-Play-Plugin`.\n"
 "\n"
-"OKAY almost forgot, **this is very important**!!! Click person icon top right. `Enable GNU GPL mode`! this allows you to disable splash screen even not logged in,  \n"
-"declaring, I love Open Source. Remember folks, **Always share your edit forks source code if you intent to release binary file!!!** keep the same license, GNU GPL v3 yeah!\n"
+"OKAY almost forgot, **this is very important**!!! Click **person icon** top right. `Enable GNU GPL mode`! this allows you to disable splash screen even not logged in,  \n"
+"declaring, I love Open Source. Remember folks, **Always share your edit forks source code if you intent to release binary file!!!** keep the same license, **GNU GPL v3** yeah!\n"
 "\n"
 "alright, next\n"
 "\n"
@@ -120,12 +134,23 @@ static const unsigned char temp_binary_data_0[] =
 "\n"
 "So with this zip file, take out that folder into `C:\\SDKs`. rename that folder into `AAX`. tada! AAX SDK installed.\n"
 "\n"
+"### ARA\n"
+"Somehow, ARA is also available separately. However, as I've looked at it, it's licensed Apache-2.0 something something. Therefore should be safe.\n"
+"- https://github.com/Celemony/ARA_SDK\n"
+"\n"
+"Remember, make sure that when cloning you make it recursive, meaning it also download all of the submodules installed in that repo. GitHub Desktop should do this automatically for you yay!  \n"
+"Don't forget! you must `checkout` force to the stable version (`git checkout release/2.1.0 --force`), right now is tag `release/2.1.0`. Then reupdate all submodules by open terminal in that repo directory & type `git submodule update` idk. Optionally"
+", you can create it as a new branch of its own if you want just to make sure the git status stable (`git switch -c 2.1.0`, the `2.1.0` is the name of the new branch).\n"
+"\n"
+"According to the Projucer default Global Paths, again, you clone it right in the `SDKs` folder, like `C:\\SDKs\\ARA_SDK` for Windows / ReactOS user yeah.\n"
+"\n"
 "## Now select your IDE export!\n"
 "Watch the compile mode! I recommend you select `Release x64`. Keep in mind, 64-bit Host will not be able to load 32-bit plugin and vice versa, except when the host have the bridgers (Carla, VST Host). (jbridge is the only legit one and it's >$0 too p"
 "ecking expensive!! no comment pls!! PLS MAKE ONE THAT IS $0 & OPEN SOURCE!!! IT'S BEEN YEARS NOBODY DID THIS!!!! I TRIED TO FIND ALTERNATIVES MYSELF AND GOT ZERO!!! NOBODY WORKS THE SAME WAY AS JBRIDGE)\n"
 "\n"
 "Build this thing! each IDE has differently set build destination. your files is the name of this project `IvanC-MIDI-Play-Plugin` in extensions of:\n"
 "- `vst3` **BEST**\n"
+"- `lv2` **BESTER**\n"
 "- `dll` **DO NOT SHARE VST2 UNLESS YOU HAVE RARE LICENSE**\n"
 "- `aax` **NOT RECOMMENDED TO SHARE UNLESS YOU HAVE PRO LICENSE**\n"
 "- `au` if compiled in in macOS Xcode.\n"
@@ -228,6 +253,7 @@ static const unsigned char temp_binary_data_0[] =
 "nly 14 days! quick download before expired. worse and worst, ***RAAAAAAAAAAAAAW***, I mean, If you want to always be up to date, then you have to subscribe to their Patreon or whatever is that to have access to download link everyday for every new ve"
 "rsion. Remember, don't pay for tools! and since this is considered **Adobe level of soul hostage**, it is morally correct to sparsdat this product. No offense, sorry. Oh wow, I've been canceled lmao! Well, you see that GNU GPL only wants you let peop"
 "le have freedom in Source code, **but not have to be as in beer**. Bruh why not both. very flawed License I would say.\n"
+"- **EGREGIOUSLY EXPENSIVE!!!!!!** Now, the permanent purchase is available, **but costs over $100!!!!!!!!!!!!!!!!**\n"
 "- Lacks MIDI player at the moment. though it has Audio Player (has respond to MIDI Start, Stop, & Continue button) & duplicate its under the name of Media Player (that just plays Audio and does not respond to MIDI start stop continue button). C'mon, "
 "I want MIDI player!!! This is where IvanC MIDI Play plugin.. actually honestly shines. Element has that Playhead needed.\n"
 "\n"
@@ -301,7 +327,7 @@ const char* getNamedResource (const char* resourceNameUTF8, int& numBytes)
 
     switch (hash)
     {
-        case 0x64791dc8:  numBytes = 21683; return README_md;
+        case 0x64791dc8:  numBytes = 23370; return README_md;
         default: break;
     }
 
@@ -323,10 +349,8 @@ const char* getNamedResourceOriginalFilename (const char* resourceNameUTF8);
 const char* getNamedResourceOriginalFilename (const char* resourceNameUTF8)
 {
     for (unsigned int i = 0; i < (sizeof (namedResourceList) / sizeof (namedResourceList[0])); ++i)
-    {
-        if (namedResourceList[i] == resourceNameUTF8)
+        if (strcmp (namedResourceList[i], resourceNameUTF8) == 0)
             return originalFilenames[i];
-    }
 
     return nullptr;
 }

@@ -14,7 +14,7 @@
 # Compiled Dynamic libraries
 *.so
 *.dylib
-*.dll
+# *.dll
 
 # Fortran module files
 *.mod
@@ -41,7 +41,7 @@ Builds/VisualStudio2019/.vs
 Builds/VisualStudio2022/.vs
 
 # Plugins (because some of the distribution may requires sell soul (subscription) / purchase for license, what a karen!)
-*.dll 
+# *.dll # lv2 is also dll, not just vst2
 *.aaxplugin
 *.rtax
 *.rtas

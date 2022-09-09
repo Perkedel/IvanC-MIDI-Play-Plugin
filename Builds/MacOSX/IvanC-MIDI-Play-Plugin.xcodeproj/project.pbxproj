@@ -15,9 +15,10 @@
 			dependencies = (
 				3C2FD40912F80C3B6C3F3457,
 				63DBD71B2790E78419A6E25E,
-				1BFA5DA4F2F27EFD498933C5,
 				2D2C3F9A851BC61275F9611D,
+				5DC0DB96812F1704B8D24AEB,
 				8FE640D4F41632482CC65392,
+				8E8BF00F7F4AF06E13E38008,
 			);
 			name = "IvanC-MIDI-Play-Plugin - All";
 			productName = "IvanC-MIDI-Play-Plugin";
@@ -25,6 +26,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		03C288F5E6E701ACB3C0A0AC /* LV2 Plugin */ = {isa = PBXBuildFile; fileRef = 5204E467C515FE36DE34E3A6; };
+		0E49FE0105D4C890C9A6A6DC /* include_juce_audio_plugin_client_RTAS_3.cpp */ = {isa = PBXBuildFile; fileRef = 04D0E13EB26571C9DB10453C; };
+		132D9AFEC7E6BEEC4BE05120 /* include_juce_audio_processors_ara.cpp */ = {isa = PBXBuildFile; fileRef = 94A7E58CE3B4679B4DF80A9A; };
 		1790A033D80B3822F3A1D757 /* include_juce_audio_formats.mm */ = {isa = PBXBuildFile; fileRef = 26232B8F6C5A524DE1469911; };
 		214DBC723CF9FEDBA59785E9 /* AudioUnit.framework */ = {isa = PBXBuildFile; fileRef = AE1C6BC785F0AC889FFB6022; };
 		259DC079A096FA28932E5BE5 /* Accelerate.framework */ = {isa = PBXBuildFile; fileRef = CDE7C2543A50AD8D2EC4E6D8; };
@@ -33,12 +37,17 @@
 		2CEAAD57FFC25013746D9768 /* include_juce_dsp.mm */ = {isa = PBXBuildFile; fileRef = 7C27E45732F0058DE1BD49C3; };
 		3026F6DDA4873141A29607D2 /* include_juce_data_structures.mm */ = {isa = PBXBuildFile; fileRef = E8DE8E503D42128117027292; };
 		305575AD88830B9B633BFD3A /* WebKit.framework */ = {isa = PBXBuildFile; fileRef = 5FBE861EA80032C312D16865; };
+		3591C972FA0D21E41A2E9490 /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXBuildFile; fileRef = 6EB19174F0CE228BDB684BBC; };
 		3A401B540765288DB37EF571 /* include_juce_events.mm */ = {isa = PBXBuildFile; fileRef = 9606A53F67052680134718C5; };
-		3F336E77C6374E5E02064533 /* Carbon.framework */ = {isa = PBXBuildFile; fileRef = 271EEBF9CD2F1118C3030D8A; };
+		4F2BBD008B82AFA15BAD1C85 /* include_juce_audio_plugin_client_LV2.mm */ = {isa = PBXBuildFile; fileRef = 59D7ECBC3A1D204D1B277151; };
+		505F835D4DD0C8A82332D5F8 /* include_juce_audio_plugin_client_RTAS_1.cpp */ = {isa = PBXBuildFile; fileRef = B31AC9C3578185281A442C47; };
+		50A7DD3CF949EE05C6A0D901 /* juce_LV2TurtleDumpProgram.cpp */ = {isa = PBXBuildFile; fileRef = ADAEA206F3487B4EA9BFD254; settings = { COMPILER_FLAGS = "-std=c++11 -w -DJUCE_SKIP_PRECOMPILED_HEADER"; }; };
 		5751D6E56B3ED8C95EB1E9EA /* BinaryData.cpp */ = {isa = PBXBuildFile; fileRef = 04E296A0648DAC9984D302B1; };
 		575A30174F1F27D6A8C4FC28 /* AudioToolbox.framework */ = {isa = PBXBuildFile; fileRef = 373BC7B23FEB63EDB22723A3; };
 		62D375F0E441B5BE60EF9F1D /* RecentFilesMenuTemplate.nib */ = {isa = PBXBuildFile; fileRef = 59EE12B8B31C7D62399E4021; };
+		6366BCF968832078A78F131F /* include_juce_audio_plugin_client_RTAS_2.cpp */ = {isa = PBXBuildFile; fileRef = 4E49580E8A4ACFD43C266070; };
 		63D537E903609497525D06D0 /* include_juce_core.mm */ = {isa = PBXBuildFile; fileRef = 9CB1B2B556A484764BEFBF15; };
+		6596BDE4B02A6C8A328B47B4 /* LV2 Manifest Helper */ = {isa = PBXBuildFile; fileRef = FA1FAC6D16237A4E590A5158; };
 		65CB591BF41A1D6EB2B0A136 /* include_juce_audio_processors.mm */ = {isa = PBXBuildFile; fileRef = DB0058F28643F5F4461D1AC7; };
 		71786370087E00390EB42F94 /* include_juce_audio_plugin_client_VST2.cpp */ = {isa = PBXBuildFile; fileRef = 0309F07A9804059673A11903; };
 		71B145FDCF8A9529E75B34E6 /* include_juce_graphics.mm */ = {isa = PBXBuildFile; fileRef = 2A6604B0CDE8A0CC65C1F427; };
@@ -48,6 +57,7 @@
 		893422BC0F82DCA4E445AD9E /* VST */ = {isa = PBXBuildFile; fileRef = D33794B801C528C2EB3E3103; };
 		8B9AA06E42DB549E0141C9B7 /* IOKit.framework */ = {isa = PBXBuildFile; fileRef = 5E085869D3C96B2EE35EAE35; };
 		90D44BDFF89DBE5970F20264 /* Foundation.framework */ = {isa = PBXBuildFile; fileRef = C7D88B9CD5F080D4C3317F6A; };
+		94A7976BD22DDBDBD905BCE6 /* include_juce_audio_plugin_client_RTAS_utils.mm */ = {isa = PBXBuildFile; fileRef = D46CC838CFAA3A69ED8FCC74; };
 		9576FC39BA50E85B90892FF6 /* CoreAudio.framework */ = {isa = PBXBuildFile; fileRef = E388859239B3BABCA6933280; };
 		A061B7432DA3FAF0B0C31C00 /* QuartzCore.framework */ = {isa = PBXBuildFile; fileRef = 2F7E7001EB55F522D59D5E33; };
 		A778963E49E665D09D58F04C /* Standalone Plugin */ = {isa = PBXBuildFile; fileRef = EE78FDBF787E9175404600D3; };
@@ -59,12 +69,12 @@
 		CCB5EF3A8422E30D0746CA48 /* VST3 */ = {isa = PBXBuildFile; fileRef = 2AC1D473EBB8CF0EED8C1717; };
 		D18558B169DC0646BEAD1249 /* CoreMIDI.framework */ = {isa = PBXBuildFile; fileRef = 1BB609446F99986B27DEAA0D; };
 		D76B5C7CA59AB28A3BA1A621 /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXBuildFile; fileRef = 3C03F7F9AD176145419B87C8; };
-		D79FA74DA4816402F9ABD6F8 /* AAX */ = {isa = PBXBuildFile; fileRef = B08E1A561F3B3F087831CED4; };
 		DDC3D4EF94F065A3775FE575 /* PluginProcessor.cpp */ = {isa = PBXBuildFile; fileRef = 208A30E394BE923030F78C00; };
+		DFFBB54992078AACCA1781E9 /* include_juce_audio_plugin_client_ARA.cpp */ = {isa = PBXBuildFile; fileRef = 3297FC0A17782FF8BAC2E3E9; };
 		E5507277255F5D87D68A444B /* Shared Code */ = {isa = PBXBuildFile; fileRef = 6B5C0695E1AB02BE826A8A90; };
 		E94A60613DD1D7535B407EF7 /* CoreAudioKit.framework */ = {isa = PBXBuildFile; fileRef = 8FB59694C9F07E0CC63FE9DA; };
+		EA486C8A5F1ABEE7F7276502 /* include_juce_audio_plugin_client_RTAS_4.cpp */ = {isa = PBXBuildFile; fileRef = 21F89FA3D11C1AD0D9D5FDB9; };
 		EBC3ED5E16CD96B4F3DDDC5E /* include_juce_audio_basics.mm */ = {isa = PBXBuildFile; fileRef = 232CC243C8E0FF393D7EA4DE; };
-		F0C540FC0E00B154BBE420E5 /* include_juce_audio_plugin_client_AAX.mm */ = {isa = PBXBuildFile; fileRef = 1A37B467193914542022EE8C; };
 		F3844917F423A8798D1FD711 /* include_juce_gui_basics.mm */ = {isa = PBXBuildFile; fileRef = 7DA3EB94729F7C210F3FF7FD; };
 		FAA6FE5E1AA0732CA7A2B9F3 /* PluginEditor.cpp */ = {isa = PBXBuildFile; fileRef = 784E5BE94A01F511D274EE29; };
 /* End PBXBuildFile section */
@@ -73,32 +83,41 @@
 		0082F08D00EB1F184475182F /* include_juce_gui_extra.mm */ /* include_juce_gui_extra.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_extra.mm; path = ../../JuceLibraryCode/include_juce_gui_extra.mm; sourceTree = SOURCE_ROOT; };
 		0309F07A9804059673A11903 /* include_juce_audio_plugin_client_VST2.cpp */ /* include_juce_audio_plugin_client_VST2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_VST2.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST2.cpp; sourceTree = SOURCE_ROOT; };
 		03F48AED5835F0625228DAB7 /* include_juce_audio_plugin_client_utils.cpp */ /* include_juce_audio_plugin_client_utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_utils.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_utils.cpp; sourceTree = SOURCE_ROOT; };
+		04D0E13EB26571C9DB10453C /* include_juce_audio_plugin_client_RTAS_3.cpp */ /* include_juce_audio_plugin_client_RTAS_3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_RTAS_3.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_RTAS_3.cpp; sourceTree = SOURCE_ROOT; };
 		04E296A0648DAC9984D302B1 /* BinaryData.cpp */ /* BinaryData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = BinaryData.cpp; path = ../../JuceLibraryCode/BinaryData.cpp; sourceTree = SOURCE_ROOT; };
 		0B5C548AF2334EBD08A367DF /* juce_data_structures */ /* juce_data_structures */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_data_structures; path = "~/JUCE/modules/juce_data_structures"; sourceTree = "<absolute>"; };
 		0D9840DB4011406770DE4F12 /* juce_audio_devices */ /* juce_audio_devices */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_devices; path = "~/JUCE/modules/juce_audio_devices"; sourceTree = "<absolute>"; };
+		109C8EF64D391298ECF3051E /* include_juce_audio_plugin_client_RTAS.r */ /* include_juce_audio_plugin_client_RTAS.r */ = {isa = PBXFileReference; lastKnownFileType = file.r; name = include_juce_audio_plugin_client_RTAS.r; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_RTAS.r; sourceTree = SOURCE_ROOT; };
 		1376DA15C61A753BBF9874D9 /* juce_graphics */ /* juce_graphics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_graphics; path = "~/JUCE/modules/juce_graphics"; sourceTree = "<absolute>"; };
 		15F4BB498379222B2093B716 /* juce_core */ /* juce_core */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_core; path = "~/JUCE/modules/juce_core"; sourceTree = "<absolute>"; };
 		18465A86D27FD9AC673FE31A /* include_juce_audio_plugin_client_VST3.cpp */ /* include_juce_audio_plugin_client_VST3.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_VST3.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_VST3.cpp; sourceTree = SOURCE_ROOT; };
-		1A37B467193914542022EE8C /* include_juce_audio_plugin_client_AAX.mm */ /* include_juce_audio_plugin_client_AAX.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_AAX.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_AAX.mm; sourceTree = SOURCE_ROOT; };
 		1BB609446F99986B27DEAA0D /* CoreMIDI.framework */ /* CoreMIDI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMIDI.framework; path = System/Library/Frameworks/CoreMIDI.framework; sourceTree = SDKROOT; };
 		208A30E394BE923030F78C00 /* PluginProcessor.cpp */ /* PluginProcessor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginProcessor.cpp; path = ../../Source/PluginProcessor.cpp; sourceTree = SOURCE_ROOT; };
+		21F89FA3D11C1AD0D9D5FDB9 /* include_juce_audio_plugin_client_RTAS_4.cpp */ /* include_juce_audio_plugin_client_RTAS_4.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_RTAS_4.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_RTAS_4.cpp; sourceTree = SOURCE_ROOT; };
 		232CC243C8E0FF393D7EA4DE /* include_juce_audio_basics.mm */ /* include_juce_audio_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_basics.mm; path = ../../JuceLibraryCode/include_juce_audio_basics.mm; sourceTree = SOURCE_ROOT; };
 		26232B8F6C5A524DE1469911 /* include_juce_audio_formats.mm */ /* include_juce_audio_formats.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_formats.mm; path = ../../JuceLibraryCode/include_juce_audio_formats.mm; sourceTree = SOURCE_ROOT; };
-		271EEBF9CD2F1118C3030D8A /* Carbon.framework */ /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		2A5743E6A7351D1FC6BBCBA9 /* include_juce_audio_devices.mm */ /* include_juce_audio_devices.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_devices.mm; path = ../../JuceLibraryCode/include_juce_audio_devices.mm; sourceTree = SOURCE_ROOT; };
 		2A6604B0CDE8A0CC65C1F427 /* include_juce_graphics.mm */ /* include_juce_graphics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_graphics.mm; path = ../../JuceLibraryCode/include_juce_graphics.mm; sourceTree = SOURCE_ROOT; };
 		2AC1D473EBB8CF0EED8C1717 /* VST3 */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IvanC-MIDI-Play-Plugin.vst3"; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F7E7001EB55F522D59D5E33 /* QuartzCore.framework */ /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		3277F2952AABB997D114627F /* juce_gui_basics */ /* juce_gui_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_basics; path = "~/JUCE/modules/juce_gui_basics"; sourceTree = "<absolute>"; };
+		3297FC0A17782FF8BAC2E3E9 /* include_juce_audio_plugin_client_ARA.cpp */ /* include_juce_audio_plugin_client_ARA.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_ARA.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_ARA.cpp; sourceTree = SOURCE_ROOT; };
+		3648CF7F79A7B0B18F551E63 /* JuceLV2Defines.h */ /* JuceLV2Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceLV2Defines.h; path = ../../JuceLibraryCode/JuceLV2Defines.h; sourceTree = SOURCE_ROOT; };
 		373BC7B23FEB63EDB22723A3 /* AudioToolbox.framework */ /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		3C03F7F9AD176145419B87C8 /* include_juce_audio_plugin_client_Standalone.cpp */ /* include_juce_audio_plugin_client_Standalone.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_Standalone.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_Standalone.cpp; sourceTree = SOURCE_ROOT; };
+		3C0750A7F0383556C836AE63 /* Info-LV2_Manifest_Helper.plist */ /* Info-LV2_Manifest_Helper.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-LV2_Manifest_Helper.plist"; path = "Info-LV2_Manifest_Helper.plist"; sourceTree = SOURCE_ROOT; };
 		4C4EA87DB3E7DF3239267820 /* juce_dsp */ /* juce_dsp */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_dsp; path = "~/JUCE/modules/juce_dsp"; sourceTree = "<absolute>"; };
+		4E49580E8A4ACFD43C266070 /* include_juce_audio_plugin_client_RTAS_2.cpp */ /* include_juce_audio_plugin_client_RTAS_2.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_RTAS_2.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_RTAS_2.cpp; sourceTree = SOURCE_ROOT; };
+		5204E467C515FE36DE34E3A6 /* LV2 Plugin */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = "IvanC-MIDI-Play-Plugin.so"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5808E3C5191D791518D2F2B8 /* juce_audio_basics */ /* juce_audio_basics */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_basics; path = "~/JUCE/modules/juce_audio_basics"; sourceTree = "<absolute>"; };
+		59D7ECBC3A1D204D1B277151 /* include_juce_audio_plugin_client_LV2.mm */ /* include_juce_audio_plugin_client_LV2.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_LV2.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_LV2.mm; sourceTree = SOURCE_ROOT; };
 		59EE12B8B31C7D62399E4021 /* RecentFilesMenuTemplate.nib */ /* RecentFilesMenuTemplate.nib */ = {isa = PBXFileReference; lastKnownFileType = file.nib; name = RecentFilesMenuTemplate.nib; path = RecentFilesMenuTemplate.nib; sourceTree = SOURCE_ROOT; };
 		5E085869D3C96B2EE35EAE35 /* IOKit.framework */ /* IOKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = IOKit.framework; path = System/Library/Frameworks/IOKit.framework; sourceTree = SDKROOT; };
 		5FBE861EA80032C312D16865 /* WebKit.framework */ /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		6B5C0695E1AB02BE826A8A90 /* Shared Code */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libIvanC-MIDI-Play-Plugin.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6BD91C9E36A7993BF03CD765 /* Info-LV2_Plugin.plist */ /* Info-LV2_Plugin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-LV2_Plugin.plist"; path = "Info-LV2_Plugin.plist"; sourceTree = SOURCE_ROOT; };
 		6E32313291213B0EE69E14A6 /* juce_audio_utils */ /* juce_audio_utils */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_utils; path = "~/JUCE/modules/juce_audio_utils"; sourceTree = "<absolute>"; };
+		6EB19174F0CE228BDB684BBC /* include_juce_audio_processors_lv2_libs.cpp */ /* include_juce_audio_processors_lv2_libs.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_lv2_libs.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_lv2_libs.cpp; sourceTree = SOURCE_ROOT; };
 		71B7297E5EA83D5C1AE66F6E /* include_juce_osc.cpp */ /* include_juce_osc.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_osc.cpp; path = ../../JuceLibraryCode/include_juce_osc.cpp; sourceTree = SOURCE_ROOT; };
 		784E5BE94A01F511D274EE29 /* PluginEditor.cpp */ /* PluginEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PluginEditor.cpp; path = ../../Source/PluginEditor.cpp; sourceTree = SOURCE_ROOT; };
 		789BFEF839E55C4FC37FBAF9 /* juce_osc */ /* juce_osc */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_osc; path = "~/JUCE/modules/juce_osc"; sourceTree = "<absolute>"; };
@@ -106,15 +125,16 @@
 		7DA3EB94729F7C210F3FF7FD /* include_juce_gui_basics.mm */ /* include_juce_gui_basics.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_gui_basics.mm; path = ../../JuceLibraryCode/include_juce_gui_basics.mm; sourceTree = SOURCE_ROOT; };
 		7EAD56DA6CA3C116DC793F55 /* DiscRecording.framework */ /* DiscRecording.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = DiscRecording.framework; path = System/Library/Frameworks/DiscRecording.framework; sourceTree = SDKROOT; };
 		8FB59694C9F07E0CC63FE9DA /* CoreAudioKit.framework */ /* CoreAudioKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreAudioKit.framework; path = System/Library/Frameworks/CoreAudioKit.framework; sourceTree = SDKROOT; };
-		924854CD1A1E58A01001E439 /* Info-AAX.plist */ /* Info-AAX.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-AAX.plist"; path = "Info-AAX.plist"; sourceTree = SOURCE_ROOT; };
+		94A7E58CE3B4679B4DF80A9A /* include_juce_audio_processors_ara.cpp */ /* include_juce_audio_processors_ara.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_processors_ara.cpp; path = ../../JuceLibraryCode/include_juce_audio_processors_ara.cpp; sourceTree = SOURCE_ROOT; };
 		9606A53F67052680134718C5 /* include_juce_events.mm */ /* include_juce_events.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_events.mm; path = ../../JuceLibraryCode/include_juce_events.mm; sourceTree = SOURCE_ROOT; };
 		9CA0428EC7FDBA4365990F59 /* JucePluginDefines.h */ /* JucePluginDefines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JucePluginDefines.h; path = ../../JuceLibraryCode/JucePluginDefines.h; sourceTree = SOURCE_ROOT; };
 		9CB1B2B556A484764BEFBF15 /* include_juce_core.mm */ /* include_juce_core.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_core.mm; path = ../../JuceLibraryCode/include_juce_core.mm; sourceTree = SOURCE_ROOT; };
 		9D1F142313629C0A324E27FB /* juce_audio_formats */ /* juce_audio_formats */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_formats; path = "~/JUCE/modules/juce_audio_formats"; sourceTree = "<absolute>"; };
 		A21A3EC261AE931586342E65 /* Cocoa.framework */ /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		ACBA7C6193A5D6D4EC0D22E0 /* juce_audio_plugin_client */ /* juce_audio_plugin_client */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_audio_plugin_client; path = "~/JUCE/modules/juce_audio_plugin_client"; sourceTree = "<absolute>"; };
+		ADAEA206F3487B4EA9BFD254 /* juce_LV2TurtleDumpProgram.cpp */ /* juce_LV2TurtleDumpProgram.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = juce_LV2TurtleDumpProgram.cpp; path = "$(HOME)/JUCE/modules/juce_audio_plugin_client/LV2/juce_LV2TurtleDumpProgram.cpp"; sourceTree = "<absolute>"; };
 		AE1C6BC785F0AC889FFB6022 /* AudioUnit.framework */ /* AudioUnit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioUnit.framework; path = System/Library/Frameworks/AudioUnit.framework; sourceTree = SDKROOT; };
-		B08E1A561F3B3F087831CED4 /* AAX */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IvanC-MIDI-Play-Plugin.aaxplugin"; sourceTree = BUILT_PRODUCTS_DIR; };
+		B31AC9C3578185281A442C47 /* include_juce_audio_plugin_client_RTAS_1.cpp */ /* include_juce_audio_plugin_client_RTAS_1.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = include_juce_audio_plugin_client_RTAS_1.cpp; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_RTAS_1.cpp; sourceTree = SOURCE_ROOT; };
 		BFE4035F491B3D508EDAC4D7 /* Info-Standalone_Plugin.plist */ /* Info-Standalone_Plugin.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-Standalone_Plugin.plist"; path = "Info-Standalone_Plugin.plist"; sourceTree = SOURCE_ROOT; };
 		C3C36D1DB10749089380A122 /* PluginProcessor.h */ /* PluginProcessor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginProcessor.h; path = ../../Source/PluginProcessor.h; sourceTree = SOURCE_ROOT; };
 		C684D3D19FAC23229234E034 /* JuceHeader.h */ /* JuceHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = JuceHeader.h; path = ../../JuceLibraryCode/JuceHeader.h; sourceTree = SOURCE_ROOT; };
@@ -127,6 +147,7 @@
 		CC67F82EFE34FE47068B8355 /* Info-VST3.plist */ /* Info-VST3.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Info-VST3.plist"; path = "Info-VST3.plist"; sourceTree = SOURCE_ROOT; };
 		CDE7C2543A50AD8D2EC4E6D8 /* Accelerate.framework */ /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		D33794B801C528C2EB3E3103 /* VST */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "IvanC-MIDI-Play-Plugin.vst"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D46CC838CFAA3A69ED8FCC74 /* include_juce_audio_plugin_client_RTAS_utils.mm */ /* include_juce_audio_plugin_client_RTAS_utils.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_plugin_client_RTAS_utils.mm; path = ../../JuceLibraryCode/include_juce_audio_plugin_client_RTAS_utils.mm; sourceTree = SOURCE_ROOT; };
 		D83912AC2821A550FD3EC811 /* juce_gui_extra */ /* juce_gui_extra */ = {isa = PBXFileReference; lastKnownFileType = folder; name = juce_gui_extra; path = "~/JUCE/modules/juce_gui_extra"; sourceTree = "<absolute>"; };
 		D85E56E8CC1F1345618317D3 /* ThisWindowThingyPls.cpp */ /* ThisWindowThingyPls.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = ThisWindowThingyPls.cpp; path = ../../Source/ThisWindowThingyPls.cpp; sourceTree = SOURCE_ROOT; };
 		DB0058F28643F5F4461D1AC7 /* include_juce_audio_processors.mm */ /* include_juce_audio_processors.mm */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.objcpp; name = include_juce_audio_processors.mm; path = ../../JuceLibraryCode/include_juce_audio_processors.mm; sourceTree = SOURCE_ROOT; };
@@ -137,6 +158,7 @@
 		EAD4A1551565CF16D185CCF9 /* README.md */ /* README.md */ = {isa = PBXFileReference; lastKnownFileType = file.md; name = README.md; path = ../../README.md; sourceTree = SOURCE_ROOT; };
 		EE78FDBF787E9175404600D3 /* Standalone Plugin */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "IvanC-MIDI-Play-Plugin.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		EEA3F02CE78215F1D25B47B7 /* PluginEditor.h */ /* PluginEditor.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PluginEditor.h; path = ../../Source/PluginEditor.h; sourceTree = SOURCE_ROOT; };
+		FA1FAC6D16237A4E590A5158 /* LV2 Manifest Helper */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = juce_lv2_helper; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,7 +169,6 @@
 				214DBC723CF9FEDBA59785E9,
 				259DC079A096FA28932E5BE5,
 				575A30174F1F27D6A8C4FC28,
-				3F336E77C6374E5E02064533,
 				2A0DEBF19329DAA8FCA468A0,
 				9576FC39BA50E85B90892FF6,
 				E94A60613DD1D7535B407EF7,
@@ -160,14 +181,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		3AF6DBCF8CCD867596E7FF39 = {
+		50728AA2CFDB137BCECB4BA8 = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				214DBC723CF9FEDBA59785E9,
 				259DC079A096FA28932E5BE5,
 				575A30174F1F27D6A8C4FC28,
-				3F336E77C6374E5E02064533,
 				2A0DEBF19329DAA8FCA468A0,
 				9576FC39BA50E85B90892FF6,
 				E94A60613DD1D7535B407EF7,
@@ -187,7 +207,6 @@
 				214DBC723CF9FEDBA59785E9,
 				259DC079A096FA28932E5BE5,
 				575A30174F1F27D6A8C4FC28,
-				3F336E77C6374E5E02064533,
 				2A0DEBF19329DAA8FCA468A0,
 				9576FC39BA50E85B90892FF6,
 				E94A60613DD1D7535B407EF7,
@@ -207,7 +226,6 @@
 				214DBC723CF9FEDBA59785E9,
 				259DC079A096FA28932E5BE5,
 				575A30174F1F27D6A8C4FC28,
-				3F336E77C6374E5E02064533,
 				2A0DEBF19329DAA8FCA468A0,
 				9576FC39BA50E85B90892FF6,
 				E94A60613DD1D7535B407EF7,
@@ -228,8 +246,9 @@
 			children = (
 				CC0A3D3970F6527A572AC725,
 				CC67F82EFE34FE47068B8355,
-				924854CD1A1E58A01001E439,
 				BFE4035F491B3D508EDAC4D7,
+				6BD91C9E36A7993BF03CD765,
+				3C0750A7F0383556C836AE63,
 				59EE12B8B31C7D62399E4021,
 			);
 			name = Resources;
@@ -278,13 +297,21 @@
 				232CC243C8E0FF393D7EA4DE,
 				2A5743E6A7351D1FC6BBCBA9,
 				26232B8F6C5A524DE1469911,
-				1A37B467193914542022EE8C,
+				3297FC0A17782FF8BAC2E3E9,
+				59D7ECBC3A1D204D1B277151,
+				B31AC9C3578185281A442C47,
+				4E49580E8A4ACFD43C266070,
+				04D0E13EB26571C9DB10453C,
+				21F89FA3D11C1AD0D9D5FDB9,
+				D46CC838CFAA3A69ED8FCC74,
 				3C03F7F9AD176145419B87C8,
 				03F48AED5835F0625228DAB7,
 				E633ACB92AFBC4641FD045C6,
 				0309F07A9804059673A11903,
 				18465A86D27FD9AC673FE31A,
 				DB0058F28643F5F4461D1AC7,
+				94A7E58CE3B4679B4DF80A9A,
+				6EB19174F0CE228BDB684BBC,
 				C990B7B321BC87E101ED4241,
 				9CB1B2B556A484764BEFBF15,
 				E8DE8E503D42128117027292,
@@ -295,6 +322,7 @@
 				0082F08D00EB1F184475182F,
 				71B7297E5EA83D5C1AE66F6E,
 				C684D3D19FAC23229234E034,
+				3648CF7F79A7B0B18F551E63,
 				9CA0428EC7FDBA4365990F59,
 			);
 			name = "JUCE Library Code";
@@ -326,9 +354,10 @@
 			children = (
 				D33794B801C528C2EB3E3103,
 				2AC1D473EBB8CF0EED8C1717,
-				B08E1A561F3B3F087831CED4,
 				EE78FDBF787E9175404600D3,
+				5204E467C515FE36DE34E3A6,
 				6B5C0695E1AB02BE826A8A90,
+				FA1FAC6D16237A4E590A5158,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -339,7 +368,6 @@
 				AE1C6BC785F0AC889FFB6022,
 				CDE7C2543A50AD8D2EC4E6D8,
 				373BC7B23FEB63EDB22723A3,
-				271EEBF9CD2F1118C3030D8A,
 				A21A3EC261AE931586342E65,
 				E388859239B3BABCA6933280,
 				8FB59694C9F07E0CC63FE9DA,
@@ -374,6 +402,26 @@
 			productReference = 2AC1D473EBB8CF0EED8C1717;
 			productType = "com.apple.product-type.bundle";
 		};
+		4CB84863F8FC92695453E49E /* IvanC-MIDI-Play-Plugin - LV2 Plugin */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C8530E1CB385A6B7A4EF6A38;
+			buildPhases = (
+				F7AFEDF1C308D13C7468E32E,
+				27355D60A8A6D011346AA382,
+				50728AA2CFDB137BCECB4BA8,
+				862F0BBDB9D3BC889946E1AD,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				26C74DD8B8CF05FB59442FF1,
+				0CB123F2AF08E05BF121F1AC,
+			);
+			name = "IvanC-MIDI-Play-Plugin - LV2 Plugin";
+			productName = "IvanC-MIDI-Play-Plugin";
+			productReference = 5204E467C515FE36DE34E3A6;
+			productType = "com.apple.product-type.tool";
+		};
 		683363B88C35F42F512EDBFD /* IvanC-MIDI-Play-Plugin - Shared Code */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = DF3DDDEB26E25D221711D577;
@@ -389,23 +437,20 @@
 			productReference = 6B5C0695E1AB02BE826A8A90;
 			productType = "com.apple.product-type.library.static";
 		};
-		84CCA58FE37BDAA2A9E1E172 /* IvanC-MIDI-Play-Plugin - AAX */ = {
+		B04075784818EB6D87B1BAD3 /* IvanC-MIDI-Play-Plugin - LV2 Manifest Helper */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 73F01226ACB45684635CDFB6;
+			buildConfigurationList = 6F0BECD0D1693F92DF172355;
 			buildPhases = (
-				BC2803EA9784426D579BE5C2,
-				F6474EB261748462945C0059,
-				3AF6DBCF8CCD867596E7FF39,
+				CFF500BAF348950EF5ACFA6E,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				513A4D2D549DBD9B35863E81,
 			);
-			name = "IvanC-MIDI-Play-Plugin - AAX";
+			name = "IvanC-MIDI-Play-Plugin - LV2 Manifest Helper";
 			productName = "IvanC-MIDI-Play-Plugin";
-			productReference = B08E1A561F3B3F087831CED4;
-			productType = "com.apple.product-type.bundle";
+			productReference = FA1FAC6D16237A4E590A5158;
+			productType = "com.apple.product-type.tool";
 		};
 		C18967C4DDF33B0175EDBACC /* IvanC-MIDI-Play-Plugin - VST */ = {
 			isa = PBXNativeTarget;
@@ -449,10 +494,32 @@
 		40F0190F92DE9B52F781DE01 = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1340;
 				ORGANIZATIONNAME = "Perkedel";
 				TargetAttributes = {
 					1620F4AB86B11C50D31998D0 = {
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 0;
+							};
+							com.apple.HardenedRuntime = {
+								enabled = 0;
+							};
+							com.apple.InAppPurchase = {
+								enabled = 0;
+							};
+							com.apple.InterAppAudio = {
+								enabled = 0;
+							};
+							com.apple.Push = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+						};
+					};
+					4CB84863F8FC92695453E49E = {
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -518,7 +585,7 @@
 							};
 						};
 					};
-					84CCA58FE37BDAA2A9E1E172 = {
+					B04075784818EB6D87B1BAD3 = {
 						SystemCapabilities = {
 							com.apple.ApplicationGroups.iOS = {
 								enabled = 0;
@@ -600,9 +667,10 @@
 				7C0DE57014AD38F03B451394,
 				C18967C4DDF33B0175EDBACC,
 				1620F4AB86B11C50D31998D0,
-				84CCA58FE37BDAA2A9E1E172,
 				E72CA3BEB9856A5804FA21E0,
+				4CB84863F8FC92695453E49E,
 				683363B88C35F42F512EDBFD,
+				B04075784818EB6D87B1BAD3,
 			);
 		};
 /* End PBXProject section */
@@ -624,7 +692,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		BC2803EA9784426D579BE5C2 = {
+		E2B03EB0DB9E54FA3D5228BD = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -632,7 +700,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		E2B03EB0DB9E54FA3D5228BD = {
+		F7AFEDF1C308D13C7468E32E = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -642,7 +710,29 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		862F0BBDB9D3BC889946E1AD /* Generate manifest */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			name = "Generate manifest";
+			alwaysOutOfDate = 1;
+			shellPath = /bin/sh;
+			shellScript = "set -e\n\"$CONFIGURATION_BUILD_DIR/../juce_lv2_helper\" \"$CONFIGURATION_BUILD_DIR/$PRODUCT_NAME\"\nif [ \"$CONFIGURATION\" = \"Debug\" ]; then\nmkdir -p \"$HOME/Library/Audio/Plug-Ins/LV2/\"\n/bin/ln -sfh \"$CONFIGURATION_BUILD_DIR\" \"$HOME/Library/Audio/Plug-Ins/LV2/\"\nfi\nif [ \"$CONFIGURATION\" = \"Release\" ]; then\nmkdir -p \"$HOME/Library/Audio/Plug-Ins/LV2/\"\n/bin/ln -sfh \"$CONFIGURATION_BUILD_DIR\" \"$HOME/Library/Audio/Plug-Ins/LV2/\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		27355D60A8A6D011346AA382 = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4F2BBD008B82AFA15BAD1C85,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4E883FE3AC13D84261758F2B = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -667,6 +757,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CFF500BAF348950EF5ACFA6E = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50A7DD3CF949EE05C6A0D901,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		DC39A90AAC773893FDEA05F1 = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -678,9 +776,17 @@
 				EBC3ED5E16CD96B4F3DDDC5E,
 				8296384410AE31EFCDB01F9C,
 				1790A033D80B3822F3A1D757,
+				DFFBB54992078AACCA1781E9,
+				505F835D4DD0C8A82332D5F8,
+				6366BCF968832078A78F131F,
+				0E49FE0105D4C890C9A6A6DC,
+				EA486C8A5F1ABEE7F7276502,
+				94A7976BD22DDBDBD905BCE6,
 				BE27F2176624F3A052D82157,
 				CB4730F72FDD32C05ADBA2B3,
 				65CB591BF41A1D6EB2B0A136,
+				132D9AFEC7E6BEEC4BE05120,
+				3591C972FA0D21E41A2E9490,
 				2AE9C914328A33F9545516E5,
 				63D537E903609497525D06D0,
 				3026F6DDA4873141A29607D2,
@@ -693,20 +799,16 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		F6474EB261748462945C0059 = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				F0C540FC0E00B154BBE420E5,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		1BFA5DA4F2F27EFD498933C5 = {
+		0CB123F2AF08E05BF121F1AC = {
 			isa = PBXTargetDependency;
-			target = 84CCA58FE37BDAA2A9E1E172;
+			target = 683363B88C35F42F512EDBFD;
+		};
+		26C74DD8B8CF05FB59442FF1 = {
+			isa = PBXTargetDependency;
+			target = B04075784818EB6D87B1BAD3;
 		};
 		270B9C3A38EEE69AE308B7D3 = {
 			isa = PBXTargetDependency;
@@ -724,9 +826,9 @@
 			isa = PBXTargetDependency;
 			target = 683363B88C35F42F512EDBFD;
 		};
-		513A4D2D549DBD9B35863E81 = {
+		5DC0DB96812F1704B8D24AEB = {
 			isa = PBXTargetDependency;
-			target = 683363B88C35F42F512EDBFD;
+			target = 4CB84863F8FC92695453E49E;
 		};
 		63DBD71B2790E78419A6E25E = {
 			isa = PBXTargetDependency;
@@ -736,6 +838,10 @@
 			isa = PBXTargetDependency;
 			target = 683363B88C35F42F512EDBFD;
 		};
+		8E8BF00F7F4AF06E13E38008 = {
+			isa = PBXTargetDependency;
+			target = B04075784818EB6D87B1BAD3;
+		};
 		8FE640D4F41632482CC65392 = {
 			isa = PBXTargetDependency;
 			target = 683363B88C35F42F512EDBFD;
@@ -743,144 +849,6 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		0077191DAB7F5E19A563A7F9 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_LINK_OBJC_RUNTIME = NO;
-				CODE_SIGN_IDENTITY = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
-				COPY_PHASE_STRIP = NO;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
-				EXCLUDED_ARCHS = "";
-				GCC_DYNAMIC_NO_PIC = NO;
-				GCC_OPTIMIZATION_LEVEL = 0;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_DEBUG=1",
-					"DEBUG=1",
-					"JUCE_DISPLAY_SPLASH_SCREEN=0",
-					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
-					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
-					"JUCE_MODULE_AVAILABLE_juce_core=1",
-					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
-					"JUCE_MODULE_AVAILABLE_juce_dsp=1",
-					"JUCE_MODULE_AVAILABLE_juce_events=1",
-					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
-					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
-					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
-					"JUCE_MODULE_AVAILABLE_juce_osc=1",
-					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
-					"JUCE_USE_WINRT_MIDI=1",
-					"JUCE_ASIO=1",
-					"JUCE_WASAPI=1",
-					"JUCE_DIRECTSOUND=1",
-					"JUCE_ALSA=1",
-					"JUCE_USE_MP3AUDIOFORMAT=1",
-					"JUCE_USE_LAME_AUDIO_FORMAT=1",
-					"JUCE_VST3_CAN_REPLACE_VST2=1",
-					"JUCE_PLUGINHOST_VST=1",
-					"JUCE_PLUGINHOST_VST3=1",
-					"JUCE_PLUGINHOST_AU=1",
-					"JUCE_PLUGINHOST_LADSPA=1",
-					"JUCE_ALLOW_STATIC_NULL_VARIABLES=1",
-					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
-					"JucePlugin_Build_VST=0",
-					"JucePlugin_Build_VST3=0",
-					"JucePlugin_Build_AU=0",
-					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
-					"JucePlugin_Build_AAX=1",
-					"JucePlugin_Build_Standalone=0",
-					"JucePlugin_Build_Unity=0",
-					"JucePlugin_Enable_IAA=0",
-					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
-					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
-					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
-					"JucePlugin_ManufacturerWebsite=\\\"https://cointr.ee/joelwindows7\\\"",
-					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x506b646c",
-					"JucePlugin_PluginCode=0x49636d64",
-					"JucePlugin_IsSynth=1",
-					"JucePlugin_WantsMidiInput=1",
-					"JucePlugin_ProducesMidiOutput=1",
-					"JucePlugin_IsMidiEffect=0",
-					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
-					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
-					"JucePlugin_VSTCategory=kPlugCategSynth",
-					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
-					"JucePlugin_AUMainType=\\'aumi\\'",
-					"JucePlugin_AUSubType=JucePlugin_PluginCode",
-					"JucePlugin_AUExportPrefix=IvanCMIDIPlayPluginAU",
-					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
-					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
-					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
-					"JucePlugin_AAXCategory=2048",
-					"JucePlugin_AAXDisableBypass=0",
-					"JucePlugin_AAXDisableMultiMono=0",
-					"JucePlugin_IAAType=0x61757269",
-					"JucePlugin_IAASubType=JucePlugin_PluginCode",
-					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
-					"JucePlugin_VSTNumMidiInputs=16",
-					"JucePlugin_VSTNumMidiOutputs=16",
-					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
-					"JUCE_MODAL_LOOPS_PERMITTED=1",
-					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GENERATE_PKGINFO_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
-					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
-					"$(HOME)/JUCE/modules",
-					"C:\SDKs\boost_1_71_0",
-					"C:\SDKs\ASIOSDK2.3\common",
-					"$(HOME)/JUCE/modules/juce_audio_plugin_client",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Info-AAX.plist;
-				INFOPLIST_PREPROCESS = NO;
-				INSTALL_PATH = "/Library/Application Support/Avid/Audio/Plug-Ins/";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(HOME)/SDKs/AAX/Libs/Debug\"",
-				);
-				LIBRARY_STYLE = Bundle;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-bundle -lAAXLibrary_libcpp -lIvanC-MIDI-Play-Plugin";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
-				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
-				USE_HEADERMAP = NO;
-				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
-				WRAPPER_EXTENSION = aaxplugin;
-			};
-			name = Debug;
-		};
 		01F3D091D212D9ED140ECA5F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -901,7 +869,7 @@
 					"NDEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -935,11 +903,12 @@
 					"JucePlugin_Build_VST3=0",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
 					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=0",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -952,9 +921,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -964,11 +933,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -980,20 +944,30 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -1006,8 +980,8 @@
 				LIBRARY_STYLE = Bundle;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				USE_HEADERMAP = NO;
@@ -1036,7 +1010,7 @@
 					"DEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -1070,11 +1044,12 @@
 					"JucePlugin_Build_VST3=0",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
 					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=0",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -1087,9 +1062,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -1099,11 +1074,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -1115,20 +1085,30 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -1140,8 +1120,8 @@
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/VST/";
 				LIBRARY_STYLE = Bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				USE_HEADERMAP = NO;
@@ -1149,145 +1129,6 @@
 				WRAPPER_EXTENSION = vst;
 			};
 			name = Debug;
-		};
-		0BBDCD41A860B0D4780E7291 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
-				CLANG_CXX_LIBRARY = "libc++";
-				CLANG_LINK_OBJC_RUNTIME = NO;
-				CODE_SIGN_IDENTITY = "";
-				COMBINE_HIDPI_IMAGES = YES;
-				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
-				DEAD_CODE_STRIPPING = YES;
-				DEPLOYMENT_LOCATION = YES;
-				DSTROOT = /;
-				EXCLUDED_ARCHS = "";
-				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
-				GCC_OPTIMIZATION_LEVEL = 3;
-				GCC_PREPROCESSOR_DEFINITIONS = (
-					"_NDEBUG=1",
-					"NDEBUG=1",
-					"JUCE_DISPLAY_SPLASH_SCREEN=0",
-					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
-					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
-					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
-					"JUCE_MODULE_AVAILABLE_juce_core=1",
-					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
-					"JUCE_MODULE_AVAILABLE_juce_dsp=1",
-					"JUCE_MODULE_AVAILABLE_juce_events=1",
-					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
-					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
-					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
-					"JUCE_MODULE_AVAILABLE_juce_osc=1",
-					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
-					"JUCE_USE_WINRT_MIDI=1",
-					"JUCE_ASIO=1",
-					"JUCE_WASAPI=1",
-					"JUCE_DIRECTSOUND=1",
-					"JUCE_ALSA=1",
-					"JUCE_USE_MP3AUDIOFORMAT=1",
-					"JUCE_USE_LAME_AUDIO_FORMAT=1",
-					"JUCE_VST3_CAN_REPLACE_VST2=1",
-					"JUCE_PLUGINHOST_VST=1",
-					"JUCE_PLUGINHOST_VST3=1",
-					"JUCE_PLUGINHOST_AU=1",
-					"JUCE_PLUGINHOST_LADSPA=1",
-					"JUCE_ALLOW_STATIC_NULL_VARIABLES=1",
-					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
-					"JucePlugin_Build_VST=0",
-					"JucePlugin_Build_VST3=0",
-					"JucePlugin_Build_AU=0",
-					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
-					"JucePlugin_Build_AAX=1",
-					"JucePlugin_Build_Standalone=0",
-					"JucePlugin_Build_Unity=0",
-					"JucePlugin_Enable_IAA=0",
-					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
-					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
-					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
-					"JucePlugin_ManufacturerWebsite=\\\"https://cointr.ee/joelwindows7\\\"",
-					"JucePlugin_ManufacturerEmail=\\\"\\\"",
-					"JucePlugin_ManufacturerCode=0x506b646c",
-					"JucePlugin_PluginCode=0x49636d64",
-					"JucePlugin_IsSynth=1",
-					"JucePlugin_WantsMidiInput=1",
-					"JucePlugin_ProducesMidiOutput=1",
-					"JucePlugin_IsMidiEffect=0",
-					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
-					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
-					"JucePlugin_VSTCategory=kPlugCategSynth",
-					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
-					"JucePlugin_AUMainType=\\'aumi\\'",
-					"JucePlugin_AUSubType=JucePlugin_PluginCode",
-					"JucePlugin_AUExportPrefix=IvanCMIDIPlayPluginAU",
-					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
-					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
-					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
-					"JucePlugin_AAXCategory=2048",
-					"JucePlugin_AAXDisableBypass=0",
-					"JucePlugin_AAXDisableMultiMono=0",
-					"JucePlugin_IAAType=0x61757269",
-					"JucePlugin_IAASubType=JucePlugin_PluginCode",
-					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
-					"JucePlugin_VSTNumMidiInputs=16",
-					"JucePlugin_VSTNumMidiOutputs=16",
-					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
-					"JUCE_MODAL_LOOPS_PERMITTED=1",
-					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
-				);
-				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
-				GENERATE_PKGINFO_FILE = YES;
-				HEADER_SEARCH_PATHS = (
-					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
-					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
-					"$(HOME)/JUCE/modules",
-					"C:\SDKs\boost_1_71_0",
-					"C:\SDKs\ASIOSDK2.3\common",
-					"$(HOME)/JUCE/modules/juce_audio_plugin_client",
-					"$(inherited)",
-				);
-				INFOPLIST_FILE = Info-AAX.plist;
-				INFOPLIST_PREPROCESS = NO;
-				INSTALL_PATH = "/Library/Application Support/Avid/Audio/Plug-Ins/";
-				LIBRARY_SEARCH_PATHS = (
-					"$(inherited)",
-					"\"$(HOME)/SDKs/AAX/Libs/Release\"",
-				);
-				LIBRARY_STYLE = Bundle;
-				LLVM_LTO = YES;
-				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-bundle -lAAXLibrary_libcpp -lIvanC-MIDI-Play-Plugin";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
-				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
-				USE_HEADERMAP = NO;
-				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
-				WRAPPER_EXTENSION = aaxplugin;
-			};
-			name = Release;
 		};
 		1089A3F3234D7518A98113E1 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1307,7 +1148,7 @@
 					"NDEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -1341,11 +1182,12 @@
 					"JucePlugin_Build_VST3=1",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
-					"JucePlugin_Build_AAX=1",
+					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=1",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=1",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -1358,9 +1200,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -1370,11 +1212,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -1386,20 +1223,30 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 					"JUCE_SHARED_CODE=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -1409,12 +1256,293 @@
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				SKIP_INSTALL = YES;
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
+			};
+			name = Release;
+		};
+		15C0CF7E0DD478805B6A93F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
+				COPY_PHASE_STRIP = NO;
+				EXCLUDED_ARCHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG=1",
+					"DEBUG=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=0",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x70002",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_dsp=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_osc=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_USE_WINRT_MIDI=1",
+					"JUCE_ASIO=1",
+					"JUCE_WASAPI=1",
+					"JUCE_DIRECTSOUND=1",
+					"JUCE_ALSA=1",
+					"JUCE_USE_MP3AUDIOFORMAT=1",
+					"JUCE_USE_LAME_AUDIO_FORMAT=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=1",
+					"JUCE_PLUGINHOST_VST=1",
+					"JUCE_PLUGINHOST_VST3=1",
+					"JUCE_PLUGINHOST_AU=1",
+					"JUCE_PLUGINHOST_LADSPA=1",
+					"JUCE_ALLOW_STATIC_NULL_VARIABLES=1",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=0",
+					"JucePlugin_Build_AU=0",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=0",
+					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
+					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
+					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"https://cointr.ee/joelwindows7\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x506b646c",
+					"JucePlugin_PluginCode=0x49636d64",
+					"JucePlugin_IsSynth=1",
+					"JucePlugin_WantsMidiInput=1",
+					"JucePlugin_ProducesMidiOutput=1",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategSynth",
+					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
+					"JucePlugin_AUMainType=\\'aumi\\'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=IvanCMIDIPlayPluginAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=2048",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757269",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
+					"$(SRCROOT)/../../JuceLibraryCode",
+					"$(HOME)/JUCE/modules",
+					"C:\SDKs\boost_1_71_0",
+					"C:\SDKs\ASIOSDK2.3\common",
+					"$(HOME)/JUCE/modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Info-LV2_Manifest_Helper.plist;
+				INFOPLIST_PREPROCESS = NO;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-weak_framework Metal -weak_framework MetalKit";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
+				PRODUCT_NAME = "juce_lv2_helper";
+				USE_HEADERMAP = NO;
+				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
+			};
+			name = Debug;
+		};
+		2B26FC46366835D5ADBE3A3B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)/IvanC-MIDI-Play-Plugin.lv2";
+				DEAD_CODE_STRIPPING = YES;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				EXCLUDED_ARCHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_NDEBUG=1",
+					"NDEBUG=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=0",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x70002",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_dsp=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_osc=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_USE_WINRT_MIDI=1",
+					"JUCE_ASIO=1",
+					"JUCE_WASAPI=1",
+					"JUCE_DIRECTSOUND=1",
+					"JUCE_ALSA=1",
+					"JUCE_USE_MP3AUDIOFORMAT=1",
+					"JUCE_USE_LAME_AUDIO_FORMAT=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=1",
+					"JUCE_PLUGINHOST_VST=1",
+					"JUCE_PLUGINHOST_VST3=1",
+					"JUCE_PLUGINHOST_AU=1",
+					"JUCE_PLUGINHOST_LADSPA=1",
+					"JUCE_ALLOW_STATIC_NULL_VARIABLES=1",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=0",
+					"JucePlugin_Build_AU=0",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=0",
+					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
+					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
+					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"https://cointr.ee/joelwindows7\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x506b646c",
+					"JucePlugin_PluginCode=0x49636d64",
+					"JucePlugin_IsSynth=1",
+					"JucePlugin_WantsMidiInput=1",
+					"JucePlugin_ProducesMidiOutput=1",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategSynth",
+					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
+					"JucePlugin_AUMainType=\\'aumi\\'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=IvanCMIDIPlayPluginAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=2048",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757269",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
+					"$(SRCROOT)/../../JuceLibraryCode",
+					"$(HOME)/JUCE/modules",
+					"C:\SDKs\boost_1_71_0",
+					"C:\SDKs\ASIOSDK2.3\common",
+					"$(HOME)/JUCE/modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Info-LV2_Plugin.plist;
+				INFOPLIST_PREPROCESS = NO;
+				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/LV2/";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PROJECT_DIR)/build/$(CONFIGURATION)\"",
+				);
+				LIBRARY_STYLE = Bundle;
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
+				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
+				SKIP_INSTALL = YES;
+				USE_HEADERMAP = NO;
+				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
+				WRAPPER_EXTENSION = so;
 			};
 			name = Release;
 		};
@@ -1484,7 +1612,7 @@
 					"DEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -1518,11 +1646,12 @@
 					"JucePlugin_Build_VST3=0",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
 					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=1",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -1535,9 +1664,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -1547,11 +1676,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -1563,19 +1687,29 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -1585,12 +1719,157 @@
 				INFOPLIST_FILE = Info-Standalone_Plugin.plist;
 				INFOPLIST_PREPROCESS = NO;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-lIvanC-MIDI-Play-Plugin";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
+			};
+			name = Debug;
+		};
+		A7B202D3D1647BC893AE025A /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)/IvanC-MIDI-Play-Plugin.lv2";
+				COPY_PHASE_STRIP = NO;
+				DEPLOYMENT_LOCATION = YES;
+				DSTROOT = /;
+				EXCLUDED_ARCHS = "";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_DEBUG=1",
+					"DEBUG=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=0",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x70002",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_dsp=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_osc=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_USE_WINRT_MIDI=1",
+					"JUCE_ASIO=1",
+					"JUCE_WASAPI=1",
+					"JUCE_DIRECTSOUND=1",
+					"JUCE_ALSA=1",
+					"JUCE_USE_MP3AUDIOFORMAT=1",
+					"JUCE_USE_LAME_AUDIO_FORMAT=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=1",
+					"JUCE_PLUGINHOST_VST=1",
+					"JUCE_PLUGINHOST_VST3=1",
+					"JUCE_PLUGINHOST_AU=1",
+					"JUCE_PLUGINHOST_LADSPA=1",
+					"JUCE_ALLOW_STATIC_NULL_VARIABLES=1",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=0",
+					"JucePlugin_Build_AU=0",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=0",
+					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=1",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
+					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
+					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"https://cointr.ee/joelwindows7\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x506b646c",
+					"JucePlugin_PluginCode=0x49636d64",
+					"JucePlugin_IsSynth=1",
+					"JucePlugin_WantsMidiInput=1",
+					"JucePlugin_ProducesMidiOutput=1",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategSynth",
+					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
+					"JucePlugin_AUMainType=\\'aumi\\'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=IvanCMIDIPlayPluginAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=2048",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757269",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GENERATE_PKGINFO_FILE = YES;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
+					"$(SRCROOT)/../../JuceLibraryCode",
+					"$(HOME)/JUCE/modules",
+					"C:\SDKs\boost_1_71_0",
+					"C:\SDKs\ASIOSDK2.3\common",
+					"$(HOME)/JUCE/modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Info-LV2_Plugin.plist;
+				INFOPLIST_PREPROCESS = NO;
+				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/LV2/";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(PROJECT_DIR)/build/$(CONFIGURATION)\"",
+				);
+				LIBRARY_STYLE = Bundle;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
+				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
+				SKIP_INSTALL = YES;
+				USE_HEADERMAP = NO;
+				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
+				WRAPPER_EXTENSION = so;
 			};
 			name = Debug;
 		};
@@ -1628,7 +1907,7 @@
 					"DEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -1662,11 +1941,12 @@
 					"JucePlugin_Build_VST3=1",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
-					"JucePlugin_Build_AAX=1",
+					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=1",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=1",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -1679,9 +1959,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -1691,11 +1971,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -1707,20 +1982,30 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 					"JUCE_SHARED_CODE=1",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -1729,7 +2014,8 @@
 				);
 				INSTALL_PATH = "@executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				SKIP_INSTALL = YES;
@@ -1756,7 +2042,7 @@
 					"NDEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -1790,11 +2076,12 @@
 					"JucePlugin_Build_VST3=0",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
 					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=1",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -1807,9 +2094,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -1819,11 +2106,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -1835,19 +2117,29 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -1858,8 +2150,8 @@
 				INFOPLIST_PREPROCESS = NO;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-lIvanC-MIDI-Play-Plugin";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				USE_HEADERMAP = NO;
@@ -1887,7 +2179,7 @@
 					"DEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -1921,11 +2213,12 @@
 					"JucePlugin_Build_VST3=1",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
 					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=0",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -1938,9 +2231,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -1950,11 +2243,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -1966,20 +2254,30 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -1991,8 +2289,8 @@
 				INSTALL_PATH = "$(HOME)/Library/Audio/Plug-Ins/VST3/";
 				LIBRARY_STYLE = Bundle;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				USE_HEADERMAP = NO;
@@ -2021,7 +2319,7 @@
 					"NDEBUG=1",
 					"JUCE_DISPLAY_SPLASH_SCREEN=0",
 					"JUCE_USE_DARK_SPLASH_SCREEN=1",
-					"JUCE_PROJUCER_VERSION=0x60106",
+					"JUCE_PROJUCER_VERSION=0x70002",
 					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
 					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
@@ -2055,11 +2353,12 @@
 					"JucePlugin_Build_VST3=1",
 					"JucePlugin_Build_AU=0",
 					"JucePlugin_Build_AUv3=0",
-					"JucePlugin_Build_RTAS=0",
 					"JucePlugin_Build_AAX=0",
 					"JucePlugin_Build_Standalone=0",
 					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
 					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
 					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
 					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
@@ -2072,9 +2371,9 @@
 					"JucePlugin_ProducesMidiOutput=1",
 					"JucePlugin_IsMidiEffect=0",
 					"JucePlugin_EditorRequiresKeyboardFocus=0",
-					"JucePlugin_Version=2022.02",
-					"JucePlugin_VersionCode=0x7e60200",
-					"JucePlugin_VersionString=\\\"2022.02\\\"",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
 					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
 					"JucePlugin_VSTCategory=kPlugCategSynth",
 					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
@@ -2084,11 +2383,6 @@
 					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
 					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
-					"JucePlugin_RTASCategory=2048",
-					"JucePlugin_RTASManufacturerCode=JucePlugin_ManufacturerCode",
-					"JucePlugin_RTASProductId=JucePlugin_PluginCode",
-					"JucePlugin_RTASDisableBypass=0",
-					"JucePlugin_RTASDisableMultiMono=0",
 					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
 					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
 					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
@@ -2100,20 +2394,30 @@
 					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
 					"JucePlugin_VSTNumMidiInputs=16",
 					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
 					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
 					"JUCE_MODAL_LOOPS_PERMITTED=1",
 					"JUCER_XCODE_MAC_F6D2F4CF=1",
-					"JUCE_APP_VERSION=2022.02",
-					"JUCE_APP_VERSION_HEX=0x7e60200",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
 				);
 				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				GENERATE_PKGINFO_FILE = YES;
 				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
 					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
 					"$(SRCROOT)/../../JuceLibraryCode",
-					"$(HOME)/SDKs/AAX",
-					"$(HOME)/SDKs/AAX/Interfaces",
-					"$(HOME)/SDKs/AAX/Interfaces/ACF",
 					"$(HOME)/JUCE/modules",
 					"C:\SDKs\boost_1_71_0",
 					"C:\SDKs\ASIOSDK2.3\common",
@@ -2126,13 +2430,148 @@
 				LIBRARY_STYLE = Bundle;
 				LLVM_LTO = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
-				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/SDKs/AAX $(HOME)/SDKs/AAX/Interfaces $(HOME)/SDKs/AAX/Interfaces/ACF $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
-				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin";
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-bundle -lIvanC-MIDI-Play-Plugin -weak_framework Metal -weak_framework MetalKit";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
 				PRODUCT_NAME = "IvanC-MIDI-Play-Plugin";
 				USE_HEADERMAP = NO;
 				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 				WRAPPER_EXTENSION = vst3;
+			};
+			name = Release;
+		};
+		F56C2D24A61EA64F9607E17C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++20";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_LINK_OBJC_RUNTIME = NO;
+				CODE_SIGN_IDENTITY = "";
+				COMBINE_HIDPI_IMAGES = YES;
+				CONFIGURATION_BUILD_DIR = "$(PROJECT_DIR)/build/$(CONFIGURATION)";
+				DEAD_CODE_STRIPPING = YES;
+				EXCLUDED_ARCHS = "";
+				GCC_GENERATE_DEBUGGING_SYMBOLS = NO;
+				GCC_OPTIMIZATION_LEVEL = 3;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"_NDEBUG=1",
+					"NDEBUG=1",
+					"JUCE_DISPLAY_SPLASH_SCREEN=0",
+					"JUCE_USE_DARK_SPLASH_SCREEN=1",
+					"JUCE_PROJUCER_VERSION=0x70002",
+					"JUCE_MODULE_AVAILABLE_juce_audio_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_devices=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_formats=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_plugin_client=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_processors=1",
+					"JUCE_MODULE_AVAILABLE_juce_audio_utils=1",
+					"JUCE_MODULE_AVAILABLE_juce_core=1",
+					"JUCE_MODULE_AVAILABLE_juce_data_structures=1",
+					"JUCE_MODULE_AVAILABLE_juce_dsp=1",
+					"JUCE_MODULE_AVAILABLE_juce_events=1",
+					"JUCE_MODULE_AVAILABLE_juce_graphics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_basics=1",
+					"JUCE_MODULE_AVAILABLE_juce_gui_extra=1",
+					"JUCE_MODULE_AVAILABLE_juce_osc=1",
+					"JUCE_GLOBAL_MODULE_SETTINGS_INCLUDED=1",
+					"JUCE_USE_WINRT_MIDI=1",
+					"JUCE_ASIO=1",
+					"JUCE_WASAPI=1",
+					"JUCE_DIRECTSOUND=1",
+					"JUCE_ALSA=1",
+					"JUCE_USE_MP3AUDIOFORMAT=1",
+					"JUCE_USE_LAME_AUDIO_FORMAT=1",
+					"JUCE_VST3_CAN_REPLACE_VST2=1",
+					"JUCE_PLUGINHOST_VST=1",
+					"JUCE_PLUGINHOST_VST3=1",
+					"JUCE_PLUGINHOST_AU=1",
+					"JUCE_PLUGINHOST_LADSPA=1",
+					"JUCE_ALLOW_STATIC_NULL_VARIABLES=1",
+					"JUCE_STRICT_REFCOUNTEDPOINTER=1",
+					"JucePlugin_Build_VST=0",
+					"JucePlugin_Build_VST3=0",
+					"JucePlugin_Build_AU=0",
+					"JucePlugin_Build_AUv3=0",
+					"JucePlugin_Build_AAX=0",
+					"JucePlugin_Build_Standalone=0",
+					"JucePlugin_Build_Unity=0",
+					"JucePlugin_Build_LV2=0",
+					"JucePlugin_Enable_IAA=0",
+					"JucePlugin_Enable_ARA=0",
+					"JucePlugin_Name=\\\"IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_Desc=\\\"IvanC\\\'s\\ MIDI\\ player\\ plugin\\\"",
+					"JucePlugin_Manufacturer=\\\"Perkedel\\ Technologies\\ +\\ IvanC\\\"",
+					"JucePlugin_ManufacturerWebsite=\\\"https://cointr.ee/joelwindows7\\\"",
+					"JucePlugin_ManufacturerEmail=\\\"\\\"",
+					"JucePlugin_ManufacturerCode=0x506b646c",
+					"JucePlugin_PluginCode=0x49636d64",
+					"JucePlugin_IsSynth=1",
+					"JucePlugin_WantsMidiInput=1",
+					"JucePlugin_ProducesMidiOutput=1",
+					"JucePlugin_IsMidiEffect=0",
+					"JucePlugin_EditorRequiresKeyboardFocus=0",
+					"JucePlugin_Version=2022.09",
+					"JucePlugin_VersionCode=0x7e60900",
+					"JucePlugin_VersionString=\\\"2022.09\\\"",
+					"JucePlugin_VSTUniqueID=JucePlugin_PluginCode",
+					"JucePlugin_VSTCategory=kPlugCategSynth",
+					"JucePlugin_Vst3Category=\\\"Instrument|Generator\\\"",
+					"JucePlugin_AUMainType=\\'aumi\\'",
+					"JucePlugin_AUSubType=JucePlugin_PluginCode",
+					"JucePlugin_AUExportPrefix=IvanCMIDIPlayPluginAU",
+					"JucePlugin_AUExportPrefixQuoted=\\\"IvanCMIDIPlayPluginAU\\\"",
+					"JucePlugin_AUManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_CFBundleIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXIdentifier=com.Perkedel.IvanCMIDIPlayPlugin",
+					"JucePlugin_AAXManufacturerCode=JucePlugin_ManufacturerCode",
+					"JucePlugin_AAXProductId=JucePlugin_PluginCode",
+					"JucePlugin_AAXCategory=2048",
+					"JucePlugin_AAXDisableBypass=0",
+					"JucePlugin_AAXDisableMultiMono=0",
+					"JucePlugin_IAAType=0x61757269",
+					"JucePlugin_IAASubType=JucePlugin_PluginCode",
+					"JucePlugin_IAAName=\\\"Perkedel\\ Technologies\\ +\\ IvanC:\\ IvanC-MIDI-Play-Plugin\\\"",
+					"JucePlugin_VSTNumMidiInputs=16",
+					"JucePlugin_VSTNumMidiOutputs=16",
+					"JucePlugin_ARAContentTypes=0",
+					"JucePlugin_ARATransformationFlags=0",
+					"JucePlugin_ARAFactoryID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.factory\\\"",
+					"JucePlugin_ARADocumentArchiveID=\\\"com.Perkedel.IvanCMIDIPlayPlugin.aradocumentarchive.2022.09\\\"",
+					"JucePlugin_ARACompatibleArchiveIDs=\\\"\\\"",
+					"JUCE_STANDALONE_APPLICATION=JucePlugin_Build_Standalone",
+					"JUCE_MODAL_LOOPS_PERMITTED=1",
+					"JUCER_XCODE_MAC_F6D2F4CF=1",
+					"JUCE_APP_VERSION=2022.09",
+					"JUCE_APP_VERSION_HEX=0x7e60900",
+				);
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				HEADER_SEARCH_PATHS = (
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/",
+					"$(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK",
+					"$(SRCROOT)/../../JuceLibraryCode",
+					"$(HOME)/JUCE/modules",
+					"C:\SDKs\boost_1_71_0",
+					"C:\SDKs\ASIOSDK2.3\common",
+					"$(HOME)/JUCE/modules/juce_audio_plugin_client",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = Info-LV2_Manifest_Helper.plist;
+				INFOPLIST_PREPROCESS = NO;
+				LLVM_LTO = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_HEADER_SEARCH_PATHS = "$(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lilv $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sratom $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord/src $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/sord $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/serd $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/lv2 $(HOME)/JUCE/modules/juce_audio_processors/format_types/LV2_SDK/ $(HOME)/JUCE/modules/juce_audio_processors/format_types/VST3_SDK $(SRCROOT)/../../JuceLibraryCode $(HOME)/JUCE/modules C:\SDKs\boost_1_71_0 C:\SDKs\ASIOSDK2.3\common $(HOME)/JUCE/modules/juce_audio_plugin_client";
+				OTHER_LDFLAGS = "-weak_framework Metal -weak_framework MetalKit";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Perkedel.IvanCMIDIPlayPlugin;
+				PRODUCT_NAME = "juce_lv2_helper";
+				USE_HEADERMAP = NO;
+				VALID_ARCHS = "i386 x86_64 arm64 arm64e";
 			};
 			name = Release;
 		};
@@ -2206,11 +2645,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
 		};
-		73F01226ACB45684635CDFB6 = {
+		6F0BECD0D1693F92DF172355 = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				0077191DAB7F5E19A563A7F9,
-				0BBDCD41A860B0D4780E7291,
+				15C0CF7E0DD478805B6A93F7,
+				F56C2D24A61EA64F9607E17C,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;
@@ -2238,6 +2677,15 @@
 			buildConfigurations = (
 				C1AE2C94AA2BE6254B06550B,
 				BD43C9E203CD2256001D4539,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Debug;
+		};
+		C8530E1CB385A6B7A4EF6A38 = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				A7B202D3D1647BC893AE025A,
+				2B26FC46366835D5ADBE3A3B,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Debug;

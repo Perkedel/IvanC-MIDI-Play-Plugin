@@ -35,10 +35,11 @@ comming soon
 
 The nightly & cutting edge rolling is finally here!
 ### rendered in Visual Studio 2019
-https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2019/x64 (64-bit)
+<!-- https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2019/x64 (64-bit) -->
+https://github.com/Perkedel/IvanC-MIDI-Play-Plugin/tree/main/Builds/VisualStudio2022/x64 (64-bit)
 
 - VST3
-- LV2 (LADSPA v2) (Coming soon)
+- LV2 (LADSPA v2) **(NEW)**
 
 # How to build
 Here's how to compile this VSTi. As well as preparing everything to be able to compile more VST & JUCE projects in the future. You're welcome.
@@ -49,6 +50,17 @@ okay that's hard. but! there is [GitHub Desktop](https://desktop.github.com). In
 
 Now, in this GitHub repo page, scroll up from where you read this, `Code` green button, `Open in GitHub Desktop`, Select where folder you'd like to put this repo at,  
 and go back to this reading. NOW! GO GO GO!
+
+### Note however, if you are on a platform that failed to appear `Open in GitHub Desktop`,
+- Copy the `HTTPS` URL (the download tab must be selected `HTTPS`, not `SSH`) by pressing that clipboard icon button.
+- Focus / Open your GitHub Desktop.
+- `File` top menu.
+- `Clone Repository...`.
+- `URL` tab
+- Paste this repo URL you've just got, in.
+- Browse where you'd like to put it at.
+- `Open Folder` & see that your folder selection has the repo directory name appened.
+- Clone. DOne!
 
 Okay you're back.
 
@@ -65,8 +77,8 @@ the project file is `.jucer` that put next to bunch of folders and stuffs in eac
 
 therefore, this, you `Open Existing Project`, go to where `IvanC-MIDI-Play-Plugin.jucer` is, which is at that cloned git repo folder of `IvanC-MIDI-Play-Plugin`.
 
-OKAY almost forgot, **this is very important**!!! Click person icon top right. `Enable GNU GPL mode`! this allows you to disable splash screen even not logged in,  
-declaring, I love Open Source. Remember folks, **Always share your edit forks source code if you intent to release binary file!!!** keep the same license, GNU GPL v3 yeah!
+OKAY almost forgot, **this is very important**!!! Click **person icon** top right. `Enable GNU GPL mode`! this allows you to disable splash screen even not logged in,  
+declaring, I love Open Source. Remember folks, **Always share your edit forks source code if you intent to release binary file!!!** keep the same license, **GNU GPL v3** yeah!
 
 alright, next
 
@@ -105,11 +117,21 @@ Go to https://www.avid.com/alliance-partner-program/aax-connectivity-toolkit, sc
 
 So with this zip file, take out that folder into `C:\SDKs`. rename that folder into `AAX`. tada! AAX SDK installed.
 
+### ARA
+Somehow, ARA is also available separately. However, as I've looked at it, it's licensed Apache-2.0 something something. Therefore should be safe.
+- https://github.com/Celemony/ARA_SDK
+
+Remember, make sure that when cloning you make it recursive, meaning it also download all of the submodules installed in that repo. GitHub Desktop should do this automatically for you yay!  
+Don't forget! you must `checkout` force to the stable version (`git checkout release/2.1.0 --force`), right now is tag `release/2.1.0`. Then reupdate all submodules by open terminal in that repo directory & type `git submodule update` idk. Optionally, you can create it as a new branch of its own if you want just to make sure the git status stable (`git switch -c 2.1.0`, the `2.1.0` is the name of the new branch).
+
+According to the Projucer default Global Paths, again, you clone it right in the `SDKs` folder, like `C:\SDKs\ARA_SDK` for Windows / ReactOS user yeah.
+
 ## Now select your IDE export!
 Watch the compile mode! I recommend you select `Release x64`. Keep in mind, 64-bit Host will not be able to load 32-bit plugin and vice versa, except when the host have the bridgers (Carla, VST Host). (jbridge is the only legit one and it's >$0 too pecking expensive!! no comment pls!! PLS MAKE ONE THAT IS $0 & OPEN SOURCE!!! IT'S BEEN YEARS NOBODY DID THIS!!!! I TRIED TO FIND ALTERNATIVES MYSELF AND GOT ZERO!!! NOBODY WORKS THE SAME WAY AS JBRIDGE)
 
 Build this thing! each IDE has differently set build destination. your files is the name of this project `IvanC-MIDI-Play-Plugin` in extensions of:
 - `vst3` **BEST**
+- `lv2` **BESTER**
 - `dll` **DO NOT SHARE VST2 UNLESS YOU HAVE RARE LICENSE**
 - `aax` **NOT RECOMMENDED TO SHARE UNLESS YOU HAVE PRO LICENSE**
 - `au` if compiled in in macOS Xcode.
@@ -201,6 +223,7 @@ This is newer Plugin host made with JUCE. Same as VST Host, but it utilizes JUCE
 
 Unfortunately,
 - EXPENSIVE!!! >$0 !!! Despite being Open Source under GNU GPL v3 (& hence the source code there on GitHub & $0), the prebuilt binaries are Expensive. worse, buying once only grants you that version. worse again, per purchase opens the download for only 14 days! quick download before expired. worse and worst, ***RAAAAAAAAAAAAAW***, I mean, If you want to always be up to date, then you have to subscribe to their Patreon or whatever is that to have access to download link everyday for every new version. Remember, don't pay for tools! and since this is considered **Adobe level of soul hostage**, it is morally correct to sparsdat this product. No offense, sorry. Oh wow, I've been canceled lmao! Well, you see that GNU GPL only wants you let people have freedom in Source code, **but not have to be as in beer**. Bruh why not both. very flawed License I would say.
+- **EGREGIOUSLY EXPENSIVE!!!!!!** Now, the permanent purchase is available, **but costs over $100!!!!!!!!!!!!!!!!**
 - Lacks MIDI player at the moment. though it has Audio Player (has respond to MIDI Start, Stop, & Continue button) & duplicate its under the name of Media Player (that just plays Audio and does not respond to MIDI start stop continue button). C'mon, I want MIDI player!!! This is where IvanC MIDI Play plugin.. actually honestly shines. Element has that Playhead needed.
 
 My question is I can fork (it's GNU GPL v3). but.. can I render and spread my own, (warning earape fx) **for $0**?  

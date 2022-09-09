@@ -1,0 +1,23 @@
+@prefix lv2:   <http://lv2plug.in/ns/lv2core#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix pset:  <http://lv2plug.in/ns/ext/presets#> .
+@prefix state: <http://lv2plug.in/ns/ext/state#> .
+@prefix ui:    <http://lv2plug.in/ns/extensions/ui#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+
+<https://github.com/Perkedel/IvanC-MIDI-Play-Plugin>
+	a lv2:Plugin ;
+	lv2:binary <IvanC-MIDI-Play-Plugin.dll> ;
+	rdfs:seeAlso <dsp.ttl> .
+
+<https://github.com/Perkedel/IvanC-MIDI-Play-Plugin:UI>
+	a ui:WindowsUI ;
+	lv2:binary <IvanC-MIDI-Play-Plugin.dll> ;
+	rdfs:seeAlso <ui.ttl> .
+
+<https://github.com/Perkedel/IvanC-MIDI-Play-Plugin:preset1>
+	a pset:Preset ;
+	lv2:appliesTo <https://github.com/Perkedel/IvanC-MIDI-Play-Plugin> ;
+	rdfs:label "" ;
+	state:state [ <https://github.com/Perkedel/IvanC-MIDI-Play-Plugin:Program> "0"^^xsd:int ; ] .
+

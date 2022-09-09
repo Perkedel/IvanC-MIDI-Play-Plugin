@@ -228,19 +228,34 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
     if (tellPlayNow)
     {
         //thePositionInfo.transportPlay(true);
-        /*if (useOwnTransportInstead)
-            ownTransportSource.start();
-        else
-            getPlayHead()->transportPlay(true);*/
+        if (useOwnTransportInstead) {
+            //ownTransportSource.start();
+            ownStopPlaying = false;
+            ownIsPlaying = !ownIsPlaying;
+            if (ownIsPlaying) {
+
+            }
+            else {
+
+            }
+        }
+        else {
+            //getPlayHead()->transportPlay(true);
+        }
         tellPlayNow = false;
     }
 
     if (tellStopNow)
     {
-        /*if (useOwnTransportInstead)
-            ownTransportSource.stop();
-        else
-            getPlayHead()->transportPlay(false);*/
+        if (useOwnTransportInstead){
+            //ownTransportSource.stop();
+            ownIsPlaying = false;
+            ownStopPlaying = true;
+        }
+        else{
+            //getPlayHead()->transportPlay(false);
+        }
+
         tellStopNow = false;
     }
 
@@ -295,10 +310,24 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
         if (numTracks.load() > 0)
         {
             
-
             // The MIDI file is played only when the transport is active
             // TODO: JOELwindows7: point of transport override. add ignore transport and use own transport
             if (useOwnTransportInstead) {
+                if (ownIsPlaying) {
+                    // playing
+                    const juce::MidiMessageSequence* theSequence = theMIDIFile.getTrack(currentTrack.load());
+
+                    ownOffsetTime = fmod(ownStartTime, traverseEndTime);
+                    ownStartTime = thePositionInfo.timeInSeconds - ownOffsetTime;
+                    ownElapsedTime += 0;
+                }
+                else {
+                    // paused or maybe stop
+                    // add offset by frame time!
+                    ownOffsetTime = thePositionInfo.timeInSeconds;
+                }
+
+                //oldeh
                 /*
                 if (Timer::isTimerRunning()) {
                     const juce::MidiMessageSequence* theSequence = theMIDIFile.getTrack(currentTrack.load());
@@ -381,6 +410,7 @@ void SimpleMidiplayerAudioProcessor::processBlock (juce::AudioBuffer<float>& buf
                     if (isPlayingSomething)
                         sendAllNotesOff(midiMessages);
                 } */
+                // end oldeh
             } else{
                 if (thePositionInfo.isPlaying)
                 {
@@ -737,7 +767,7 @@ void SimpleMidiplayerAudioProcessor::pressPlayPauseButton() {
         else {
             printf("Play lah!");
             DBG("Play lah!");
-            startTimer(1);
+            //startTimer(1);
         }
     }
     tellPlayNow = true;

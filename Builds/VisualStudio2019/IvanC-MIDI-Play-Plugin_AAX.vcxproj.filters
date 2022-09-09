@@ -16,13 +16,13 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Wrapper.cpp">
+    <ClCompile Include="C:\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Wrapper.cpp">
       <Filter>JUCE Modules\juce_audio_plugin_client\AAX</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_AAX.cpp">
+    <ClCompile Include="C:\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_AAX.cpp">
       <Filter>JUCE Modules\juce_audio_plugin_client</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_AAX.mm">
+    <ClCompile Include="C:\JUCE\modules\juce_audio_plugin_client\juce_audio_plugin_client_AAX.mm">
       <Filter>JUCE Modules\juce_audio_plugin_client</Filter>
     </ClCompile>
     <ClCompile Include="..\..\JuceLibraryCode\include_juce_audio_plugin_client_AAX.cpp">
@@ -30,7 +30,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="..\..\..\..\..\..\..\..\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Modifier_Injector.h">
+    <ClInclude Include="C:\JUCE\modules\juce_audio_plugin_client\AAX\juce_AAX_Modifier_Injector.h">
       <Filter>JUCE Modules\juce_audio_plugin_client\AAX</Filter>
     </ClInclude>
   </ItemGroup>

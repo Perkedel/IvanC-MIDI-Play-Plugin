@@ -146,6 +146,7 @@ private:
     std::atomic<int> numTracks;                 // Current MIDI file number of tracks
     std::atomic<int> totalNumEvents;
     double ownStartTime;                        // JOELwindows7: start time for own transport
+    double ownOffsetTime;                       // JOELwindows7: offset increases by frame time when pauses.
     double traverseEndTime;        // JOELwindows7: Overall MIDI end time traversing sequence by sequence. who's the highest end time?
     double ownElapsedTime;                      // JOELwindows7: to be ++ every timer callbacks
     double lastSampleStartTime;                 // JOELwindows7: for position pulling here purpose & loop. see https://forum.juce.com/t/how-to-loop-midi-file/33837/10?u=joelwindows
@@ -156,6 +157,9 @@ private:
                                                 // we can call sendAllNotesOff there
     int transpose = 0;                          // JOELwindows7: adissu had transposer. it starts from 0 & typically adjustable from -12 to 12.
     bool haveBeenSpaced = false;                // JOELwindows7: tell if the traverse end time have been spaced.
+    //bool ownPause = false;                      // JOELwindows7: if own pause true, it'll add spacer by elapsed time every tick.
+    bool ownIsPlaying = false;                  // JOELwindows7: how about vice versa? if true, then the music runs.
+    bool ownStopPlaying = true;                 // JOELwindows7: true means always catch latest position from transport of host. no wait, can just be is playing?
 
     //JOELwindows7: f8888ing reset messages that is f8888ing hard to find online
     // found in LINK

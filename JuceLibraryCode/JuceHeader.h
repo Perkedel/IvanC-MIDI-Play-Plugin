@@ -45,7 +45,7 @@ namespace ProjectInfo
 {
     const char* const  projectName    = "IvanC-MIDI-Play-Plugin";
     const char* const  companyName    = "Perkedel";
-    const char* const  versionString  = "2022.02";
-    const int          versionNumber  = 0x7e60200;
+    const char* const  versionString  = "2022.09";
+    const int          versionNumber  = 0x7e60900;
 }
 #endif

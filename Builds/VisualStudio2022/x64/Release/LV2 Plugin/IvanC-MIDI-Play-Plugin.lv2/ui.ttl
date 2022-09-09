@@ -1,0 +1,25 @@
+@prefix lv2:  <http://lv2plug.in/ns/lv2core#> .
+@prefix opts: <http://lv2plug.in/ns/ext/options#> .
+@prefix param: <http://lv2plug.in/ns/ext/parameters#> .
+@prefix ui:   <http://lv2plug.in/ns/extensions/ui#> .
+@prefix urid: <http://lv2plug.in/ns/ext/urid#> .
+
+<https://github.com/Perkedel/IvanC-MIDI-Play-Plugin:UI>
+	lv2:extensionData
+		opts:interface ,
+		ui:noUserResize ,
+		ui:resize ;
+
+	lv2:requiredFeature
+		urid:map ,
+		ui:parent ,
+		<http://lv2plug.in/ns/ext/instance-access> ;
+
+	lv2:optionalFeature
+		ui:resize ,
+		opts:interface ,
+		opts:options ;
+
+	opts:supportedOption
+		ui:scaleFactor ,
+		param:sampleRate .
